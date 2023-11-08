@@ -1,4 +1,4 @@
-import tkinter as tk
+from tkinter import *
 import tkinter.filedialog
 
 class TextEditor:
@@ -8,12 +8,12 @@ class TextEditor:
 
     def open_file(self,event=None):
         txt_file = tkinter.filedialog.askopenfilename(parent=root,initialdir="./examples")
-        if text_file:
+        if txt_file:
             self.text_area.delete(1.0,END)
 
-        with open(txt_file) as _file:
-            self.txt_area.insert(1.0,_file.read())
-            root.update_idletasks()
+            with open(txt_file) as _file:
+                self.text_area.insert(1.0,_file.read())
+                root.update_idletasks()
     def save_file(self,event=None):
         file=tkinter.filedialog.asksavesasfile(mode='w')
         if file!= None:
@@ -42,7 +42,6 @@ class TextEditor:
         
         the_menu.add_cascade(label="File",menu=file_menu)
         root.config(menu=the_menu)
-        root=tk.Tk()
-
-        text_editor = TextEditor(root)
-        root.mainloop()
+root=Tk()
+text_editor = TextEditor(root)
+root.mainloop()
