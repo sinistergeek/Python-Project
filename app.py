@@ -10,7 +10,7 @@ db = SQLAlchemy(app)
 class Todo(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     content=db.Column(db.String(200),nullable=False)
-    completed = db.Column(db.Interger,default=0)
+    completed = db.Column(db.Integer,default=0)
     pub_date = db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
 
     def __repr__(self):
