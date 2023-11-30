@@ -44,5 +44,20 @@ def LinkedInEmailScraper(userEmail,userPassword):
         emailList[commenterName.get_attribute('innerHTML')] = commenterEmail
     browser.quit()
     return emailList
+def DictToCSV(input_dict):
+    '''
+    Converts dictonary into csv
+    '''
 
+    with open('./LinkedIn Email Scraper/emails.csv','w') as f:
+        f.write('name,email\n')
+        for key in input_dict:
+            f.write('%s,%s\n'%(key,input_dict[key]))
+        f.close()
+
+if __name__ == '__main__':
+    userEmail = '[EmAIL Address for linkedin account]'
+    userPassword = '[Password for linkedin account]'
+    emailList = LinkedInEmailScraper(userEmail,userPassword)
+    DictToCSV(emailList)
 
