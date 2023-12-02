@@ -29,4 +29,16 @@ model.fit(x,y)
 text = input("Enter text: ")
 
 updated_text = ''
+for i in range(len(text)):
+    if text[i].isdigit() == False:
+        updated_text = updated_text + text[i]
+text = updated_text
 
+text = re.split("\W+",text.lower())
+
+updated_list = []
+stopwords = nltk.corpus.stopwords.words('english')
+for i in range(len(text)):
+    if text[i] not in stopwords:
+        updated_list.append(text[i])
+text = updated_list
