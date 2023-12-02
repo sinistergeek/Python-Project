@@ -42,3 +42,11 @@ for i in range(len(text)):
     if text[i] not in stopwords:
         updated_list.append(text[i])
 text = updated_list
+
+text = "".join(text)
+text = cv.transform([text])
+pred = model.predict(text)
+if pred == 0:
+    print("Not Spam")
+else:
+    print("Spam")
