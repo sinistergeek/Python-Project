@@ -14,3 +14,8 @@ nltk.download('wordnet')
 msg = pd.read_csv("./Message_Spam_Detection/dataset.csv",encoding='latin-1')
 msg.drop(['Unnamed:2','unnamed:4'],axis=1,inplace=True)
 msg.rename(columns={"v1":"label","v2":"text"},inplace=True)
+
+for i in msg.index:
+    if msg['label'][i] =='ham':
+
+    
