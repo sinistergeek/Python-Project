@@ -80,4 +80,32 @@ def get_info(movie):
             if new_url != pre_url:
                 html = requests.get(new_url)
                 soup2 = BeautifulSoup(html.text,"html.parser")
+                movietitle = soup2.find('title').string.replace('- IMDB','')
+                a = soup2('a')
+                span = soup2('director')
+                for item in span:
+                    print(item)
+                genresting = "Genere:"
+                for j in a:
+                    genre = re.search('<a href=\"/search/title\?geners=.*>(.*?)</a>',str(j))
+                    try:
+                        genresting += genre.group(1) + ''
+                    except:
+                        pass
+                atag = soup2('strong')
+                for i in atag:
+                    rating = re.search('<strong title=\"(.*?)based',str(i))
+                    try:
+                        rstring="IMDB rating:" + rating.group(1)
+                    except:
+                        pass
+                details = "For more details:" + new_url
+                lis.append(movietitle)
+                lis.append(genresting)
+                lis.append(rstring)
+                lis.append(details)
+                pre_url = new_url
+                count += 1
+
+
 
