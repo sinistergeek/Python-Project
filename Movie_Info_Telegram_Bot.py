@@ -43,3 +43,41 @@ str = ""
 for i in res:
     stri += i +'\n'
 update.message.reply_text(stri)
+
+
+def name(update,context):
+    movie = str(update.message.text)[6:]
+    print(movie)
+    res = get_info(movie)
+    stri = ""
+    for i in res:
+        for a in i:
+            stri += a + "\n"
+        stri += '\n'
+    update.message.reply_text(stri)
+
+def error(update,context):
+    logger.warning('Update "%s" caused error "%s"',update,context.error)
+
+def get_info(movie):
+    url = 'https://www.imdb.com/find?q='
+    r =requests.get(url+movie+'&ref_=nv_sr_sm')
+    soup = BeautifulSoup(r.text,"html.parser")
+    title = soup.find('title')
+    tags = soup('a')
+    pre_url = ""
+    count = 0
+    lis = []
+    res = []
+    for tag in tags:
+        if(count > 2):
+            break
+        m re.search('<a her=.*>(.?)</a>',str(tag))
+        try:
+            list = []
+            link = re.search('/title/(.*?)/',str(m))
+            new_url = 'https://www.imdb.com' + str(link.group(0))
+            if new_url != pre_url:
+                html = requests.get(new_url)
+                soup2 = BeautifulSoup(html.text,"html.parser")
+
