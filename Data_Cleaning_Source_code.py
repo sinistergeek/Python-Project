@@ -43,3 +43,9 @@ for i in msg.index:
     msg['lem_text'][i] = updated_list
 msg.drop(['updated_token'],axis=1,inplace=True)
     
+msg['final_text'] = ""
+for i in msg.index:
+    updated_string = "".join(msg['lem_text'][i])
+    msg['final_text'][i] = updated_string
+msg.drop(['cleaned_text','lem_text'],axis=1,inplace=True)
+msg.to_csv('Cleaned_Dataset.csv')
