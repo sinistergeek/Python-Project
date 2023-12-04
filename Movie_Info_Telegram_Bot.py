@@ -15,3 +15,31 @@ logger = logging.getLogger(__name__)
 TOKEN = decouple.config("API_KEY")
 
 def start(update,context):
+    update.message.reply_text('What can this bot do?\n\n This bot gives brief information about any moview from IMDB website' + '\n Send /name movie_name to know the genre and rating of the movie.Send genre genre_name to' + 'get the list of movies belonging to that genere')
+
+def help(update,context):
+    update.message.reply_text("Help!")
+
+def genre(update,context):
+    url = requests.get(url+'?genres='+genre)
+    soup = BeautifulSoup(r.text,"html.parser")
+    title = soup.find('title')
+    if title.string == 'IMDB: Advanced Title Search - IMDb':
+        update.message.reply_text("Sorry,No such genre.Try again")
+    else:
+        res = []
+        res.append(title.string+"\n")
+        tags = soup('a')
+        for tag in tags:
+            movie = re.search('<a herf=\"/title/.*>(.*?)</a>',str(tag))
+            try:
+                if "&amp;" in movie.group(1):
+                    movie.group(1).replace("&amp;","&")
+                res.append(movie.group(1))
+            except:
+                pass
+
+str = ""
+for i in res:
+    stri += i +'\n'
+update.message.reply_text(stri)
