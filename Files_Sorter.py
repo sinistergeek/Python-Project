@@ -22,6 +22,16 @@ def sorting(file):
             if file.endswith(ext):
                 return key
 
-    for file in files
-    dist = sorting(file)
+    for file in files:
+        dist = sorting(file)
+        if dist:
+            try:
+                shutil.move(file,"../download-sorting"+ dist)
+            except:
+                print(file+"is already exist")
+        else:
+            try:
+                shutil.move(file,"../download-sorting/others")
+            except:
+                print(file + "is already exist")
 
