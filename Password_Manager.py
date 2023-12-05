@@ -40,3 +40,34 @@ def checkExistence():
     else:
         file = open("info.txt",'w')
         file.close()
+
+def appendNew():
+    file = open("info.txt",'a')
+    userName = entry1.get()
+    website = entry2.get()
+    Random_password = entry.get()
+    usrnm = "UserName" + userName + "\n"
+    pwd = "Password: " + Random_password + "\n"
+    web = "Website: " + website + "\n"
+    file.write("-----------------------------\n")
+    file.write(usrnm)
+    file.write(pwd)
+    file.write(web)
+    file.write("-----------------------------\n")
+    file.write("\n")
+    file.close
+    file = open("info.txt",'a')
+
+
+def readPasswords():
+    file = open('info.txt','r')
+    content = file.read()
+    file.close()
+    print(content)
+
+root = Tk()
+var = IntVar()
+var1 = IntVar()
+
+root.title("Python Password Manager")
+
