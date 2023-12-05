@@ -73,4 +73,39 @@ class PaintApp:
                 self.rect_draw(event)
             if self.drawing_tool == "text":
                 self.text_draw(event)
+        def motion(self,event=None):
+            if self.drawing_tool == "pencil":
+                self.pencil_draw(event)
+                self.x_position = event.x
+                self.y_position = event.y
+        def pencil_draw(self,event=None):
+
+            if self.left_button == "down":
+                if self.x_position is not None and self.y_position is not None:
+                    event.widget.create_line(self.x_position,self.y_position,event.x,event.y,smooth=True)
+        def line_draw(self,event=None):
+            if None not in (self.x1_line_pt,self.x2_line_pt,self.y1_line_pt,self.y2_line_pt):
+                event.widget.create_line(self.x1_line_pt,self.x2_line_pt,self.y1_line_pt,self.y2_line_pt,smooth=True,fill="green")
+        def arc_draw(self,event=None):
+            if None not in (self.x1_line_pt,self.x2_line_pt,self.y1_line_p,self.y2_line_pt):
+                coords = self.x1_line_pt,self.x2_line_pt,self.y1_line_pt,self.y2_line_pt
+                event.widget.create_arc(coords,start=0,extent=150,style=ARC,fill="blue")
+
+        def oval_draw(self,event=None):
+            if None not in (self.x1_line_pt,self.x2_line_pt,self.y1_line_pt,self.y1_line_pt,self.y2_line.y2_line_pt):
+                event.widget.create_oval(self.x1_line_pt,self.x2_line_pt,self.y1_line_pt,self.y2_line_pt,fill="midnight blue",outline="yellow",width=2)
+
+        def rect_draw(self,event=None):
+            if None not in (self.x1_line_pt,self.x2_line_pt,self.y1_line_pt,self.y2_line_pt):
+                event.widget.create_rectangle(self.x1_line_pt,self.x2_line_pt,self.y1_line_pt,self.y2_line_pt,fill="red",outline="pink",width=2)
+
+        def text_draw(self,event=None):
+            if None not in (self.x1_line_pt,self.y1_line_pt):
+                text_font= tkinter.fontFont(family="Helvetica",size=20,weight="bold",slant="italic")
+                event.widget.create_text(self.x1_line_ptt,self.y1_line_pt,fill="lightblue",font=text_font,text="helloo")
+
+
+root=TK()
+paint_app = PaintApp(root)
+root.mainloop()
 
