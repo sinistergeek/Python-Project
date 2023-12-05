@@ -71,3 +71,34 @@ var1 = IntVar()
 
 root.title("Python Password Manager")
 
+
+c_label = Label(root,text="Length")
+c_label.grid(row=1)
+
+copy_button = Button(root,text="Copy",command=copy1)
+copy_button.grid(row=0,column=2)
+generate_button.grid(row=0,column=3)
+
+radio_low = Radiobutton(root,text="Low",variable=var,value=1)
+radio_low.grid(row=1,column=2,sticky='E')
+radio_middle = Radiobutton(root,text="Medium",variable=var,value=0)
+radio_middle.grid(row=1,column=3,sticky='E')
+radio_strong = Radiobutton(root,text="Strong",variable=var,value=3)
+radio_strong.grid(row=1,column=4,sticky='E')
+combo = Combobox(root,textvariable=var1)
+
+
+combo['values'] = (12,32,123,12,5,66,4,"Length")
+combo.current(0)
+combo.bind('<<ComboboxSelected>>')
+combo.grid(column=1,row=1)
+
+userName = Label(root,text="Enter username here")
+userName.grid(row=2)
+entry1 = Entry(root)
+entry1.grid(row=2,column=1)
+
+website = Label(root,text="Enter website address here")
+website.grid(row=3)
+entry2 = Entry(root)
+entry2.grid(row3,column=1)
