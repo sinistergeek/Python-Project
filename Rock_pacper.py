@@ -29,6 +29,13 @@ while(comp_count+user_count < games):
         print("UserScore",user_count,"\tComputer Score",comp_count,"\n")
 
 print("\n\tFINAL SCORe:")
+if user_count > comp_count:
+    print("\n\tCongRATURATIONl YOU WON")
 
+elif user_count < comp_count:
+    print("\n\t SORRY u lost!")
+
+else:
+    print("\n\t IT's a tie")
 
 
