@@ -73,3 +73,31 @@ class window(QMainWindow):
         if button.text() == "&Yes":
             pass
         elifbutton.text() == "&No":
+            with open("showMessage","w") as f:
+                f.write("0")
+
+
+    def deletePasswords(self,button):
+        if button.text() == "&Yes":
+            try:
+                with open("passwords.txt","w") as f:
+                    f.write("")
+
+            except:
+                raise FileNotFoundError("password file not found please press generate password")
+
+
+    def deletePopUp(self):
+        message = QMessageBox()
+        message.setText("Are you sur you want to delte all the passwords")
+        message.setIcon(QMessageBox.Warning)
+        message.setStandardButtons(QmessageBox.Yes|QMessageBox.Cancel)
+        message.setDefaultButton(QMessageBox.Cancel)
+        message.buttonClicked.connect(self.deletePasswords)
+        x=message.exec_()
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    win = window()
+    win.start()
+    sys.exit(app.exec_())
