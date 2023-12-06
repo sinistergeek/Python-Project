@@ -103,4 +103,37 @@ class Sudoku:
         self.canvas.update()
         self.grid[(x,y)] = t
     def populate(self,X:[[]]):
+        c=self.canvas
+        for i in range(9):
+            for j in range(9):
+                text_x = j*self.cell_width + self.cell_width/2
+                text_y = i*self.cell_height + self.cell_height/2
+                val = X[i][j]
+                if val == 0:
+                    t = c.create_text(text_x,text_y,text='',font=('Times',14))
+                    self.grid[(j,i)] = [val,True,t]
+
+                else:
+                    t = c.create_text(text_x,text_y,text=val,font=('Times',15,'bold'))
+                    self.grid[(j,i)] = [val,False,t]
+
+    def clearGrid(self):
+        for i in range(9):
+            for j in range(9):
+                self.updateCell(0,i,j)
+
+    def getValue(self,row:int,col:int):
+        return self.grid[(row,col)][0]
+
+    def printGrind(self):
+        for i in range(9):
+            x=[]
+            for j in range(9):
+                x.append(self.getValue(j,i))
+            print(x)
+    def wrapper(self):
+        global count
+        count = 0
+        self.canvas.delete(self.e)
+
 
