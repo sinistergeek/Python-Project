@@ -73,4 +73,34 @@ class Sudoku:
         else:
             self.canvas.delete(self.e)
         self.e = self.canvas.create_window(cordx+1,cordy+1,window=self.t,width=self.cell_width-1,height=self.cell_height-2,anchor=tk.NW)
+        self.t.delete(0,tk.END)
+        self.t.focus_set()
+
+
+    def keyPressed(self,event):
+        val = self.t.get().strip()
+        try:
+            val = int(val)
+            if (val>9 or val<0):
+                raise ValueError
+        except ValueError:
+            print("Invalid input!")
+            self.t.delete(0,tk.END)
+
+        else:
+            x,y = (self.t.winfo_x())/self.cell_width,(self.t.winfo_y())/self.cell_height
+            self.updateCell(val,x,y)
+            self.canvas.delete(self.e)
+    def updateCell(self,value,x,y,editable=True):
+        t=self.getCell(x,y)
+        t[0] = value
+        t[1] = editable
+        text = value
+        if value ==0:
+            text=''
+
+        self.canvas.itemconfigure(t[2],text=text)
+        self.canvas.update()
+        self.grid[(x,y)] = t
+    def populate(self,X:[[]]):
 
