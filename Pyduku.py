@@ -197,4 +197,31 @@ class Sudoku:
                 self.canvas.itemconfigure(cell[2],font=('Times',14))
             else:
                 self.canvas.itemconfigure(cell[2],font=('Time',15,'bold'))
+                self.canvas.delete(cover)
+                self.btn_solve.configure(state='normal')
+    def findEmpty(self):
+        for i in range(9):
+            for j in range(9):
+                cell_val = self.getCell(j,i)[1]
+                if cell_val:
+                    return (j,i)
+
+
+    def is_SubGrid_Safe(self,val,x,y) -> bool:
+        sgrid_x = int(x/3) *3
+        sgrid_y = int(y/3) *3
+        for i in range(sgrid_x,sgrid_x+3):
+            for j in range(sgrid_y,sgrid_y+3):
+                if val==self.getValue(i,j) and not self.getCell(i,j)[1]:
+                    return False
+        return True
+
+    def is_Cell_Safe(self,val,x,y) -> bool:
+        for i in range(9):
+            if val == self.getValue(x,i) and not self.getCell(x,i)[1]:
+                return False
+            if val == self.getValue(i,y) and not self.getCell(i,y)[i]:
+                return False
+
+        return True
 
