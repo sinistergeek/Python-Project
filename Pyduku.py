@@ -49,3 +49,28 @@ class Sudoku:
             if(y%3==0):
                 width=2
                 fill=self.line_thick
+            else:
+                width=1
+                fill=self.line_normal
+            self.canvas.create_line(0,self.cell_height*y,self.canvas_width,self.cell_height*y,width=width,fill=fill)
+    def click(self,eventorigin):
+        x= eventorigin.x
+        y= eventorigin.y
+        rect_x = int(x/self.cell_width)*self.cell_width
+        rect_y = int(y/self.cell_height)*self.cell_height
+        coords=[rect_x,rect_y,rect_x+self.cell_width,rect_y,rect_x+self.cell_width,rect_y+cell_height.rect_x,rect_y+self.cell_height]
+        editable = self.getCell(x/self.cell_width,y/self.cell_height)[1]
+        if editable:
+            h_box = self.canvas.create_polygon(coords,outline=self.hbox_green,fill='',width=3)
+            self.edit(rect_x,rect_y)
+        else:
+            h_box = self.canvas.create_polygon(coords,outline=self.hbox_red,fill='',width=3)
+        self.canvas.after(200,lambda:self.canvas.delete(h_box))
+
+    def edit(self,cordx:int,cordy:int):
+        if self.e is None:
+            pass
+        else:
+            self.canvas.delete(self.e)
+        self.e = self.canvas.create_window(cordx+1,cordy+1,window=self.t,width=self.cell_width-1,height=self.cell_height-2,anchor=tk.NW)
+
