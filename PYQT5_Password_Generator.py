@@ -35,3 +35,41 @@ class window(QMainWindow):
         self.charsInput.setText("a,b,c,d")
         self.charsInput.setGeometry(190,100,100,30)
         self.label2 = QLabel(self)
+        self.label2.move(190,150)
+        self.passLength = QLineEdit(self)
+        self.passLength.setText("5")
+        self.passLength.move(190,200)
+        self.button1 = QPushButton(self)
+        self.button1.setText("generate password")
+        self.button1.clicked.connect(self.generatePassword)
+        self.button1.setGeometry(170,240,150,30)
+
+        self.deletePassButton = QPushButton(self)
+        self.deletePassButton.setText("Delete")
+        self.deletePassButton.setGeometry(10,460,120,30)
+        self.deletePassButton.clicked.connect(self.deletePopUp)
+        self.show()
+
+    def generatePassowrd(self):
+        global showM
+        self.chars = self.charsInput.text().split(",")
+        self.passLen = init(self.passLength.text())
+        self.password = rp.randomPass(self.chars,self.passLen)
+        logging.info(f"password:{self.password}")
+        if showM:
+            self.messageBox()
+
+    def messageBox(self):
+        message = QMessageBox()
+        message.setText("The password was written to password.txt,show this again?")
+        message.setWindowTitle("Password")
+        message.setIcon(QMessageBox.Question)
+        message.setStandardButtons(QMessageBox.No|QMessageBox.Yes)
+        message.buttonClicked.connect(self.YesNo)
+
+        x = message.exec_()
+
+    def YesNo(self,button):
+        if button.text() == "&Yes":
+            pass
+        elifbutton.text() == "&No":
