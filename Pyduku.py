@@ -135,5 +135,31 @@ class Sudoku:
         global count
         count = 0
         self.canvas.delete(self.e)
+        self.btn_gen.configure(state='disabled')
+        self.btn_solve.configure(state='disabled')
+        self.solve()
+        self.btn_gen.configure(state='normal')
+        self.btn_solve.configure(state='normal')
 
+    def solve(self):
+        global count
+        x,y = self.findEmpty()
+        if (x,y) ==(None,None):
+            print("Recursed",count,"times.")
+            return True
+
+        count += 1
+        for i in range(1,10):
+            if self.is_SubGrid_Safe(i,x,y) and self.is_Cell_Safe(i,x,y):
+                self.updateCell(i,x,y,False)
+                nxt = self.solve()
+                if nxt:
+                    return True
+                else:
+                    self.updateCell(0,x,y,True)
+        return False
+
+    def Generate(self,level=1):
+        self.btn_solve.configure(state='disabled')
+        self.btn_gen.configure(state='disabled')
 
