@@ -24,4 +24,11 @@ def generate_pass(length,array,is_alpha=False):
         password.append(character)
 
 
-
+        generate_pass(alpha_len,alpha,True)
+        generate_pass(num_len,num)
+        generate_pass(special_len,special)
+        random.shuffle(password)
+        gen_password=""
+        for i in password:
+            gen_password = gen_password + str(i)
+        print(gen_password)
