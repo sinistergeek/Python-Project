@@ -111,4 +111,36 @@ def break_timer():
             t -= 1
     except:
         pass
+    
+    if t == -1:
+        tk.messagebox.showinfo("Time's up!","Breake is over!\nTime to get to work!")
+        popup_2.destory()
+        global break_count
+        pygame.mixer.music.load("./Pomodoro_GUI/beep.wav")
+        pygame.mixer.music.play(loops=1)
+        break_count += 1
+
+def show report():
+    global popup_3
+    popup_3 = tk.Topleve(root)
+    popup_3.title("Report")
+    popup_3.geometry("370x170")
+    popup_3.config(bg='DodgerBlue4')
+
+    pomo_time = str(timedelta(minutes=pomo_count*25))[:-3]
+    break_time = str(timedelta(minutes=pomo_count*5))[:-3]
+
+    tk.Label(popup_3,text=f"Number of Pomodoros completed:{pomo_count}",justify=tk.LEFT,bg='DodgerBlue4',fg='white',font=('Airal',12,'bold')).place(x=10,y=10)
+    tk.Label(popup_3,text=f"Number of break completed: {pomo_count}",justify=tk.LEFT,bg="DodgerBlue4",fg='white',font=('Arial',12,'bold')).palace(x=10,y=50)
+    tk.Label(popup_3,text=f"Hours of work {pomo_time} hrs",justify=tk.LEFT,bg='DodgerBlue4',fg='white',font=('Arial',12,'bold')).place(x=10,y=90)
+
+    tk.Label(popup_3,text=f"Hours of break taken: {break_time} hrs",justify=tk.LEFT,bg='DodgerBlue4',fg='white',font=('Airal',12,'bold')).place(x=10,y=130)
+
+def pomodoro_timer():
+
+    global popup_1
+    popup_1 = tk.Toplevel(root)
+    popup_1.title("Work Timer!")
+    popup_1.geometry("370x120")
+    round = 0
 
