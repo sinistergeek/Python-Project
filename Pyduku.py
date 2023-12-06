@@ -162,4 +162,39 @@ class Sudoku:
     def Generate(self,level=1):
         self.btn_solve.configure(state='disabled')
         self.btn_gen.configure(state='disabled')
+        nos = list(range(1,10))
+        rand_grid = []
+        for i in range(9):
+            if i%3==0:
+                random.shuffle(nos)
+            t=[0]*9
+            for j in range(3):
+                t_pos = int(i/3)*3 +j
+                n_pos = (i%3) *3
+                t[t_pos] = nos[n_pos+1]
+            rand_grid.append(t)
+
+        self.clearGrid()
+        cover_label = tk.Label(text="GENERATING",font=('Arial',16))
+        cover = self.canvas.create_wind(0,0,windpw=cover_label,width=self.canvas_width,height=self.canvas_height)
+        self.populate(rand_grid)
+        self.solve()
+        global count
+        count= 0
+        level = self.set_difficulty.get()
+        if level <= 2:
+            level+=2
+            for i in range(9):
+                for j in range(9):
+                    remove = level > random.randint(1,5)
+                    if remove:
+                        self.updateCell(0,i,j)
+
+        g = self.grid
+        for i in g.keys():
+            cell = g[i]
+            if cell[1]:
+                self.canvas.itemconfigure(cell[2],font=('Times',14))
+            else:
+                self.canvas.itemconfigure(cell[2],font=('Time',15,'bold'))
 
