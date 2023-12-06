@@ -78,4 +78,37 @@ def blocker():
     pass_label = tk.Label(popup_4,text='Enter URL to block:',font=('Arial',12,'bold'),bg='DodgerBlue4',fg='white')
     pass_entry = tk.Entry(popup_4,textvariable=web_var,font=('Arial',12,'bold'))
     sub_btn = tk.Button(popup_4,text = 'Block',font =('Arial',12,'bold'),command= block_websites,bg='gold',activebackground='yellow')
+    text_to_put = '*Supported for all OS JK'
+    instructions = tk.Label(popup_4,text=text_to_put,font=('Arial',12,'bold'),justify = 'left',bg='sky blue')
+    unblock_btn = tk.Button(popup_4,text='Unblock all',font=('Arial',12,'bold'),command=remove_websites,state='disabled',width=23,height=2,bg='gold',activebackground='yellow')
+
+    if enable:
+        unblock_btn.config(state='normal')
+    pass_label.place(x=25,y=10)
+    pass_entry.place(x=25,y=34)
+    sub_btn.place(x=255,y=30)
+    instructions.place(x=25,y=80)
+    unblock_btn.place(x=50,y=150)
+
+def break_timer():
+
+    global enable
+    global popup_2
+    popup_2 = tk.Toplevel(root)
+    popup_2.title("Break Timer!")
+    popup_2.geometry("370x120")
+    round = 0
+    try:
+        t = 5*60
+        while t > -1:
+            minute_count = t // 60
+            second_count = t % 60
+            timer = '{:02d}:{:02d}'.format(minute_count,second_count)
+            time_display = tk.Label(popup_2,text=timer,bg='DodgerBlue4',fg='white',font=('STIX',90,'bold'))
+            time_display.place(x=0,y=0)
+            popup_2.update()
+            time.sleep(1)
+            t -= 1
+    except:
+        pass
 
