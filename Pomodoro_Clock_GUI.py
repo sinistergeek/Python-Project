@@ -143,4 +143,51 @@ def pomodoro_timer():
     popup_1.title("Work Timer!")
     popup_1.geometry("370x120")
     round = 0
+    try:
 
+        t =  25*60
+        while t > -1:
+            minute_count = t//60
+            second_count = t%60
+            timer = '{02d}:{02d}'.format(minute_count,second_count)
+            time_display = tk.Label(popup_1,text=timer,bg='DodgerBlue4',fg='white',font=('STIX',90,'bold'))
+            time_display.place(x=0,y=0)
+            popup_1.update()
+            time.sleep(1)
+            t -= 1
+
+    except:
+        pass
+
+    if t == -1:
+        tk.messagebox.showinfo("Time's up!","Pomodoro completed sucessfully\n You deserve a break!")
+        popup_1.destroy()
+        global pomo_count
+        pomo_count += 1
+        pygame.mixer.music.load("./Pomodoro_GUI/beep.wav")
+        pygame.mixer.music.play(loops=0)
+
+def main():
+    global root
+    root = tk.Tk()
+    root.title('Timer')
+    root.geometry('470x608')
+
+    bg = tk.PhotoImage(file="./Pomodro_GUI/bg.png")
+    label1 = tk.label(root,image=bg)
+    label1.place(x=0,y=0)
+
+    intro1 = tk.Label(root,text='POMODRO TIMER',bg='snow',fg='maroon',font=('Arial',25,'bold'))
+    intro1.place(x=100,y=100)
+
+    blocker_btn = tk.Button(root,text='WEBSITEBLOCKER',command = blocker,font=('Arial',12,'bold'),bg='gold',activebackground='yellow',height=3,width=25)
+    blocker_btn.place(x=100,y=150)
+    start_btn = tk.Button(root,text='START WORK TIMER',command= pomodoro_timer,font=('Arial',12,'bold'),bg='gold',activebackground='yellow',height=3,width=25)
+    start_btn.place(x=100,y=250)
+
+    break_btn = tk.Button(root,text = 'START BREAK TIMER',command = break_timer,font=('Arial',12,'bold'),bg='gold',activebackground='yellow',height=3,width=25)
+    report_btn = tk.Button(root,text='SHOW REPORT',command=show_report,font=('Arial',12,'bold'),bg='gold',activebackground='yellow',height=3,width=25)
+    report_btn.place(x=100,y=450)
+    root.mainloop()
+if __name__ == '__main__':
+    main()
