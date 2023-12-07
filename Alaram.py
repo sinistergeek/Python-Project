@@ -44,3 +44,31 @@ def set_alarm():
                 print("\n Select any alaram music:\n")
                 for i in range(1,len(musics)+1):
                     print(f"{i}.{clean_filename(musics[i-1])}")
+
+                user_input = int(input("\n Enter the index of listed music(e.g.1)"))
+                selected_music = musics[user_input - 1]
+                print(">> Alaram music has been set -->"+clean_filename(selected_music))
+                error=False
+
+            except:
+                print(">>> Error: Invalid Index! Please try again!\n")
+
+    while stop == False:
+        current_time = str(datetime.datetime.now().time())
+        if current_time >= playback_time:
+            stop = True
+            subprocess.run(('cmd','/C','start',f"{cd}\\musics\\{selected_music}"))
+            print(">>> Alarm ringing! Closing the program!! Bye Bye!! <<<")
+
+
+def display_header(header):
+    print("")
+    print("#################".center(os.get_terminal_size().columns))
+    print(f"######{header}########".center(os.get_terminal_size().columns))
+    print("#######".center(os.get_terminal_size().columns))
+
+if __name__ == "__main__":
+    display_header("Alarm Program")
+    set_alarm()
+
+
