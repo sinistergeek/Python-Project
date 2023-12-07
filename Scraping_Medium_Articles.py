@@ -49,4 +49,14 @@ def collect_text(soup):
         fin += f'\n{purify(str(elem))}'
         return fin
 
+def save_file(fin):
+    if not os.path.exists('./scraped_articles'):
+        os.mkdir('./scraped_articles')
+        fname = './scraped_articles/'+'_'.join(title.split()) + '.txt'
+        with open(fname,'w',encoding='utf8') as outfile:
+            outfile.write(fin)
+            print(f'File saved in directory {fname}')
 
+if __name__ == '__main__':
+    fin = collect_text(get_page())
+    save_file(fin)
