@@ -16,7 +16,7 @@ def screenrecoder():
         cv2.imshow("Screen Recoder",frame)
         out.write(frame)
         if cv2.waitKey(1) == 27:
-    break
+            break
 out.release()
 cv2.destroyAllWindows()
 screenrecorder()
