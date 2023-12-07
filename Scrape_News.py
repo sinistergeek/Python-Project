@@ -44,4 +44,34 @@ def fetch(page_no,verbose=False):
                 author = tdm[idx].find('a',attrs={'class':'hnuser'})
                 f.write('\nArticle Number:'+ rank.text.replace('.') if rank else '\n Article Number: Could not get article number')
                 f.write('\n Article Title:' + title.text if titl else '\nArticle Title: Could not get article title')
-                f.write('\nSource Website' + site.text if site else '\nSource Website: https://news.ycombinator.com')
+                f.write('\n Source Website:' + site.text if site else '\nSource Website: https://news.ycombinator.com')
+                f.write('\n Source URL:' + url if url else '\n Source URL: No URL found for this article')
+                f.write('\n Article Author:'+ author.text if author else '\n Article Author: Could not get article author')
+                f.write('\n Article Score:'+ socre.text if score else '\n Article Score: Not Scored')
+                f.write('\n Posted:' + time.text if time else '\n Posted: Could not find when the article was posted')
+                f.write('\n'+'-'*80+'\n')
+    
+    except(requests.ConnectionError,requests.packages.urllib3.exceptions.ConnectionError) as e:
+        print('Connection Failed for page {}'.format(i))
+
+    except requests.RequestException as e:
+        print("Some ambiguous Request Exception occurred. The exception is " + str(e))
+
+    while True:
+        try:
+            pages = int(input('Enter number of pages that you want the HackerNews for (max 20):'))
+            v= input('Want verbose output y/[n]?')
+            verbose = v.lower().startswith('y')
+            if pages > 20:
+                print('A maximum of only 20 pages can be fetched')
+
+            pages = min(pages,20)
+            for page_no in range(1,pages+1):
+                fetch(page_no,verbose)
+
+            break
+
+        except:
+            print('\n Invalid input, probably not a positive integer\n')
+            continue
+
