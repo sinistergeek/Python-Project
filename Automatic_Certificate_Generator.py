@@ -4,7 +4,7 @@ import os
 
 
 df = pd.read_csv('list.csv')
-font = ImageFont.truetype('arial.ttf',60)
+font = ImageFont.load_default()
 for index,j in df.iterrows():
     img = Image.open('certifacte.png')
     draw = ImageDraw.Draw(img)
