@@ -68,4 +68,12 @@ def sync_root(root,arg):
 
     for thread in threads:
         thread.join()
-       
+if __name__ == '__main__':
+
+
+    arg = parse_input()
+    print('---------------Start Copy-----------------')
+    for root in arg.source:
+        sync_root(root,arg)
+
+    print('--------Done------')
