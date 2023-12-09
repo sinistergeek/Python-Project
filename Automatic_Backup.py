@@ -27,4 +27,12 @@ def size_if_newer(source,target):
             target_ts = 0
     return src_stat.st_size if(src_stat.st_mtime - target_ts > 1) else False
 
+def threaded_sync_file(source,target,compress):
+    size = size_file_newer(source,target)
+    if size:
+        thread = threading.Thread(target=transfer_file,args=(source,target,size > compress))
+        thread.start()
+        return thread
+
+
 
