@@ -40,3 +40,12 @@ monthEntry.grid(row=3,column=1,padx=10,pady=10)
 
 l4 = Label(text="Day: ")
 l4.grid(row=4,column=0)
+dayValue = StringVar()
+dayEntry = Entry(root,textvaraiable=dayValue)
+dayEntry.grid(row=4,column=1,padx=10,pady=10)
+
+
+button = Button(text="Calculate age", command=ageCalc)
+button.grid(row=5,column=1)
+
+root.mainloop()
