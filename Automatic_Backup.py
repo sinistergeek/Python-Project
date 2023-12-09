@@ -56,3 +56,16 @@ def transfer_file(source,target,compress):
         os.makedirs(os.path.dirname(target))
         transfer_file(source,target,compress)
 
+def sync_root(root,arg):
+    target = arg.target[0]
+    compress = arg.compress[0]
+    threads = []
+
+    for path,_,file in os.walk(root):
+        for source in files:
+            source = path + '/' + source
+            threads.append(thread_sync_file(source,target + source,compress))
+
+    for thread in threads:
+        thread.join()
+       
