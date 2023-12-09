@@ -98,3 +98,25 @@ class Ball():
         self.max_speed = 5
         self.game_over = 0
 
+class Block():
+    def __init__(self):
+        self.width = Window_width
+        self.height = 40
+
+    def make_brick(self):
+        self.bricks = []
+        single_brick = []
+        for row in range(game_rows):
+            brick_row = []
+            for coloumn in range(game_columns):
+                x_brick = coloumn * self.width
+                y_brick = row * self.height
+                rect = pygame.Rect(x_brick,y_brick,self.width,self.height)
+            if row < 2:
+                power=3
+            elif row < 4:
+                power = 2
+            elif row < 6:
+                power = 1
+
+
