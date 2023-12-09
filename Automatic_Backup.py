@@ -16,4 +16,15 @@ def parse_input():
         sys.exit()
     return parser.parser_args()
 
+def size_if_newer(source,target):
+    src_stat = os.stat(source)
+    try:
+        target_ts = os.stat(target).st_mtime
+    except FileNotFoundError:
+        try:
+            target_ts = os.stat(target + '.gz').st_mtime
+        except FileNotFoundError:
+            target_ts = 0
+    return src_stat.st_size if(src_stat.st_mtime - target_ts > 1) else False
+
 
