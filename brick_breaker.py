@@ -135,3 +135,18 @@ class Block():
                 pygame.draw.rect(window,brick_colour,brick[0])
                 pygame.draw.rect(window,black,(brick[0]),1)
 
+class base():
+
+    def __init__(self):
+        self.height = 20
+        self.width = int(Window_width/game_columns)
+        self.x = int((Window_width/2) - (self.width/2))
+        self.y = Window_height - (self.height * 2)
+        self.speed = 8
+        self.rect = Rect(self.x,self.y,self.width,self.height)
+        self.direction = 0
+
+    def slide(self):
+        self.direction = 0
+        key = pygame.key.get_pressed()
+
