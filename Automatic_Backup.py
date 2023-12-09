@@ -35,4 +35,24 @@ def threaded_sync_file(source,target,compress):
         return thread
 
 
+def sync_file(source,target,compress):
+    size = size_if_newer(source,target)
+    if size:
+        transfer_file(source,target, size > compress)
+
+def transfer_file(source,target,compress):
+    try:
+        if compress:
+            with gzip.open(target + '.gz','wb') as target_fid:
+                with open(source,'rb') as source_fid:
+                    target_fid.writelines(source_fid)
+            print('Compress {}'.format(source))
+
+
+        else:
+            shutil.copy2(source,target)
+            print('Copy {}'.format(source))
+    except FileNotFoundError:
+        os.makedirs(os.path.dirname(target))
+        transfer_file(source,target,compress)
 
