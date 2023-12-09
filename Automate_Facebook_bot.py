@@ -35,4 +35,26 @@ class FacebookLogin():
 
         time.sleep(2)
 
+        for i in range(len(groupid)):
+            link = 'https://facebook.com/groups/'+groupid[i]
+            self.driver.get(link)
+            print("Waiting for few seconds ...")
+            time.sleep(45)
 
+            self.driver.find_element_by_class_name('a8c37x1j ni8dbmo4 stjgntxs 19j0dhe7').click()
+            time.sleep(7)
+
+            self.driver.switch_to.active_element.send_keys("message")
+            time.sleep(7)
+
+
+            self.driver.find_element_by_class_name('a8c37x1j ni8dbmo4 stjgntxs 19j0dhe7 ltmttdrg g0qnabr5').click()
+            time.sleep(7)
+
+
+if __name__ == '__main__':
+
+    usr = input('Enter Email Id:')
+    pwd = getpass('Enter Password:')
+    fb_login = FacebookLogin(email=usr,password=pwd,browser='Chrome')
+    fb_login.login()
