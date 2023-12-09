@@ -168,3 +168,19 @@ class base():
         self.speed = 8
         self.rect = Rect(self.x,self.y,self.width,self.height)
         self.drection = 0
+
+        def draw_text(text,font,w_brick,x,y):
+            image = font.render(text,True,w_brick)
+            window.blit(image,(x,y))
+        Block = Block()
+        Block.make_brick()
+        user_basepad = base()
+        ball = Ball(user_basepad.x + (user_basepad.width //2),user_basepad.y - user_basepad.height)
+        game = True
+        while game:
+            clock.tick(frame_rate)
+    window.fill(black)
+    Block.draw_brick()
+    user_basepad.draw()
+    ball.draw()
+
