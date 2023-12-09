@@ -52,4 +52,28 @@ class Ball():
                         block_object[count_row][count_item][1] -= 1
                     else:
                         block_object[count_row][count_item][0] = (0,0,0,0)
+                if block_object[count_row][count_item][0] !=(0,0,0,0):
+                    brick_destroyed =0
+                count_row += 1
+            count_row += 1
+        if brick_destroyed == 1:
+            self.game_over = 1
+
+        if self.rect.left < 0 or self.rect.right > Window_width:
+            self.x_speed *= -1
+        if self.rect.top < 0:
+            self.y_speed *= -1
+        if self.rect.bottom > Window_height:
+            self.game_over = -1
+
+        if self.rect.colliderect(user_basepad):
+            if abs(self.rect.bottom - user_basepad.rect.top) < collision_threshold and self.y_speed > 0:
+                self.y_speed *= -1
+                self.x_speed += user_basepad.direction
+                if self.x_speed > self.max_speed:
+                    self.x_speed = self.max_speed
+                elif self.x_speed < 0 and self.x_speed < -self.max_speed:
+                    self.x_speed = -self.max_speed
+                else:
+                    self.x_speed *= -1
 
