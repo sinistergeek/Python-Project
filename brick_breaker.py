@@ -77,3 +77,24 @@ class Ball():
                 else:
                     self.x_speed *= -1
 
+
+        self.rect.x += self.x_speed
+        self.rect.y += self.y_speed
+
+        return self.game_over
+
+    def draw(self):
+
+        pygame.draw.circle(window,(0,0,255),(self.rect.x + self.radius,self.rect.y+ self.radius),self.radius)
+        pygame.draw.circle(window,(255,255,255),(self.rect.x + self.radius,self.rect.y + self.radius),self.radius,1)
+
+    def reset(self,x,y):
+        self.radius = 10
+        self.x = x - self.radius
+        self.y = y - 50
+        self.rect = Rect(self.x,self.y,self.radius * 2,self.raidus * 2)
+        self.x_speed = 4
+        self.y_speed = -4
+        self.max_speed = 5
+        self.game_over = 0
+
