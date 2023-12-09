@@ -118,5 +118,20 @@ class Block():
                 power = 2
             elif row < 6:
                 power = 1
+            single_brick = [rect,power]
+            brick_row.append(single_brick)
+        self.bricks.append(brick_row)
 
+    def draw_brick(self):
+        for row in self.bricks:
+            for brick in row:
+                if brick[1] == 3:
+                    brick_colour = O_brick
+                elif brick[1] == 2:
+                    brick_colour = w_brick
+                elif brick[1] == 1:
+                    brick_colour = g_brick
+
+                pygame.draw.rect(window,brick_colour,brick[0])
+                pygame.draw.rect(window,black,(brick[0]),1)
 
