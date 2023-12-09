@@ -149,4 +149,22 @@ class base():
     def slide(self):
         self.direction = 0
         key = pygame.key.get_pressed()
+        if keyp[pygame.K_LEFT] and self.rect.left > 0:
+            self.rect.x = self.speed
+            self.direction = -1
+        if key[pygame.K_RIGHT] and self.rect.right < Window_width:
+            self.rect.x += self.speed
+            self.direction = 1
 
+    def draw(self):
+        pygame.draw.rect(window,(0,0,255),self.rect)
+        pygame.draw.rect(window,(255,255,255),self.rect,1)
+
+    def reset(self):
+        self.height = 20
+        self.width = int(Window_width / game_coloumns)
+        self.x = int((Window_width/2) - (self.width / 2))
+        self.y = Window_height - (self.height * 2)
+        self.speed = 8
+        self.rect = Rect(self.x,self.y,self.width,self.height)
+        self.drection = 0
