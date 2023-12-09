@@ -183,4 +183,29 @@ class base():
     Block.draw_brick()
     user_basepad.draw()
     ball.draw()
+    if my_ball:
+        user_basepad.slide()
+        game_over = ball.motion()
+        if game_over != 0:
+            my_ball = False
+    if not my_ball:
+        if game_over == 0:
+            draw_text('Click anywhere to start',font,w_brick,90 Window_height//2 + 100)
+        elif game_over == 1:
+            draw_text('You won!',font,w_brick,180,Window_height//2+50)
+            draw_text('Click anywhere to restart',font,w_brick,90,Window_height//2+100)
+        elif game_over == -1:
+            draw_text('Gameover!',font,w_brick,180,Window_height//2+50)
+            draw_text('Click Anywhere to restart',font,w_brick,90,Window_height//2+100)
 
+    for event in in pygame.event.get():
+        if event.type == pygame.QUIT:
+            game = False
+
+        if event.type == pygame.MOUSEBUTTONDOWN and my_ball == False:
+            my_ball = True
+            ball.reset(user_basepad.x + (user_basepad.width//2),user_basepad.y - user_basepad.height)
+            user_basepad.reset()
+            Block.make_brick()
+            pygame.display.update()
+        pygame.quit()
