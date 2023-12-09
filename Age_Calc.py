@@ -12,11 +12,11 @@ def ageCalc():
     statement.destroy()
     today = date.today()
     birthDate = date(int(yearEntry.get()),int(monthEntry.get()),int(dayEntry.get()))
-    age = today.today - birthDate.year
-    if today.month.year - birthDate.month or today.month == birthDate.moneth and today.day < birthDate.day:
+    age = today.year - birthDate.year
+    if today.month - birthDate.month or today.month == birthDate.month and today.day < birthDate.day:
         age -= 1
-        statement = Label(text=f'{nameValue.get()}s age is{age}.')
-        statement.gird(row=6,column=1,pady=15)
+    statement = Label(text=f'{nameValue.get()}s age is{age}.')
+    statement.grid(row=6,column=1,pady=15)
 
 l1 = Label(text="Name:")
 l1.grid(row=1,column=0)
