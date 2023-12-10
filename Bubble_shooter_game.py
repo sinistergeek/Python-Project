@@ -343,3 +343,21 @@ def popflotrs(bbarr,cpyofbrd,col,row=0):
         popflotrs(bbarr,cpyofbrd,col - 1,row)
         popflotrs(bbarr,cpyofbrd,col,row + 1)
         popflotrs(bbarr,cpyofbrd,col - 1,row + 1)
+
+    elif(row % 2 == 0):
+        popflotrs(bbarr,cpyofbrd,col + 1,row)
+        popflotrs(bbarr,cpyofbrd,col - 1,row)
+        popflotrs(bbarr,cpyofbrd,col,row + 1)
+        popflotrs(bbarr,cpyofbrd,col - 1,row + 1)
+        popflotrs(bbarr,cpyofbrd,col,row - 1)
+        popflotrs(bbarr,cpyofbrd,col - 1,row -1)
+
+    else:
+        popflotrs(bbarr,cpyofbrd,col + 1, row)
+        popflotrs(bbarr,cpyofbrd,col - 1, row)
+        popflotrs(bbarr,cpyofbrd,col,row + 1)
+        popflotrs(bbarr,cpyofbrd,col + 1,row + 1)
+        popflotrs(bbarr,cpyofbrd,col,row - 1)
+        popflotrs(bbarr,cpyofbrd,col + 1, row - 1)
+
+
