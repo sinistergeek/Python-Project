@@ -37,3 +37,27 @@ deeppink =(255,20,147)
 cyan = (0,255,255)
 peacockblue =(0,164,180)
 grapecolor = (128,49,167)
+amber=(255,198,0)
+comic =(0,174,239)
+lytgray = (217,217,214)
+peach = (255,229,180)
+green = (0,255,0)
+GRAY = (100,100,100)
+white =(255,255,255)
+cyan = (0,255,255)
+black = (0,0,0)
+
+bgcolor =vblue
+clrlist = [grey,blue,red,white,pink,peach,hotpink,green,deeppink,peacockblue,grapecolor,amber,comic,lytgray]
+
+class Blubble(pygame.sprite.Sprite):
+    def __init__(self,color,row=0,col=0):
+        pygame.sprite.Sprite.__init__(self)
+        self.rect = pygame.Rect(0,0,30,30)
+        self.rect.centerx = int(strx)
+        self.speed=10
+        self.color=color
+        self.radius = bubblerad
+        self.angle=0
+        self.row=row
+        self.col=col
