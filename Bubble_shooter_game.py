@@ -81,4 +81,23 @@ class Blubble(pygame.sprite.Sprite):
         pygame.gfxdraw.filled_circle(dispsurf,self.rect.centerx,self.rect.centery,self.radius,self.color)
         pygame.gfxdraw.aacircle(dispsurf,self.rect.centerx,self.rect.centery,self.radius,GRAY)
 
-
+    def xcalc(self,angle):
+        radians = math.radians(angle)
+        xmove = math.cos(radians)*(self.speed)
+        return xmove
+    def ycalc(self,angle):
+        radians = math.radians(angle)
+        ymove = math.sin(radians)*(self.speed) * -1
+        return ymove
+class Ary(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.angle=90
+        arrimg = pygame.image.load('Arrow.png')
+        arrimg.convert_alpha()
+        arrowRect = arrimg.get_rect()
+        self.image = arrimg
+        self.transformImage = self.image
+        self.rect = arrowRect
+        self.rect.centerx = int(strx)
+        self.rect.centery = strY
