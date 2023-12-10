@@ -446,5 +446,17 @@ def stbb(bbarr,newbb,launchbb,score):
                                 bbarr[newRow][newcol].row = newRow
                                 bbarr[newRow][newcol].col = newcol
                     popbb(bbarr,newRow,newcol,newbb.color,dellst)
+                    if(len(dellst) >= 3):
+                        for pos in dellst:
+                            popSound.play()
+                            row = pos[0]
+                            col = pos[1]
+                            bbarr[row][col] = blank
+                        chkfflotrs(bbarr)
+                        score.update(dellst)
+                    launchbb = False
+                    newbb = None
+
+    return launchbb,newbb,score
 
 
