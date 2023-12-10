@@ -169,16 +169,16 @@ class base():
         self.rect = Rect(self.x,self.y,self.width,self.height)
         self.drection = 0
 
-        def draw_text(text,font,w_brick,x,y):
-            image = font.render(text,True,w_brick)
-            window.blit(image,(x,y))
-        Block = Block()
-        Block.make_brick()
-        user_basepad = base()
-        ball = Ball(user_basepad.x + (user_basepad.width //2),user_basepad.y - user_basepad.height)
-        game = True
-        while game:
-            clock.tick(frame_rate)
+def draw_text(text,font,w_brick,x,y):
+    image = font.render(text,True,w_brick)
+    window.blit(image,(x,y))
+Block = Block()
+Block.make_brick()
+user_basepad = base()
+ball = Ball(user_basepad.x + (user_basepad.width //2),user_basepad.y - user_basepad.height)
+game = True
+while game:
+    clock.tick(frame_rate)
     window.fill(black)
     Block.draw_brick()
     user_basepad.draw()
@@ -198,7 +198,7 @@ class base():
             draw_text('Gameover!',font,w_brick,180,Window_height//2+50)
             draw_text('Click Anywhere to restart',font,w_brick,90,Window_height//2+100)
 
-    for event in in pygame.event.get():
+    for event in pygame.event.get():
         if event.type == pygame.QUIT:
             game = False
 
@@ -207,5 +207,5 @@ class base():
             ball.reset(user_basepad.x + (user_basepad.width//2),user_basepad.y - user_basepad.height)
             user_basepad.reset()
             Block.make_brick()
-            pygame.display.update()
-        pygame.quit()
+    pygame.display.update()
+pygame.quit()
