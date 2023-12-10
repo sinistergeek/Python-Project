@@ -460,3 +460,17 @@ def stbb(bbarr,newbb,launchbb,score):
     return launchbb,newbb,score
 
 
+def addbbtotop(bbarr,bubble):
+    posx = bubble.rect.centerx
+    leftSidex = posx - bubblerad
+    coldiv = math.modf(float(leftSidex)/float(bubblewdth))
+    col = int(coldiv[1])
+    if(coldiv[0] < 0.5):
+        bbarr[0][col] = copy.copy(bubble)
+
+    else:
+        col += 1
+        bbarr[0][col] = copy.copy(bubble)
+    row = 0
+    return row, col
+
