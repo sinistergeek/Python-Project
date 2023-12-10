@@ -207,6 +207,26 @@ def main():
                 launchbb,newbb,score = stbb(bbarr,newbb,launchbb,score)
 
                 fbblist=[]
+                for row in range(len(bbarr)):
+                    for col in range(len(bbarr[0])):
+                        if bbarr[row][col] != blank:
+                            fbblist.append(bbarr[row][col])
+                            if bbarr[row][col].rect.botton > (winhgt - arrow.rect.height - 10):
+                                return score.total,'lose'
+                if len(fbblist) < 1:
+                    return score.total,'win'
 
+                gameclrlist = updtclrlist(bbarr)
+                random.shuffle(gameclrlist)
 
+                if launchbb == False:
+                    nxtbb = Bubble(gameclrlist[0])
+                    nxtbb.rect.right = winwdth - 5
+                    nxtbb.rect.bottom = winhgt - 5
+
+            nxtbb.draw()
+            if launchbb == True:
+                covnxtbb()
+
+            arrow.update(dir)
 
