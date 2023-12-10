@@ -149,3 +149,29 @@ def main():
     while True:
         score,winorlose = rngame()
         endScreen(score,winorlose)
+
+    def rngame():
+        musclist = ['Whatever_It_Takes_OGG.ogg','bgmusic.ogg','Goofy_Theme.ogg']
+        pygame.mixer.music.load(musclist[0])
+        pygame.mixer.music.play()
+        track = 0
+        grameclrlist = copy.deepcopy(clrlist)
+        dir = None
+        launchbb = False
+        newbb = Nnone
+
+        arrow = Ary()
+        bbarr = mkeblkbrd()
+        setbb(bbarr,gameclrlist)
+        setbb(bbarr,gameclrlist)
+
+        nxtbb = Bubble(gameclrlist[0])
+        nxtbb.rect.right = winwdth - 5
+        nxtbb.rect.bottom = winhgt - 5
+
+        score = Score()
+        while True:
+            dispsurf.fill(bgcolor)
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    terminate()
