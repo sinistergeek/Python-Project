@@ -510,3 +510,28 @@ def popbb(bbarr,row,col,color,dellst):
         popbb(bbarr,row,col - 1,color,dellst)
 
 
+def drawbbary(array):
+    for row in range(aryhgt):
+        for col in range(len(array[row])):
+            if(array[row][col] != blank):
+                array[row][col].draw()
+
+def makeDisplay():
+    dispsurf = pygame.display.set_mode((winwdth,winhgt))
+    disprect = dispsurf.get_rect()
+    dispsurf.fill(bgcolor)
+    dispsurf.convert()
+    pygame.dispaly.update()
+    return dispsurf,disprect
+
+def terminate():
+    pygame.quit()
+    sys.exit()
+
+def covnxtbb():
+    whiteRect = pygame.Rect(0,0,bubblewdth,bubblewdth)
+    whiteRect.bottom = winhgt
+    whiteRect.right = winwdth
+    pygame.draw.rect(dispsurf,bgcolor,whiteRect)
+
+
