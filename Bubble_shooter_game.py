@@ -535,3 +535,25 @@ def covnxtbb():
     pygame.draw.rect(dispsurf,bgcolor,whiteRect)
 
 
+def endScreen(score,winorlose):
+    endFont = pygame.font.SysFont('merlin',50)
+    endMessage1 = endFont.render('You' + winorlose + '!Hey Your Scored' + str(score) + '.Press Enter to Play Again.',True,black,bgcolor)
+    endMessage1Rect = endMessage1.get_rect()
+    endMessage1Rect.center = disprect.center
+    dispsurf.fill(bgcolor)
+    dispsurf.blit(endMessage1,endMessage1Rect)
+    pygame.display.update()
+
+    while True:
+        for event in pygame.event.get():
+            if(event.type == QUIT):
+                terminate()
+            elif(event.type == KEYUP):
+                if(event.key == K_RETURN):
+                    return
+                elif(event.key == K_ESCAPE):
+                    terminate()
+
+
+if __name__ == '__main__':
+    main()
