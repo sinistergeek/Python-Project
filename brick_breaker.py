@@ -48,7 +48,7 @@ class Ball():
                         self.xspeed *= -1
                     if abs(self.rect.left - item[0].right) < collision_threshold and self.x_speed < 0:
                         self.x_speed *= -1
-                    if block_object[count_row][count_item][i] > 1:
+                    if block_object[count_row][count_item][1] > 1:
                         block_object[count_row][count_item][1] -= 1
                     else:
                         block_object[count_row][count_item][0] = (0,0,0,0)
