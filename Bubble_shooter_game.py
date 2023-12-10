@@ -124,4 +124,28 @@ class Score(object):
         self.render = self.font.render('Score:' + str(self.total),True,black,white)
         self.rect = self.render.get_rect()
         self.rect.left = 5
-        self.rect.bottom = winhgt -5
+        self.rect.bottom = winhgt - 5
+
+    def update(self,dellst):
+        self.totla +=((len(dellst))*10)
+        self.render = self.font.render('Score'+str(self.totla),True,black,white)
+
+    def draw(self):
+        dispsurf.blit(self.render,self.rect)
+
+
+
+
+
+def main():
+    global fpsclock,dispsurf,disprect,mainfont
+    pygame.init()
+
+    fpsclock = pygame.time.Clock()
+    pygame.display.set_caption('Bubble Shooter')
+    mainfont = pygame.font.SysFont('Comic Sans MS',txthgt)
+    dispsurf,disprect = makeDisplay()
+
+    while True:
+        score,winorlose = rngame()
+        endScreen(score,winorlose)
