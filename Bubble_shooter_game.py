@@ -150,149 +150,174 @@ def main():
         score,winorlose = rngame()
         endScreen(score,winorlose)
 
-    def rngame():
-        musclist = ['Whatever_It_Takes_OGG.ogg','bgmusic.ogg','Goofy_Theme.ogg']
-        pygame.mixer.music.load(musclist[0])
-        pygame.mixer.music.play()
-        track = 0
-        grameclrlist = copy.deepcopy(clrlist)
-        dir = None
-        launchbb = False
-        newbb = Nnone
+def rngame():
+    musclist = ['Whatever_It_Takes_OGG.ogg','bgmusic.ogg','Goofy_Theme.ogg']
+    pygame.mixer.music.load(musclist[0])
+    pygame.mixer.music.play()
+    track = 0
+    grameclrlist = copy.deepcopy(clrlist)
+    dir = None
+    launchbb = False
+    newbb = Nnone
+    arrow = Ary()
+    bbarr = mkeblkbrd()
+    setbb(bbarr,gameclrlist)
+    setbb(bbarr,gameclrlist)
+    nxtbb = Bubble(gameclrlist[0])
+    nxtbb.rect.right = winwdth - 5
+    nxtbb.rect.bottom = winhgt - 5
+    score = Score()
+    while True:
+        dispsurf.fill(bgcolor)
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                terminate()
 
-        arrow = Ary()
-        bbarr = mkeblkbrd()
-        setbb(bbarr,gameclrlist)
-        setbb(bbarr,gameclrlist)
+            elif event.type == KEYDOWN:
+                if(event.key == K_LEFT):
+                    dir = LEFT
 
-        nxtbb = Bubble(gameclrlist[0])
-        nxtbb.rect.right = winwdth - 5
-        nxtbb.rect.bottom = winhgt - 5
+            elif(event.key == K_RIGHT):
+                dir = RIGHT
 
-        score = Score()
-        while True:
-            dispsurf.fill(bgcolor)
-            for event in pygame.event.get():
-                if event.type == QUIT:
+            elif event.type == KEYUP:
+                dir = None
+                if event.key == K_SPACE:
+                    launchbb = True
+
+                elif event.key == K_ESCAPE:
                     terminate()
 
-                elif event.type == KEYDOWN:
-                    if(event.key == K_LEFT):
-                        dir = LEFT
-
-                    elif(event.key == K_RIGHT):
-                        dir = RIGHT
+        if launchbb == True:
+            if newbb == None:
+                newbb = Bubble(nxtbb.color)
+                newbb.angle =arrow.angle
 
 
-                elif event.type == KEYUP:
-                    dir = None
-                    if event.key == K_SPACE:
-                        launchbb = True
+            newbb.update()
+            newbb.draw()
+            if newbb.rect.right >= winwdth -5:
+                newbb.angle = 180 - newbb.angle
+            elif newbb.rect.left <= 5:
+                newbb.angle = 180 - newbb.angle
+            launchbb,newbb,score = stbb(bbarr,newbb,launchbb,score)
 
-                    elif event.key == K_ESCAPE:
-                        terminate()
+            fbblist=[]
+            for row in range(len(bbarr)):
+                for col in range(len(bbarr[0])):
+                    if bbarr[row][col] != blank:
+                        fbblist.append(bbarr[row][col])
+                        if bbarr[row][col].rect.botton > (winhgt - arrow.rect.height - 10):
+                            return score.total,'lose'
+            if len(fbblist) < 1:
+                return score.total,'win'
 
-            if launchbb == True:
-                if newbb == None:
-                    newbb = Bubble(nxtbb.color)
-                    newbb.angle =arrow.angle
+            gameclrlist = updtclrlist(bbarr)
+            random.shuffle(gameclrlist)
 
+            if launchbb == False:
+                nxtbb = Bubble(gameclrlist[0])
+                nxtbb.rect.right = winwdth - 5
+                nxtbb.rect.bottom = winhgt - 5
 
-                newbb.update()
-                newbb.draw()
-                if newbb.rect.right >= winwdth -5:
-                    newbb.angle = 180 - newbb.angle
-                elif newbb.rect.left <= 5:
-                    newbb.angle = 180 - newbb.angle
-                launchbb,newbb,score = stbb(bbarr,newbb,launchbb,score)
+        nxtbb.draw()
+        if launchbb == True:
+            covnxtbb()
 
-                fbblist=[]
-                for row in range(len(bbarr)):
-                    for col in range(len(bbarr[0])):
-                        if bbarr[row][col] != blank:
-                            fbblist.append(bbarr[row][col])
-                            if bbarr[row][col].rect.botton > (winhgt - arrow.rect.height - 10):
-                                return score.total,'lose'
-                if len(fbblist) < 1:
-                    return score.total,'win'
+        arrow.update(dir)
+        arrow.draw()
 
-                gameclrlist = updtclrlist(bbarr)
-                random.shuffle(gameclrlist)
+        setarrpos(bbarr)
+        drawbbary(bbarr)
 
-                if launchbb == False:
-                    nxtbb = Bubble(gameclrlist[0])
-                    nxtbb.rect.right = winwdth - 5
-                    nxtbb.rect.bottom = winhgt - 5
+        score.draw()
 
-            nxtbb.draw()
-            if launchbb == True:
-                covnxtbb()
+        if pygame.mixer.music.get_busy() == False:
+            if track == len(musiclist) - 1:
+                track = 0
 
-            arrow.update(dir)
-            arrow.draw()
+            else:
+                track += 1
 
-            setarrpos(bbarr)
-            drawbbary(bbarr)
+            pygame.mixer.music.load(musclist[track])
+            pygame.mixer.music.play()
 
-            score.draw()
+        pygame.display.update()
+        fpsclock.tick(FPS)
+def mkeblkbrd():
+    array = []
+    for row in range(aryhgt):
+        col = []
+        for i in range(arywdth):
+            col.append(blank)
+        array.append(col)
 
-            if pygame.mixer.music.get_busy() == False:
-                if track == len(musiclist) - 1:
-                    track = 0
-
-                else:
-                    track += 1
-
-                pygame.mixer.music.load(musclist[track])
-                pygame.mixer.music.play()
-
-            pygame.display.update()
-            fpsclock.tick(FPS)
-    def mkeblkbrd():
-        array = []
-        for row in range(aryhgt):
-            col = []
-            for i in range(arywdth):
-                col.append(blank)
-            array.append(col)
-
-        return array
+    return array
 
 
-    def setbb(array,gameclrlist):
-        for row in range(bubbleyrs):
-            for col in range(len(array[row])):
-                random.shuffle(gameclrlist)
-                newbb = Bubble(gameclrlist[0],row,col)
-                array[row][col] = newbb
+def setbb(array,gameclrlist):
+    for row in range(bubbleyrs):
+        for col in range(len(array[row])):
+            random.shuffle(gameclrlist)
+            newbb = Bubble(gameclrlist[0],row,col)
+            array[row][col] = newbb
 
-        setarrpos(array)
-
-
-    def setarrpos(array):
-        for row in range(aryhgt):
-            for col in range(len(array[row])):
-                if array[row][col] != blank:
-                    array[row][col].rect.x = (bubblewdth*col) + 5
-                    array[row][col].rect.y = (bubblewdth*row) + 5
+    setarrpos(array)
 
 
-        for row in range(1,aryhgt,2):
-            for col in range(len(array[row])):
-                if array[row][col] != blank:
-                    array[row][col].rect.x += bubblerad
+def setarrpos(array):
+    for row in range(aryhgt):
+        for col in range(len(array[row])):
+            if array[row][col] != blank:
+                array[row][col].rect.x = (bubblewdth*col) + 5
+                array[row][col].rect.y = (bubblewdth*row) + 5
 
 
-        for row in range(1,aryhgt):
-            for col in range(len(array[row])):
-                if array[row][col] != blank:
-                    array[row][col].rect.y -=(bubadjst * row)
+    for row in range(1,aryhgt,2):
+        for col in range(len(array[row])):
+            if array[row][col] != blank:
+                array[row][col].rect.x += bubblerad
 
-        delextrbb(array)
 
-    def delextrbb(array):
-        for row in range(aryhgt):
-            for col in range(len(array[row])):
-                if array[row][col] != blank:
-                    if array[row][col].rect.right > winwdth:
-                        array[row][col] = blank
+    for row in range(1,aryhgt):
+        for col in range(len(array[row])):
+            if array[row][col] != blank:
+                array[row][col].rect.y -=(bubadjst * row)
+
+    delextrbb(array)
+
+def delextrbb(array):
+    for row in range(aryhgt):
+        for col in range(len(array[row])):
+            if array[row][col] != blank:
+                if array[row][col].rect.right > winwdth:
+                    array[row][col] = blank
+
+def updtclrlist(bbarr):
+    newColorList = []
+    for row in range(len(bbarr)):
+        for col in range(len(bbarr[0])):
+            if bbarr[row][col] != blank:
+                newColorList.append(bbarr[row][col].color)
+
+    colorSet = set(newColorList)
+
+    if len(colorSet) < 1:
+        colorList = []
+
+        colorList.append(white)
+        return colorList
+
+    else:
+        return list(colorSet)
+
+def chkfflotrs(bbarr):
+    bubbleList = [col for col in range(len(bbarr[0])) if bbarr[0][col] != blank]
+    newbbList = []
+    for i in range(len(bubbleList)):
+        if i == 0:
+            newbbList.append(bubbleList[i])
+        elif bubbleList[i] > bubbleList[i-1] + 1:
+            newbbList.append(bubbleList[i])
+
+    cpyofbrd = copy.deepcopy(bbarr)
