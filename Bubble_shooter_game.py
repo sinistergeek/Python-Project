@@ -248,4 +248,51 @@ def main():
 
             pygame.display.update()
             fpsclock.tick(FPS)
-    
+    def mkeblkbrd():
+        array = []
+        for row in range(aryhgt):
+            col = []
+            for i in range(arywdth):
+                col.append(blank)
+            array.append(col)
+
+        return array
+
+
+    def setbb(array,gameclrlist):
+        for row in range(bubbleyrs):
+            for col in range(len(array[row])):
+                random.shuffle(gameclrlist)
+                newbb = Bubble(gameclrlist[0],row,col)
+                array[row][col] = newbb
+
+        setarrpos(array)
+
+
+    def setarrpos(array):
+        for row in range(aryhgt):
+            for col in range(len(array[row])):
+                if array[row][col] != blank:
+                    array[row][col].rect.x = (bubblewdth*col) + 5
+                    array[row][col].rect.y = (bubblewdth*row) + 5
+
+
+        for row in range(1,aryhgt,2):
+            for col in range(len(array[row])):
+                if array[row][col] != blank:
+                    array[row][col].rect.x += bubblerad
+
+
+        for row in range(1,aryhgt):
+            for col in range(len(array[row])):
+                if array[row][col] != blank:
+                    array[row][col].rect.y -=(bubadjst * row)
+
+        delextrbb(array)
+
+    def delextrbb(array):
+        for row in range(aryhgt):
+            for col in range(len(array[row])):
+                if array[row][col] != blank:
+                    if array[row][col].rect.right > winwdth:
+                        array[row][col] = blank
