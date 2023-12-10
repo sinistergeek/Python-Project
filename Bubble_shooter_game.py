@@ -383,11 +383,68 @@ def stbb(bbarr,newbb,launchbb,score):
                             else:
                                 newRow = row + 1
                                 newcol = col + 1
-                                if bbarr[newRow][newcol] != blank:
+                                if (bbarr[newRow][newcol] != blank):
                                     newRow = newRow - 1
 
                                 bbarr[newRow][newcol] = copy.copy(newbb)
                                 bbarr[newRow][newcol].row = newRow
                                 bbarr[newRow][newcol].col = newcol
+
+                        elif newbb.rect.centerx < bbarr[row][col].rect.centerx:
+                            if(row == 0 or row % 2 == 0):
+                                newRow = row + 1
+                                newcol = col -1
+                                if newcol < 0:
+                                    newcol = 0
+                                if bbarr[newRow][newcol] != blank:
+                                    newRow = newRow -1 
+                                bbarr[newRow][newcol] = copy.copy(newbb)
+                                bbarr[newRow][newcol].row = newRow
+                                bbarr[newRow][newcol].col = newcol
+
+                            else:
+                                newRow = row + 1
+                                newcol = col
+                                if bbarr[newRow][newcol] != blank:
+                                    newRow = newRow -1
+                                bbarr[newRow][newcol] = copy.copy(newbb)
+                                bbarr[newRow][newcol].row = newRow
+                                bbarr[newRow][newcol].col = newcol
+                    elif(newbb.rect.centery < bbarr[row][col].rect.centery):
+                        if(newbb.rect.centerx >= bbarr[row][col].rect.centerx):
+                            if(row == 0 or row % 2 ==0):
+                                newRow = row - 1
+                                newcol = col
+                                if(bbarr[newRow][newcol] != blank):
+                                    newRow = newRow + 1
+                                bbarr[newRow][newcol] = copy.copy(newbb)
+                                bbarr[newRow][newcol].row = newRow
+                                bbarr[newRow][newcol].col = newcol
+                            else:
+                                newRow = row - 1
+                                newcol = col + 1
+                                bbarr[newRow][newcol] = copy.copy(newbb)
+                                bbarr[newRow][newcol].row = newRow
+                                bbarr[newRow][newcol].col = newcol
+
+                        elif newbb.rect.centerx <= bbarr[row][col].rect.centerx:
+                            if(row == 0 or now % 2 ==0):
+                                newRow = row - 1
+                                newcol = col - 1
+                                if(bbarr[newRow][newcol] != blank):
+                                    newRow = newRow + 1
+
+                                bbarr[newRow][newcol] = copy.copy(newbb)
+                                bbarr[newRow][newcol].row = newRow
+                                bbarr[newRow][newocl].col = newcol
+                            else:
+                                newRow = row - 1
+                                newcol = col
+                                if(bbarr[newRow][newcol] != blank):
+                                    mewRow = newRow + 1
+                                bbarr[newRow][newcol] = copy.copy(newbb)
+                                bbarr[newRow][newcol].row = newRow
+                                bbarr[newRow][newcol].col = newcol
+                    popbb(bbarr,newRow,newcol,newbb.color,dellst)
 
 
