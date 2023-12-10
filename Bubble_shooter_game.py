@@ -360,4 +360,34 @@ def popflotrs(bbarr,cpyofbrd,col,row=0):
         popflotrs(bbarr,cpyofbrd,col,row - 1)
         popflotrs(bbarr,cpyofbrd,col + 1, row - 1)
 
+def stbb(bbarr,newbb,launchbb,score):
+    dellst = []
+    popSound = pygame.mixer.Sound('popcork.ogg')
+    for row in range(len(bbarr)):
+        for col in range(len(bbarr[row])):
+            if(bbarr[row][col] != blank and newbb != None):
+                if(pygame.sprite.collide_rect(newbb,bbarr[row][col])) or newbb.rect.top < 0:
+                    if (newbb.rect.top < 0):
+                        newRow,newcol = addbbtotop(bbarr,newbb)
+                    elif newbb.rect.centery >= bbarr[row][col].rect.centery:
+                        if (newbb.rect.centerx >= bbarr[row][col].rect.centerx):
+                            if (row == 0 or (row) % 2 == 0):
+                                newRow = row + 1
+                                newcol = col
+                                if (bbarr[newRow][newcol] != blank):
+                                    newRow = newRow - 1
+
+                                bbarr[newRow][newcol] = copy.copy(newbb)
+                                bbarr[newRow][newcol].row = newRow
+                                bbarr[newRow][newcol].col = newcol
+                            else:
+                                newRow = row + 1
+                                newcol = col + 1
+                                if bbarr[newRow][newcol] != blank:
+                                    newRow = newRow - 1
+
+                                bbarr[newRow][newcol] = copy.copy(newbb)
+                                bbarr[newRow][newcol].row = newRow
+                                bbarr[newRow][newcol].col = newcol
+
 
