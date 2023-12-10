@@ -474,3 +474,39 @@ def addbbtotop(bbarr,bubble):
     row = 0
     return row, col
 
+def popbb(bbarr,row,col,color,dellst):
+    if(row < 0 or col < 0 or row > (len(bbarr)-1) or col > (len(bbarr[0])-1)):
+        return
+    elif(bbarr[row][col] == blank):
+        return
+    elif(bbarr[row][col].color != color):
+        return
+    for bubble in dellst:
+        if(bbarr[bubble[0]][bubble[1]] == bbarr[row][col]):
+            return
+
+    dellst.append((row,col))
+
+    if(row == 0):
+        popbb(bbarr,row,col-1,color,dellst)
+        popbb(bbarr,row,col+1,color,dellst)
+        popbb(bbarr,row+1,col,color,dellst)
+        popbb(bbarr,row+1,col-1,color,dellst)
+
+    elif(row%2==0):
+        popbb(bbarr,row + 1,col,color,dellst)
+        popbb(bbarr,row + 1,col -1,color,dellst)
+        popbb(bbarr,row - 1,col,color,dellst)
+        popbb(bbarr,row - 1,col -1,color,dellst)
+        popbb(bbarr,row,col+1,color,dellst)
+        popbb(bbarr,row,col-1,color,dellst)
+
+    else:
+        popbb(bbarr,row - 1,col,color,dellst)
+        popbb(bbarr,row - 1,col + 1,color,dellst)
+        popbb(bbarr,row + 1,col,color,dellst)
+        popbb(bbarr,row + 1,col + 1,color,dellst)
+        popbb(bbarr,row,col + 1,color,dellst)
+        popbb(bbarr,row,col - 1,color,dellst)
+
+
