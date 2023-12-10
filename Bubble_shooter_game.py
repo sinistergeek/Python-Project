@@ -101,3 +101,27 @@ class Ary(pygame.sprite.Sprite):
         self.rect = arrowRect
         self.rect.centerx = int(strx)
         self.rect.centery = strY
+
+    def updates(self,dir):
+        if(dir==LEFT and self.angle < 180):
+            self.angle +=2
+        elif(dir == RIGHT and self.angle > 0):
+            self.angle -= 2
+
+        self.transformImage = pygame.transform.rotate(self.image,self.angle)
+        self.rect = self.transformImage.get_rect()
+        self.rect.centerx = int(strx)
+        self.rect.centery = strY
+
+    def draw(self):
+        dispsurf.blit(self.transformImage,self.rect)
+
+
+class Score(object):
+    def __init__(self):
+        self.total = 0
+        self.font = pygame.font.SysFont('merlin',35)
+        self.render = self.font.render('Score:' + str(self.total),True,black,white)
+        self.rect = self.render.get_rect()
+        self.rect.left = 5
+        self.rect.bottom = winhgt -5
