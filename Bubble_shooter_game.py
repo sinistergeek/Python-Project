@@ -61,3 +61,24 @@ class Blubble(pygame.sprite.Sprite):
         self.angle=0
         self.row=row
         self.col=col
+
+    def update(self):
+        if self.angle == 90:
+            xmove=0
+            ymove = self.speed * -1
+        elif self.angle < 90:
+            xmove = self.xcalc(self.angle)
+            ymove = self.ycalc(self.angle)
+
+        elif self.angle > 90:
+            xmove = self.xcalc(180 - self.angle)* -1
+            ymove = self.ycalc(180 - self.angle)
+
+        self.rect.x += int(xmove)
+        self.rect.y += int(ymove)
+    
+    def draw(self):
+        pygame.gfxdraw.filled_circle(dispsurf,self.rect.centerx,self.rect.centery,self.radius,self.color)
+        pygame.gfxdraw.aacircle(dispsurf,self.rect.centerx,self.rect.centery,self.radius,GRAY)
+
+
