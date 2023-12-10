@@ -190,7 +190,7 @@ class base():
             my_ball = False
     if not my_ball:
         if game_over == 0:
-            draw_text('Click anywhere to start',font,w_brick,90 Window_height//2 + 100)
+            draw_text('Click anywhere to start',font,w_brick,90,Window_height//2 + 100)
         elif game_over == 1:
             draw_text('You won!',font,w_brick,180,Window_height//2+50)
             draw_text('Click anywhere to restart',font,w_brick,90,Window_height//2+100)
