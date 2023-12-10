@@ -175,3 +175,38 @@ def main():
             for event in pygame.event.get():
                 if event.type == QUIT:
                     terminate()
+
+                elif event.type == KEYDOWN:
+                    if(event.key == K_LEFT):
+                        dir = LEFT
+
+                    elif(event.key == K_RIGHT):
+                        dir = RIGHT
+
+
+                elif event.type == KEYUP:
+                    dir = None
+                    if event.key == K_SPACE:
+                        launchbb = True
+
+                    elif event.key == K_ESCAPE:
+                        terminate()
+
+            if launchbb == True:
+                if newbb == None:
+                    newbb = Bubble(nxtbb.color)
+                    newbb.angle =arrow.angle
+
+
+                newbb.update()
+                newbb.draw()
+                if newbb.rect.right >= winwdth -5:
+                    newbb.angle = 180 - newbb.angle
+                elif newbb.rect.left <= 5:
+                    newbb.angle = 180 - newbb.angle
+                launchbb,newbb,score = stbb(bbarr,newbb,launchbb,score)
+
+                fbblist=[]
+
+
+
