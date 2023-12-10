@@ -92,7 +92,7 @@ class Ball():
         self.radius = 10
         self.x = x - self.radius
         self.y = y - 50
-        self.rect = Rect(self.x,self.y,self.radius * 2,self.raidus * 2)
+        self.rect = Rect(self.x,self.y,self.radius * 2,self.radius * 2)
         self.x_speed = 4
         self.y_speed = -4
         self.max_speed = 5
@@ -108,7 +108,7 @@ class Block():
         single_brick = []
         for row in range(game_rows):
             brick_row = []
-            for coloumn in range(game_columns):
+            for coloumn in range(game_coloumns):
                 x_brick = coloumn * self.width
                 y_brick = row * self.height
                 rect = pygame.Rect(x_brick,y_brick,self.width,self.height)
@@ -139,7 +139,7 @@ class base():
 
     def __init__(self):
         self.height = 20
-        self.width = int(Window_width/game_columns)
+        self.width = int(Window_width/game_coloumns)
         self.x = int((Window_width/2) - (self.width/2))
         self.y = Window_height - (self.height * 2)
         self.speed = 8
@@ -149,7 +149,7 @@ class base():
     def slide(self):
         self.direction = 0
         key = pygame.key.get_pressed()
-        if keyp[pygame.K_LEFT] and self.rect.left > 0:
+        if key[pygame.K_LEFT] and self.rect.left > 0:
             self.rect.x = self.speed
             self.direction = -1
         if key[pygame.K_RIGHT] and self.rect.right < Window_width:
