@@ -229,4 +229,23 @@ def main():
                 covnxtbb()
 
             arrow.update(dir)
+            arrow.draw()
 
+            setarrpos(bbarr)
+            drawbbary(bbarr)
+
+            score.draw()
+
+            if pygame.mixer.music.get_busy() == False:
+                if track == len(musiclist) - 1:
+                    track = 0
+
+                else:
+                    track += 1
+
+                pygame.mixer.music.load(musclist[track])
+                pygame.mixer.music.play()
+
+            pygame.display.update()
+            fpsclock.tick(FPS)
+    
