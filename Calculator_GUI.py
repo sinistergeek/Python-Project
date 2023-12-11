@@ -69,3 +69,10 @@ b4.grid(row=2,column=0)
 b5.grid(row=2,column=1)
 b6.grid(row=2,column=2)
 bmul.grid(row=2,column=3)
+
+
+b7.grid(row=4,column=0)
+bdot.grid(row=4,column=1)
+bequal.grid(row=4,column=2)
+bsub.grid(row=4,column=3)
+root.mainloop()
