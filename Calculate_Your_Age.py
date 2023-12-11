@@ -16,3 +16,21 @@ def month_days(month,leap_year):
         return 29
     elif month == 2 and (not leap_year):
         return 28
+
+name = input("input your name:")
+age = input("input your age:")
+localtime = time.localtime(time.time())
+
+year = int(age)
+month = year * 12 + localtime.tm_mon
+day = 0
+
+begin_year = int(localtime.tm_year) - year
+end_year = begin_year + year
+
+
+for y in range(begin_year,end_year):
+    if(judge_leap_year(y)):
+        day = day + 366
+    else:
+        day = day + 365
