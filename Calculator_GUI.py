@@ -13,3 +13,24 @@ def buttonClick(num):
 
 def buttonClear():
     e.delete(0,tk.END)
+
+
+def buttonGet(oper):
+    global num1,math
+    num1 = e.get()
+    math = oper
+    e.insert(tk.END,math)
+    try:
+        num1 = float(num1)
+
+    except ValueError:
+        buttonClear()
+
+def buttonEqual():
+    inp = e.get()
+    num2 = float(inp[inp.index(math) + 1:])
+    e.delete(0,tk.END)
+    if math == '+':
+        e.insert(0,str(num1 + num2))
+    elif math == '-':
+        e.insert(0,str(num1 - num2))
