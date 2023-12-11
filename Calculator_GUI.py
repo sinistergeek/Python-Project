@@ -34,3 +34,22 @@ def buttonEqual():
         e.insert(0,str(num1 + num2))
     elif math == '-':
         e.insert(0,str(num1 - num2))
+
+    elif math == 'x':
+        e.insert(0,str(num1 * num2))
+    elif math == '/':
+        try:
+            e.insert(0,str(num1/num2))
+        except ZeroDivisionError:
+            e.insert(0,'Undefined')
+
+b1 = tk.Button(root,text='1',padx=40,pady=10,command=lambda:buttonClick('1'),font='Calibri 12')
+b2 = tk.Button(root,text='2',padx=40,pady=10,command=lambda:buttonClick('2'),font='Calibri 12')
+b3 = tk.Button(root,text='3',padx=40,pady=10,command=lambda:buttonClick('3'),font='Calibri 12')
+b4 = tk.Button(root,text='4',padx=40,pady=10,command=lambda:buttonClick('4'),font='Calibri 12')
+b5 = tk.Button(root,text='5',padx=40,pady=10,command=lambda:buttonClick('5'),font='Calibri 12')
+b6 = tk.Button(root,text='6',padx=40,pady=10,command=lambda:buttonClick('6'),font='Calibri 12')
+b7 = tk.Button(root,text='7',padx=40,pady=10,command=lambda:buttonClick('7'),font='Calibri 12')
+b8 = tk.Button(root,text='8',padx=40,pady=10,command=lambda:buttonClick('8'),font='Calibri 12')
+b9 = tk.Button(root,text='9',padx=40,pady=10,command=lambda:buttonClick('9'),font='Calibri 12')
+b0 = tk.Button(root,text='0',padx=40,pady=10,command=lambda:buttonClick('0'),font='Calibri 12')
