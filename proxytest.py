@@ -59,3 +59,21 @@ def test_proxy(proxy_type:str,proxy_address:str,iptest:str):
     logging.info(f'Proxy {proxy_address} : {proxy_status}')
     return {'proxy_type':proxy_type,'proxy_address':proxy_address,'proxy_status':proxy_status}
 
+def test_single_proxy(proxy:str,iptest:str,csv_path:str):
+    proxy_type,proxy_address = proxy.split('://')
+    result:dict = test_proxy(proxy_type,proxy_address,iptest)
+    add_proxies_to_file(Path(csv_path),[result])
+
+
+def test_csv_file(iptest:str,csv_path:str):
+    csv_path:Path =Path(csv_path)
+    if csv_path.exists():
+        pr_file:pd.DataFrame = pd.read_csv(csv_path)
+    else:
+        raise FileNotFoundError
+    proxies: list = []
+    for index,proxy in pr_file.iterrows():
+        proxies.append(test_proxy(proxy['proxy_type'],proxy['proxy_address'],iptest))
+        add_proxies_to_file(csv_path,proxies)
+
+
