@@ -38,4 +38,23 @@ def add(ctx,add_task):
 @click.pass_context
 @click.option('-fin','--fin_taskid',prompt='Enter ID of task to finish',type=int)
 
+def done(ctx,fin_taskid):
+    if str(fin_taskid) in ctx.obj['TASKS'].keys():
+        task=ctx.obj['TASKS'][str(fin_taskid)]
+        del ctx.obj['TASKS'][str(fin_taskid)]
+        click.echo('Finished and removed task"'+ task +'" with id'+str(fin_taskid))
+        if ctx.obj['TASKS']:
+            curr_ind = [str(ctx.obj['LATEsT'] + 1)]
+            tasks =[str(i) + '```' + t for (i,t) om ctx.obj['TASKS'].items()]
+            with open('./todo.txt','w') as f:
+                f.writelines(['%s\n' % en for en in curr_ind + tasks])
 
+        else:
+            with open('./todo.txt','w') as f:
+                f.writelines([str(0) + '\n'])
+    else:
+        click.echo('Error: no task with id' + str(fin_taskid))
+
+
+if __name__ == '__main__':
+    todo()
