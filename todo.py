@@ -45,7 +45,7 @@ def done(ctx,fin_taskid):
         click.echo('Finished and removed task"'+ task +'" with id'+str(fin_taskid))
         if ctx.obj['TASKS']:
             curr_ind = [str(ctx.obj['LATEsT'] + 1)]
-            tasks =[str(i) + '```' + t for (i,t) om ctx.obj['TASKS'].items()]
+            tasks =[str(i) + '```' + t for (i,t) in ctx.obj['TASKS'].items()]
             with open('./todo.txt','w') as f:
                 f.writelines(['%s\n' % en for en in curr_ind + tasks])
 
