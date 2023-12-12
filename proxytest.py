@@ -41,3 +41,21 @@ def test_proxy(proxy_type:str,proxy_address:str,iptest:str):
 
         else:
             r= requests.get(f'http://{iptest}',proxies=proxies)
+
+        try:
+            json_response:dict = r.json()
+            if json_response["ip"] in proxy_address:
+                proxy_status = 'Proxy functional'
+            else:
+                logging.warning(f'Proxy"{proxy_address}"' f'returned{json_response}')
+                proxy_status = 'Proxy not functional'
+
+        except JSONDecodeError:
+            proxy_status = 'Invalid response'
+
+    except ProxyError:
+        proxy_status = 'Proxy Error'
+
+    logging.info(f'Proxy {proxy_address} : {proxy_status}')
+    return {'proxy_type':proxy_type,'proxy_address':proxy_address,'proxy_status':proxy_status}
+
