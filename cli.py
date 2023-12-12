@@ -26,7 +26,19 @@ def cli():
 def single(proxy,iptest,csv):
     test_single_proxy(proxy,iptest,csv)
 
-@click.command()
+@cli.command()
 @click.argument('csv')
 @click.option('--iptest',default='iptest.ingokeiber.de',help='iptest address')
 
+def csv_file(iptest,csv):
+    test_csv_file(iptest,csv)
+
+@cli.command()
+@click.argument('text')
+@click.option('--csv',default='proxies.csv',help='CSV path')
+def add_from_txt_file(iptest,txt,csv):
+    add_from_text_file(iptest,txt,csv)
+
+
+if __name__ == '__main__':
+    cli()
