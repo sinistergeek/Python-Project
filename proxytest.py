@@ -76,4 +76,12 @@ def test_csv_file(iptest:str,csv_path:str):
         proxies.append(test_proxy(proxy['proxy_type'],proxy['proxy_address'],iptest))
         add_proxies_to_file(csv_path,proxies)
 
+def add_from_text_file(iptest:str,text_path:str,csv_path:str):
+    text_path:Path = Path(text_path)
+    if text_path.exists():
+        proxies: list = text_path.read_text().splitlines()
+        for proxy in proxies:
+            test_single_proxy(proxy,iptest,csv_path)
 
+    else:
+        raise FileNotFoundError
