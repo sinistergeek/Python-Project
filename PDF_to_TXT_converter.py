@@ -16,4 +16,11 @@ if(len(txtpath)==0):
     txtpath=os.path.join(BASEDIR,os.path.basename(os.path.normpath(pdfpath)).replace(".pdf","")+".txt")
     pdfobj = open(pdfpath,'rb')
     pdfread =PyPDF2.PdfFileReader(pdfobj)
-    
+    x=pdfread.numPages
+    for i in range(x):
+        pageObj = pdfread.getPage(i)
+        with open(txtpath,'a+') as f:
+            f.write((pageObj.extractText()))
+
+        print(pageObj.extractText())
+    pdfobj.close()
