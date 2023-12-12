@@ -25,3 +25,19 @@ def add_proxies_to_file(csv_path:str,proxies: list):
 
             else:
                 pr_file = pr_file.append(proxy,igonre_index=True)
+
+    pr_file = pr_file.drop_duplicates()
+    pr_file.to_csv(csv_path,index=False)
+    logging.info('CSv file has been written')
+
+def test_proxy(proxy_type:str,proxy_address:str,iptest:str):
+    logging.info(f'Testing proxy: {proxy_address}')
+    try:
+        proxies = {proxy_type:proxy_address}
+        proxy_status:str=''
+
+        if proxy_type=='https':
+            r=requests.get(f'https://{iptest}',proxies=proxies)
+
+        else:
+            r= requests.get(f'http://{iptest}',proxies=proxies)
