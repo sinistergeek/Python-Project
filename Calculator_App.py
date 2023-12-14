@@ -88,3 +88,25 @@ def cal():
 
     button0 = num_button(text='0',command=lambda:get_input(entry,'0'))
     button0.grid(row=5,column=0,pady=5)
+
+    button13 = num_button(text='.',command=lambda:get_input(entry,'.'))
+    button13.grid(row=5,column=1,pady=5)
+
+    button14=Button(root,text='/',fg=text_fg,bg=cal_button_bg,padx=10,pady=3,command=lambda:get_input(entry,'/'))
+    button14.grid(row=1,column=3,pady=5)
+
+    button15 = Button(root,text='<-',bg=other_button_bg,padx=10,pady=3,command=lambda:backspace(entry),activebackground=button_active_bg)
+    button15.grid(row=1,column=0,columnspan=2,padx=3,pady=5,sticky=N+S+E+W)
+
+    button16 = Button(root,text='C',bg=other_button_bg,padx=10,pady=3,command=lambda:clear(entry),activebackground=button_active_bg)
+    button16.grid(row=1,column=2,pady=5)
+    button17 = Button(root,text='=',fg=text_fg,bg=cal_button_bg,padx=10,pady=3,command=lambda:calc(entry),activebackground=button_active_bg)
+    button17.grid(row=5,column=3,pady=5)
+
+    button18 = Button(root,text='^',fg=text_fg,bg=cal_button_bg,padx=10,pady=3,command=lambda:get_input(entry,'**'))
+    button18.grid(row=5,column=2,pady=5)
+
+    root.mainloop()
+
+if __name__ == '__main__':
+    cal()
