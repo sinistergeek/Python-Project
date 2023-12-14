@@ -21,3 +21,12 @@ def encrypt_file(path):
         ciphertext = iv + mycipher.encrypt(plain_text.encode())
         with open(path + ".bin","wb") as file_out:
             file_out.write(ciphertext[16:])
+
+path = sys.argv[1]
+if os.path.isdir(path) and os.path.exists(path):
+    encrypt_dir(path)
+
+elif os.path.isfile(path) and os.path.exists(path):
+    encrypt_file(path)
+else:
+    print("it's a special file(socket,FIFO,device file")
