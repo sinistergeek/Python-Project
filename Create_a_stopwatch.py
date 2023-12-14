@@ -17,6 +17,19 @@ def counter_label(label):
             label.afer(1000,count)
             counter += 1
 
-count()
+    count()
 
+def Start(label):
+    global running
+    running = True
+    counter_label(label)
+    start['state'] = 'disabled'
+    stop['state'] = 'normal'
+    reset['state'] = 'normal'
 
+def Stop():
+    gloabl running
+    start['state'] = 'normal'
+    stop['state'] = 'disabled'
+    reset['state'] = 'normal'
+    running = False
