@@ -41,4 +41,25 @@ def cal():
     entry_font = font.Font(size=15)
     entry=Entry(root,justify="right",font=entry_font)
     entry.grid(row=0,column=0,columnspan=4,sticky=N + W + S + E, padx=5,pady=5)
+    cal_button_bg = '#FF6600'
+    num_button_bg = '#4B4B4B'
+    other_button_bg = '#DDDDDD'
+    text_fg = '#FFFFFF'
+    button_active_bg = '#C0C0C0'
+
+    num_button = partial(Button,root,fg=text_fg,bg=num_button_bg,padx=10,pady=3,activebackground=button_active_bg)
+    cal_button = partial(Button,root,fg=text_fg,bg=cal_button_bg,padx=10,pady=3,activebackground=button_active_bg)
+
+    button7 = num_button(text='7',bg=num_button_bg,command=lambda:get_input(entry,'7'))
+    button7.grid(row=2,column=0,pady=5)
+
+    button8 = num_button(text='8',command=lambda:get_input(entry,'8'))
+    button8.grid(row=2,column=1,pady=5)
+
+    button9 = num_button(text='9',command=lambda:get_input(entry,'9'))
+    button9.grid(row=2,column=2,pady=5)
+
+    button10 = cal_button(text='+',command=lambda:get_input(entry,'+'))
+    button10.grid(row=4,column=3,pady=5)
+
 
