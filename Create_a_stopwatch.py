@@ -33,3 +33,25 @@ def Stop():
     stop['state'] = 'disabled'
     reset['state'] = 'normal'
     running = False
+
+def Reset(label):
+    global counter
+    counter = 0
+    if not running:
+        reset['state'] = 'disabled'
+        label['text'] = '00:00:00'
+    else:
+        label['text'] = '00:00:00'
+
+
+root = Tkinter.Tk()
+root.title("Stopwatch")
+root.minsize(width=250,height=70)
+label = Tkinter.Label(root,text='Ready!',fg='black',font='Verdana 30 bold')
+label.pack()
+f = Tkinter.Frame(root)
+start = Tkinter.Button(f,text='Start',width=6,command=lambda:Start(label))
+stop = Tkinter.Button(f,text='Stop',width=6,state='disabled',command=Stop)
+reset = Tkinter.Button(f,text='Reset',width=6,state='disabled',command=lambda:Reset(label))
+f.pack(anchor='center',pady=5)
+start.pack(side='left')
