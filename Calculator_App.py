@@ -61,5 +61,30 @@ def cal():
 
     button10 = cal_button(text='+',command=lambda:get_input(entry,'+'))
     button10.grid(row=4,column=3,pady=5)
+    
+    button4 = num_button(text='4',command=lambda:get_input(entry,'4'))
+    button4.grid(row=3,column=0,pady=5)
 
+    button5 = num_button(text='5',command=lambda:get_input(entry,'5'))
+    button5,grid(row=3,column=1,pady=5)
 
+    button6 = num_button(text='6',command=lambda:get_input(entry,'6'))
+    button6.grid(row=3,column=2,pady=5)
+
+    button11 = cal_button(text='-',command=lambda:get_input(entry,'-'))
+    button11.grid(row=3,column=3,pady=5)
+
+    button1 = num_button(text='1',command = lambd:get_input(entry,'1'))
+    button1.grid(row=4,column=0,pady=5)
+
+    button2 = num_button(text='2', command=lambda:get_input(entry,'2'))
+    button2.grid(row=4,column=1,pady=5)
+
+    button3 = num_button(text='3',command=lambda:get_input(entry,'3'))
+    button3.grid(row=4,column=2,pady=5)
+
+    button12 = cal_button(text='*',command=lambda:get_input(entry,'*'))
+    button12.grid(row=2,column=3,pady=5)
+
+    button0 = num_button(text='0',command=lambda:get_input(entry,'0'))
+    button0.grid(row=5,column=0,pady=5)
