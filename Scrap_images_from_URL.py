@@ -33,4 +33,15 @@ def download_img(img_link,index):
                 f.close()
     except Exception:
         pass
+result  = get_url(path,url)
+time.sleep(60)
+img_links = get_img_links(result)
+if not os.path.isdir(output):
+    os.mkdir(output)
 
+for index,img_link in enumerate(img_links):
+    img_link = img_link("src")
+    print("Downloading...")
+    if img_link:
+        download_img(img_link,index)
+        print("Download Complete!!")
