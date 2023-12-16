@@ -17,3 +17,10 @@ class EnglishCorpus:
         sentence_list = [s for s in doc.sents]
 
         return sentence_list
+
+    def make_corpus(self) -> list:
+        corpus = []
+        for s in self.ginza_sents_object:
+            tokens = [str(t) for t in s]
+            corpus.append("".join(tokens))
+        return corpus
