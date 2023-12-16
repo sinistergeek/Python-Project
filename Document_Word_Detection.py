@@ -21,3 +21,27 @@ for c in cnts:
 
 for c in cntsv:
     cv2.drawContour(frame,[c],-1,9255,255,255),2)
+
+
+cv2.imshow('thresh',thresh)
+cv2.imshow('horizontal_lines',horizontal_lines)
+cv2.imshow('vertical_lines',vertical_lines)
+cv2.imshow('frame',frame)
+
+gray1 = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+thresh1 = cv2.adaptiveThreshold(gray1,255,cv2.ADApTIVE_THRESH_GAUSsiAN_C,cv2.THRESH_BINARY,23,30)
+canny = imutils.auto_canny(thresh1)
+output = cv2.bitwise_not(canny)
+kernel = np.ones((5,5),np.uint8)
+opening = cv2.morphologyEx(canny,cv2.MORPH_CLOSE,kernel)
+dilation = cv2.dilate(canny,kernel,iterations=1)
+contour,hierachy = cv2.findContours(dilation,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+
+for i in contour:
+    area = cv2.contourArea(i)
+    if area > 20:
+        x,y,w,h = cv2.boundingRect(i)
+
+cv2.rectangle(frame,(x,y),(x+w,y+h),(0,120,255),2)
+cv2.imshow('output',output)
+cv2.imshow('dilate',dilation)
