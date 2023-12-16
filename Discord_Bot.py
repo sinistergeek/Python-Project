@@ -49,3 +49,5 @@ async def change_nick(ctx,user:discord.Member,*,new_nick):
     await user.edit(nick=new_nick)
     await ctx.send(f"Change the nick of {user.mention} to `{new_nick}`")
 
+if __name__ == "__main__":
+    bot.run(TOKEN)
