@@ -32,4 +32,11 @@ def Playideo(video_path):
             break
         if cv2.waitKey(28) & 0xFF == ord("q"):
             break
+        cv2.imshow("video",frame)
 
+        if val != 'eof' and audio_frame is not None:
+            img,t = audio_frame
+
+    video.release()
+    cv2.destroyAllWindows()
+PlayVideo(video_path)
