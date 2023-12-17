@@ -20,3 +20,19 @@ def check_dns(email,domain):
     except:
         print("Check 2 FAILED! The domain",domain,"does not exist,Invalid Email!")
         exit()
+
+def check_response(email,domain,mxRecord):
+    try:
+        host = socket.gethostname()
+        server = smtplib.SMTP()
+        server.set_debuglevel(0)
+        server.connect(mxRecord)
+        server.helo(host)
+        server.mail(email)
+        code,message=server.recpt(str(email))
+        if codef == 250:
+            print("Check 3(SMTP response) Passed")
+            print(email,"is a VALID email address!")
+        else:
+            print("Check 3 FAILED! The user",email.split("@")[0],"does not exist,Invalid Email!")
+
