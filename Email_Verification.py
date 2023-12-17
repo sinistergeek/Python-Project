@@ -35,4 +35,10 @@ def check_response(email,domain,mxRecord):
             print(email,"is a VALID email address!")
         else:
             print("Check 3 FAILED! The user",email.split("@")[0],"does not exist,Invalid Email!")
-
+    except socket.error as socketerror:
+        print("Check 3 HALTEd! The domain",domain,"either does not have an SMTP or have restricted access through external scripts")
+email = input("Enter your Email id:")
+domain = email.split("@")[-1]
+check_syntax(email)
+mxRecord = check_dns(email,domain)
+check_response(email,domain,mxRecord)
