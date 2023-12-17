@@ -16,3 +16,20 @@ def find_the_video(file_name,directory_name):
 
     print(files_found)
     return files_found[0]
+
+video_directory = Path(find_the_video(video_name,video_directory_guess))
+new_working_directory = video_directory.parent
+os.chdir(new_working_directory)
+video_path = find_the_video(video_name,video_directory_guess)
+def Playideo(video_path):
+    video = cv2.VideoCapture(video_path)
+    player = MediaPlayer(video_path)
+    while True:
+        grabbed,frame = video.read()
+        audio_frame,val = player.get_frame()
+        if not grabbed:
+            print("End of video")
+            break
+        if cv2.waitKey(28) & 0xFF == ord("q"):
+            break
+
