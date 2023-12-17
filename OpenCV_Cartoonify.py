@@ -19,3 +19,19 @@ def find_the_image(file_name,directory_name):
 image_path = Path(find_the_image(image_name,image_directory))
 new_working_directory = image_path.parent
 os.chdir(new_working_directory)
+color_image = cv2.imread(find_the_image(image_name,image_directory))
+cartoon_style_selection = input("This script currently has 2 styles. Please type 1 or 2")
+if (cartoon_style_selection == "1"):
+    cartoon_image_style_1 = cv2.stylization(color_image,sigma_s=150,sigma_r=0.25)
+    cv2.imshow('cartoon_1',cartoon_image_style_1)
+    cv2.waitKey()
+    cv2.destroyAllWindows()
+elif (cartoon_style_selection == "2"):
+    cartoon_image_style_2 = cv2.stylization(color_image,sigma_s=60,sigma_r=0.5)
+    cv2.imshow('cartoon_2',cartoon_image_style_2)
+    cv2.waitKey()
+    cv2.destoryAllWindows()
+
+else:
+    print("Invalid style selection.")
+
