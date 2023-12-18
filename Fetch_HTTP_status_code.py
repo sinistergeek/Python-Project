@@ -12,3 +12,6 @@ except HTTPError as e:
     print('Status : ' + str(e.code) + '' + emoji.emojize(':thumbs_down:'))
     print('Message : Request failed. Request returned reason -' + e.reason)
 
+except URLError as e:
+    print('Status :',str(e.reason).split(']')[0].replace('[','') + '' + emoji.emojize(':thums_down:'))
+    print('Message: '+ str(e.reason).split(']')[1])
