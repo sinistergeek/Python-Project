@@ -14,4 +14,12 @@ if os.path.exists(zip_file) == False:
 def extact(zip_file):
     file_name = zip_file.split(".zip")[0]
     if zip_file.endswith(".zip"):
+        current_working_directory = os.getcwd()
+        new_directory = current_working_directory + "/" + file_name
+        with zipfile.ZipFile(zip_file,'r') as zip_object:
+            zip_object.extractall(new_directory)
+        print("Extracted successfully!!")
 
+    else:
+        print("Not a zip file")
+extract(zip_file)
