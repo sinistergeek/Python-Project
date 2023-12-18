@@ -59,3 +59,28 @@ while buffer!=0:
             for i in os.listdir(fol):
                 if i[-4:]!='.aes'
                 try:
+                    pyAesCrypt.encryptFile(fol+'\\'+i,fol+'\\'+i'.aes',enc_key,buffer)
+                    shutil.move(fol+'\\'+i+'.aes','encrypted_folder')
+                    print('Encrypting....!')
+                except:
+                    shutil.rmtree('encrypted_folder')
+                    os.mkdir('encrypted_folder')
+                    pyAesCrypt.encryptFile(fol+'\\'+i,fol+'\\'+i+'.aes',enc_key,buffer)
+                    shutil.move(fol+'\\'+i+'.aes','encrypted_folder')
+                    print('Encrypting....!')
+                else:
+                    print('Unable to Encrypt')
+            now = time.strftime("%H:%M")
+            with open('C:\\Intel\\'+'temp_key.txt','a+') as f:
+                f.write('Folder'+'|||'+fol+'||'+now+'||||'+enc_key+'\n')
+                time.sleep(10)
+                print("====Encryption Successful-------\n\nUser Warning: Make sure to notedown the encryption key,failure to do so the data cannot be reverted back ever again.")
+                print('\nEncryption key:',enc_key+'\n')
+    elif ip == 4:
+        fol = 'encrypted_folder'
+        if not os.path.exists('dencrypted_folder'):
+            os.mkdir('dencrypted_folder')
+            enc_key = input('Enter the decryption key:')
+            for i in os.listdir(fol):
+                if i[-4:] == '.aes':
+                    try:
