@@ -22,4 +22,17 @@ def get_downloadlink(url):
         if len(a) == 0:
             print("[!] Video Not Found...")
             exit(0)
+        else:
+            return unquote(r.text.split("?src=")[1].split("")[0])
+    except (HTTPError,ConnectionError):
+        print("[x] Invalid URL")
+        exit(1)
+
+def Download_vid():
+    global Url_Val.get()
+    Status["text"] = "Downloading"
+    Status["fg"] = "green"
+    if not "www.facebook.com" in url:
+        Invalid_Url()
+        return
 
