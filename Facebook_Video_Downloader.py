@@ -73,3 +73,17 @@ class VideoDownload(Thread):
         print("Download Complete !!!")
         Status["text"] = "Finished!!"
         Status["fg"] = "green"
+
+def start_downloading():
+    bar["value"] = 0
+
+ld_window = tk.Tk()
+ld_window.title("Facebook Video Downloader")
+ld_window.geometry("400x300")
+input_label = tk.Label(ld_window,text="Enter Facebook Video URL:")
+input_label.pack()
+
+Url_Val = tk.StringVar()
+Url_Input = tk.Entry(ld_window,textvariable=Url_Val,font=("Calibri",9))
+Url_Input.place(x=25,y=50,width=350)
+
