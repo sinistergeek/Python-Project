@@ -35,4 +35,16 @@ def Download_vid():
     if not "www.facebook.com" in url:
         Invalid_Url()
         return
+    link = get_downloadlink(url)
+    start_downloading()
+    download_thread = VideoDownload(link)
+    download_thread.start()
+    monitor(download_thread)
 
+def monitor(download_thread):
+    if download_thread.is_live():
+        try:
+            bar["value"] = queue.get(0)
+            ld_window.after(10,lambda:monitor(download_thread))
+        except Empty:
+            pass
