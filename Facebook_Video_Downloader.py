@@ -48,3 +48,28 @@ def monitor(download_thread):
             ld_window.after(10,lambda:monitor(download_thread))
         except Empty:
             pass
+
+class VideoDownload(Thread):
+    def __init__(self,url):
+        super().__init__()
+        self.url = url
+
+    def run(self):
+        block_size = 1024
+        r = get(self.url,stream=True)
+        total_size = int(r.headers.get("content-length"))
+
+        with open('video.mp4','wb') as file:
+            totaldata =0
+            for data in r.iter_content(block_size):
+                totaldata += len(data)
+                per_downloaded = totaldata * 100/total_size
+                queue.put(per_downloaded)
+                bar['value'] = per_downloaded
+                file.write(data)
+                time.sleep(0.01)
+            file.close()
+            print("Download Finished")
+        print("Download Complete !!!")
+        Status["text"] = "Finished!!"
+        Status["fg"] = "green"
