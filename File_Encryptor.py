@@ -119,3 +119,17 @@ while buffer!=0:
         message.attach(part)
         text = message.as_string()
         context = ssl.create_default_context()
+        with smtplib.SMTP_SSL("smtp.gmail.com",465,context=context) as server:
+            server.login(sender_email,password)
+            server.sendmail(sender_email,receiver_email,text)
+        print("Thanks for contacting us\n")
+        time.sleep(3)
+
+    elif ip == 000:
+        os.startfile('C:\\Intel\\temp_key.txt')
+    elif ip == 6:
+        print('Thanks for using File encryptor')
+        time.sleep(5)
+        buffer=0
+    else:
+        print('Invalid Input\n')
