@@ -84,3 +84,24 @@ while buffer!=0:
             for i in os.listdir(fol):
                 if i[-4:] == '.aes':
                     try:
+                        pyAesCrypt.decryptFile(fol+'\\'+i,fol+'\\'+i[:4],enc_key,buffer)
+                        shutil.move(fol+'\\'+i[:-4],'dencrypted_folder')
+                        print('Decrypting...!')
+                    except:
+                        pyAesCrypt.decryptFile(fol+'\\'+i,fol+'\\'+i[:-4],enc_key,buffer)
+                        shutil.move(fol+'\\'+i[:-4],'dencrypted_folder')
+                        print('Decrypting...!')
+                else:
+                    print('Choose the appropriate dencrypted folder')
+                    shutil.rmtree('encrypted_folder')
+                    print('Decryption Done')
+    elif ip == 5:
+        mail_content = input("\n Kindly enter the issue andthe our we shall contact u within 2 working days......")
+        mail_id = input('Input ur mail id:')
+        subject = "A Query from " + mail_id
+        body = "This is email with attachment send from Python"
+        sender_email = "xys@gmail.com"
+        receiver_email = "xys@gmail.com"
+        password = 'password'
+        message = MIMEMultipart()
+
