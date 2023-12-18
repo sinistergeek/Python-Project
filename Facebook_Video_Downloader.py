@@ -87,3 +87,12 @@ Url_Val = tk.StringVar()
 Url_Input = tk.Entry(ld_window,textvariable=Url_Val,font=("Calibri",9))
 Url_Input.place(x=25,y=50,width=350)
 
+Download_button = tk.Button(ld_window,text="Download",font=("Calibri",9),command=Download_vid)
+Download_button.place(x=100,y=100,width=200)
+
+bar = Progressbar(ld_window,length=350,style='grey.Horizontal.TProgressbar',mode='determinate')
+bar.place(y=200,width=350,x=25)
+queue = queue.Queue()
+Status = tk.Label(ld_window,text="Hello!! :D",fg="blue",font=("Calibri",9),bd=1,relief=tk.SUNKEN,anchor=tk.W,padx=3)
+Status.pack(side=tk.BOTTOM,fill=tk.X)
+ld_window.mainloop()
