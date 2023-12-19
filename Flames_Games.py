@@ -33,4 +33,18 @@ def result_flame(x,y):
     return result
 
 if __name__ == "__main__":
+    root=Tk()
+    root.configure(background='light pink')
+    root.geometry("350x125")
+    root.title("Flames Game")
+    label1 = Label(root,text="Name 1",fg='black',bg='light green')
+    label2 = Label(root,text="Name 2",fg='black',bg='light blue')
+    label3 = Label(root,text="Relationship Status",fg='black',bg='#FFE4C4')
+    label1.grid(row=1,column=0,sticky="E")
+    label2.grid(row=2,column=0,sticky="E")
+    label3.grid(row=4,column=0,sticky="E")
+
+    Player1_field = Entry(root)
+    Player2_field = Entry(root)
+    Status_field = Entry(root)
 
