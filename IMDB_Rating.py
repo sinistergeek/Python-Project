@@ -28,4 +28,14 @@ for line in films:
             name1 = result.h3.a.text
             name = result.h3.a.text.lower()
             if title in name:
-                rating = result.find("div",class_="inline-block ratings-imdb-rating")
+                rating = result.find("div",class_="inline-block ratings-imdb-rating")["data-value"]
+                genre = result.p.find("span",class_="genre")
+                genre = genre.contents[0]
+                names.append(name1)
+                ratings.append(rating)
+                genres.append(genre)
+    except Exception:
+        print("Try again with valid combination of title and release year")
+
+df = pd.DataFrame({'Film Name':names,'Rating':ratings,'Genre':genres})
+df.to_csv('film_ratings.csv',index=False,encoding='utf-8')
