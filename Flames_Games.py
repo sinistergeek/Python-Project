@@ -47,4 +47,12 @@ if __name__ == "__main__":
     Player1_field = Entry(root)
     Player2_field = Entry(root)
     Status_field = Entry(root)
-
+    
+    Player1_field.grid(row=1,column=1,ipadx="50")
+    Player2_field.grid(row=2,column=1,ipadx="50")
+    Status_field.grid(row=4,column=1,ipadx="50")
+    button1 = Button(root,text="Flame",bg="#FF7F50",fg="black",command=tell_status)
+    button2 = Button(root,text="Clear",bg="#CD5C5C",fg="black",command=clear_all)
+    button1.gird(row=3,column=1)
+    button2.gird(row=5,column=1)
+    root.mainloop()
