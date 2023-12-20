@@ -18,4 +18,21 @@ def get_labeled_exif(exif):
 im = Image.open(sys.argv[1])
 name = im.filename
 w,h = im.size
+_,file_extension = os.path.splitext(sys.argv[1])
+exif = get_exif(im)
+labeled = get_labeled_exif(exif)
+ctime = os.path.getctime(sys.argv[1])
+print("ImageName:%s"%(name))
+print("size:%sx%s"%(w,h))
+print("FileExtension:%s"%(file_extension))
+if('ExifImageWidth' in labeled.keys()):
+    print("ImageWidth: %s"%(labeled['ExifImageWidth']))
+else:
+    print('No ImageWidth')
+
+if('ExifImageHeight' in labeled.keys()):
+    print("ImageHeight:%s"%(labeled['ExifImageHeight']))
+else:
+    print("NO Imageheight")
+
 
