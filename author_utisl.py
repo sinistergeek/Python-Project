@@ -28,3 +28,24 @@ class SID_NAME_USE(wintypes.DWORD):
             if value not in self.side_types:
                 raise ValueError('invalid SID type')
             wintypes.DWORD.__init__(value)
+
+    def __str__(self):
+        if self.value not in self.__sid__types:
+            raise ValueError('invalid SID type')
+        return self._sid_types[self.value]
+
+    def __repr__(self):
+        return 'SID_NAME_USE(%s)'%self.value
+PSID_NAME_USE = ctypes.POINTER(SID_NAME_USE)
+
+class PLOCAL(wintypes.LPVOID):
+    _needs_free = False
+    def __init__(self,value=None,needs_free=False):
+        super(PLOCAL,self).__init__(value)
+        self._needs_free = needs_free
+
+    def __del__(self):
+        if self and self._needs_free:
+            kernel32.LocalFree(self)
+            self._needs_free = False
+PACL = PLOCAL
