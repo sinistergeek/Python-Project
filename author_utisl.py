@@ -89,4 +89,10 @@ class PSECURITY_DESCRIPTOR(PLOCAL):
 
 advapi32.ConvertSidToStringSidW.errcheck = _check_bool
 advapi32.ConvertSidToStringW.argtypes = (PSID,ctypes.POINTER(wintypes.LPWSTR))
+advapi32.LookupAccountSidW.errcheck = _check_bool
+advapi32.LookupAccountSidW.argtypes = (windtypes.LPCWSTR,PSID,wintypes.LPCWSTR,LPDWORD,wintypes.LPCWSTR,LPDWORD,PSID_NAME_USE)
+advapi32.GetNamedSecurityInfoW.restype = wintypes.DWORD
+advapi32.GetNamedSecurityInfoW.argtypes = (wintypes.LPWSTR,SE_OBJECT_TYPE,SECURITY_INFORMATION,ctypes.POINTER(PSID),ctypes.POINTER(PSID),ctypes.POINTER(PACL),ctypes.POINTER(PACL),ctypes.POINTER(PSECURITY_DEsCRIPTOR))
+
+def look_up_account_sid(sid,system_name=None):
 
