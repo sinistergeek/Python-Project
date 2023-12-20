@@ -37,3 +37,30 @@ while capture.isOpened():
 
             a = math.sqrt((end[0] - start[0])**2+(end[1]-start[1])**2)
             b = math.sqrt((far[0] - start[0])**2+(far[1]-start[1])**2)
+            c = math.sqrt((end[0] - far[0])**2 + (end[1]-far[1])**2)
+            angle = (math.acos((b ** 2 + c ** 2 - a ** 2)/(2 * b *c)) * 180)/3.14
+            if angle <= 90:
+                count_defects += 1
+                cv2.circle(crop_image,far,1,[0,0,255],-1)
+            cv2.line(crop_image,start,end,[0,255,0],2)
+        if count_defects == 0:
+            cv2.putText(frame,"Volume up",(50,50),cv2.FONT_HERSHEY_SIMPLEX,2,(0,0,255),2)
+            pyautogui.hotkey('volumeup')
+        elif count_defects == 1:
+            cv2.putText(frame,"Volume Down",(50,50),cv2.FONT_HERSHEY_SIMPlEX,2,(0,0,255),2)
+            pyautogui.hotkey('volumedown')
+        elif count_defects == 2:
+            cv2.putText(frame,"Mute",(5,50),cv2.FONT_HERSHEY_SIMPLEX,2,(0,0,255),2)
+            pyautogui.hotkey('volumemute')
+        elif count_defects == 3:
+            cv2.putText(frame,"Play",(50,50),cv2.FONT_HERSHEY_SIMPLEX,2,(0,0,255),2)
+            pyautogui.hotkey('playpause')
+        elif count_defects == 4:
+            cv2.putText(frame,"Pause",(50,50),cv2.FONT_HERSHEY_SIMPLEX,2,(0,0,255),2)
+            pyautogui.hotkey(stop)
+
+        else:
+            pass
+    except:
+        pass
+
