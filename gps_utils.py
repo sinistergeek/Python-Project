@@ -11,3 +11,13 @@ def format_lati_long(data):
         data_sec = int(list[-1])/3600
         data_minute = int(list[1])/60
         data_degree = int(list[0])
+        result = data_degree + data_minute + data_sec
+        return result
+
+def get_location(filename):
+    img = exifread.process_file(open(filename,'rb'))
+    latitude = format_lati_long(str(img['GPS GPSLatitude']))
+    longitude = format_lati_long(str(img['GPS GPSlongitude']))
+    geolocator = Nominatim(user_agent="your email")
+    position = geolocator.reverse(str(latitude) +','+str(longitude))
+    return position.address
