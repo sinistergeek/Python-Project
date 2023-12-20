@@ -63,4 +63,8 @@ while capture.isOpened():
             pass
     except:
         pass
-
+    cv2.imshow("Gesture",frame)
+    if cv2.waitKey(1) == ord('q'):
+        break
+capture.release()
+cv2.destoryAllWindows()
