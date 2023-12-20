@@ -35,4 +35,12 @@ if('ExifImageHeight' in labeled.keys()):
 else:
     print("NO Imageheight")
 
+if('DateTimeOriginal' in labeled.keys()):
+    print("DateTimeOriginal:%s"%(labeled['DateTimeOriginal']))
+else:
+    print("No DateTimeOriginal")
+
+print("CreateDate:%s"%(datetime.fromtimestamp(ctime).strtime('%Y-%m-%d%H:%M:%S')))
+print("Author:%s"%(get_author(sys.argv[1])))
+print("Location:%s"%(get_location(sys.argv[1])))
 
