@@ -6,3 +6,16 @@ import os
 import sys
 from datetime import datetime
 
+def get_exif(image):
+    image.verify()
+    return image.getexif()
+
+def get_labeled_exif(exif):
+    labeled = {}
+    for (key,val) in exif.items():
+        labeled[TAGS.get(key)] = val
+    return labeled
+im = Image.open(sys.argv[1])
+name = im.filename
+w,h = im.size
+
