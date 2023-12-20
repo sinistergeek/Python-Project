@@ -18,3 +18,22 @@ while capture.isOpened():
     ret,thresh = cv2.threshold(filtered,127,255,0)
     cv2.imshow("Thresholded",thresh)
     contours,hierarchy = cv2.findContours(thresh,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+    try:
+        contour = max(contours,key=lambda x: cv2.contourArea(x))
+        x,y,w,h = cv2.boundingRect(contour)
+        cv2.rectangle(crop_image,(x,y),(x+w,y+h),(0,0,255),0)
+        hull = cv2.convexHull(contour)
+        drawing = np.zeros(crop_image.shape,np.uint8)
+        cv2.drawContours(drawing,[contour],-1,(0,255,0),0)
+        cv2.drawContours(drawing,[hull],-1,(0,0,255),0)
+        hull = cv2.convexHull(contour,returnPoints=False)
+        defects = cv2.convexityDefects(contour,hull)
+        count_defects = 0
+        for i in range(defects.shape[0]):
+            s,e,f,d = defects[i,0]
+            start = tuple(contour[s][0])
+            end = tuple(contour[e][0])
+            far = tuple(contour[f][0])
+
+            a = math.sqrt((end[0] - start[0])**2+(end[1]-start[1])**2)
+            b = math.sqrt((far[0] - start[0])**2+(far[1]-start[1])**2)
