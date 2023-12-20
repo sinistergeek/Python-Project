@@ -76,4 +76,17 @@ class PSECURITY_DESCRIPTOR(PLOCAL):
         self.pDacl._SD = self
         self.pSacl._SD = self
 
+    def get_group(self,system_name=None):
+        if not self or not self.pGroup:
+            raise ValueError('NULL Pointer access')
+        return look_up_account_sid(self.pGroup,system_name)
+
+
+    def _check_bool(result,func,args):
+        if not result:
+            raise ctypes.WinError(ctypes.get_last_error())
+        return args
+
+advapi32.ConvertSidToStringSidW.errcheck = _check_bool
+advapi32.ConvertSidToStringW.argtypes = (PSID,ctypes.POINTER(wintypes.LPWSTR))
 
