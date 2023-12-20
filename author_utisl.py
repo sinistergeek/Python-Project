@@ -49,3 +49,31 @@ class PLOCAL(wintypes.LPVOID):
             kernel32.LocalFree(self)
             self._needs_free = False
 PACL = PLOCAL
+
+class PSID(PLOCAL):
+    def __init__(self,value=None,needs_free=False):
+        super(PSID,self).__init__(value,needs_free)
+
+    def __str__(self):
+        if not self:
+            raise ValueError('NULL pointer access')
+        sid = wintypes.LPWSTR()
+        advapi32.ConvertSidToStringSidW(self,ctypes.byref(sid))
+        try:
+            return sid.value
+        finally:
+            if sid:
+                kernel32.LocalFree(sid)
+class PSECURITY_DESCRIPTOR(PLOCAL):
+    def __init__(self,value=None,needs_free=False):
+        super(PSECURITY_DESCRIPTOR,self).__init__(value,needs_free)
+        self.pOwner = PSID()
+        self.pGroup = PSID()
+        self.pDacl = PACL()
+        self.pSacl = PACL(0)
+        self.pOwner._SD = self
+        self.pGroup._SD = self
+        self.pDacl._SD = self
+        self.pSacl._SD = self
+
+
