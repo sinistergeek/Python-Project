@@ -28,4 +28,31 @@ for line in fh:
     address = line.strip()
     print('')
     cur.execute("SELECT geodata FROM Locations WHERE address=?",(memoryview(address.encode()),))
+    try:
+        data = cur.fetchone()[0]
+        print("Found in database",address)
+        continue
 
+    except:
+        pass
+
+    parms = dict()
+    parms["address"] = address
+    if api_key is not False: params['key'] = api_key
+    url = serviceurl + urllib.parse.urlencode(parms)
+
+    print('Retrieving',url)
+    uh = urlib.request.urlopen(url,context=ctx)
+    data = uh.read().decode()
+    print('Retrieved',len(data),'characters',data[:20].replace('\n',''))
+    count = count + 1
+
+    try:
+        js = json.loads(data)
+    except:
+        print(data)
+        continue
+    if 'status' not in js or (js['status'] !='OK' and js['status'] != 'ZERO_RESULTS'):
+        print('=======Failure TO Retrieve=========')
+        print(data)
+        break
