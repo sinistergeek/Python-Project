@@ -53,3 +53,25 @@ class ClassAutomation():
             print("No Class Today")
             return
         currentTime = datetime.now().strftime("%H:%M")
+        currentHour = int(currentTime.split(":")[0])
+        currentMin = int(currentTime.split(":")[1])
+        for i in classTime:
+            if currentHour == int(i.split(":")[0]) and currentMin < int(i.split(":")[1]):
+                self.count = classTime.index(i)
+                print("Next Class at",classTime[self.count],"Today")
+                break
+            elif currentHour < int(i.split(":")[0]):
+                self.count = classTime.index(i)
+                print("Next Class at",classTime[self.count],"Today")
+                break
+            else:
+                if classTime.index(i) == 2:
+                    self.count=0
+                    print("Next Class at",classTime[self.count],"Tommorrow")
+                    break
+                continue
+    def login(self):
+        profile = webdriver.FireFoxProfile('/path/to/the/created/profile')
+        self.driver = webdriver.Firefox(profile)
+        self.driver.get("https://accounts.google.com/")
+        sleep(2)
