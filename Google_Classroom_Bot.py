@@ -32,3 +32,24 @@ class ClassAutomation():
         sleep(10)
         self.driver.find_element_by_xpath("//span[text()='Joinnow']").click()
         sleep(60*60)
+        print("Qutting...")
+        sleep(5)
+        slef.driver.quit()
+        if self.count < 2:
+            self.count = self.count + 1
+        else:
+            self.count = 0
+        self.findCount()
+
+    def findClass(self):
+        with open("schedule.csv","r") as csvFile:
+            reader = csv.DictReader(csvFile)
+            for row in reader:
+                if row["Day"] == datetime.now().strftime("%a"):
+                    return row[classTime[self.count]]
+            return None
+    def findCount(self):
+        if self.findClass() is None:
+            print("No Class Today")
+            return
+        currentTime = datetime.now().strftime("%H:%M")
