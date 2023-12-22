@@ -51,5 +51,19 @@ def downloadall():
                 pro4.destroy()
                 label4 = Label(root,text='completed!').grid(row=3,column=1)
 
+    if key==0:
+        os.system("shutdown /s /t 1")
 
+key=1
+text1=tk.Entry(root,width=50,bg='#dfe6e9',fg='#0984e3')
+text2=tk.Entry(root,width=50,bg='#dfe6e9',fg='#0984e3')
+text3=tk.Entry(root,width=50,bg='#dfe6e9',fg='#0984e3')
+text4=tk.Entry(root,width=50,bg='#dfe6e9',fg='#0984e3')
 
+text1.insert(string='paste link 1 here...',index=1)
+text2.insert(string='paste link 2 here...',index=1)
+text3.insert(string='paste link 3 here...',index=1)
+text4.insert(string='paste link 4 here...',index=1)
+button = tk.Button(root,text='download all',command=downloadall,bg='#dfe6e9',fg='#0984e3')
+button.config(highlightbackground='#f2f2f2')
+shutlabel = tk.Label(root,text="do you want to shutdown after all downloads:",bg="#dfe6e9",fg='#0984e3')
