@@ -17,3 +17,12 @@ def get_google_news_result(term,count):
 
         titles.append(title)
         links.append(link)
+    return titles,links
+
+if __name__ == '__main__':
+    titleName = input('Enter the news title keyword:')
+    articleCount = int(input('Enter the number of article count: '))
+    titles,links = get_google_news_result(titleName,articleCount)
+    news = {'title':titles,'links':links}
+    df = pd.DataFrame(news,columns=['title','links'])
+    df.to_excel('{}_news_scrapper.xlsx'.format(titleName))
