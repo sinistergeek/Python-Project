@@ -27,3 +27,22 @@ def send_mail(frame):
         recipient = 'Enter_gmailID_of_the_recipient'
         message = 'Hey! It appears that someone is at home!!!'
         msg = MIMEMultipart()
+        msg['From'] = gmail_user
+        msg['To'] = recipient
+        msg['Subject'] ="Someone is at Home!"
+        msg.attach(MIMEText(message))
+        file=path + '/intrude.jpg'
+        filename = 'intrude.jpg'
+        attachment = open(file,"rb")
+        part = MIMEBase('application','ocet-stream')
+        part.set_payload(attachment.read())
+        encoders.encode_base64(part)
+        part.add_header('Content-Disposition',"attachment; filename=%s"%filename)
+        msg.attach(part)
+        mail_server = smtplib.SMTP('smtp.gmail.com',587)
+        mail_server.ehlo()
+        mail_server.starttls()
+        mail_server.ehlo()
+        mail_server.login(gmail_user,gmail_password)
+        mail_server.sendmail(gmail_user,recipient,msg.as_string())
+        mail_server.close()
