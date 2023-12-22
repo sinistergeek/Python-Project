@@ -28,3 +28,23 @@ list_of_words = content.split(",")
 word = random.choice(list_of_words).upper()
 guessed = []
 white = (255,255,255)
+BLACK=(0,0,0)
+BLUE = (180,219,251)
+PINK = (232,90,202)
+
+LETTER_FONTS =  pygame.font.SysFont('comicsans',40)
+WORD_FONTS = pygame.font.SysFont('comicsans',60)
+TITLE_FONTS =pygame.font.SysFont('comicsans',70)
+
+def draw():
+    win.fill(BLUE)
+    text = TITLE_FONTS.render("HANGMAN GAME",1,BLACK)
+    win.blit(text,(WIDTH/2 - text.get_width()/2,20))
+    display_word = ""
+    for i in word:
+        if i in guessed:
+            display_word += i + ""
+        else:
+            display_word += "_"
+    text = WORD_FONTS.render(display_word,1,BLACK)
+    win.blit(text,(400,200))
