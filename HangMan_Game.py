@@ -97,3 +97,7 @@ while run:
     if won:
         display_message("Woohooo!! YOu won!")
         break
+    if hangman_status == 6:
+        display_message(f"Opps...!! It was {word} You Lost!")
+        break
+pygame.quit()
