@@ -48,3 +48,24 @@ def draw():
             display_word += "_"
     text = WORD_FONTS.render(display_word,1,BLACK)
     win.blit(text,(400,200))
+
+    for i in letters:
+        x,y,ltr,visible = i
+        if visible:
+            pygame.draw.circle(win,BLACK,(x,y),radius,3)
+            text = LETTER_FONTS.render(ltr,1,BLACK)
+            win.blit(text,(x-text.get_width()/2,y-text.get_height()/2))
+    win.blit(images[hangman_status],(150,100))
+    pygame.display.update()
+
+def display_message(message):
+    pygame.time.delay(1000)
+    win.fill(PINK)
+    text = WORD_FONTS.render(message,1,BLACK)
+    win.blit(text,(WIDTH/2 - text.get_width()/2,HEIGHT/2-text.get_height()/2))
+    pygame.display.update()
+    pygame.time.delay(3000)
+
+FPS = 60
+clock = pygame.time.Clock()
+run = True
