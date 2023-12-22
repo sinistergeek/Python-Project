@@ -69,3 +69,31 @@ def display_message(message):
 FPS = 60
 clock = pygame.time.Clock()
 run = True
+while run:
+    clock.tick(FPS)
+    draw()
+    for i in pygame.event.get():
+        if i.type == pygame.QUIT:
+            run = False
+        if i.type == pygame.MOUSEBUTTONDOWN:
+            m_x,m_y = pygame.mouse.get_pos()
+            for i in letters:
+                x,y,ltr,visiable = i
+                if visible:
+                    dis = math.sqrt((x - m_x)**2 +(y-m_y)**2)
+                    if dis < radius:
+                        i[3] = False
+                        guessed.append(ltr)
+                        if ltr not in word:
+                            hangman_status += 1
+
+    draw()
+    won = True
+    for i in word:
+        if i not in guessed:
+            won = False
+            break
+
+    if won:
+        display_message("Woohooo!! YOu won!")
+        break
