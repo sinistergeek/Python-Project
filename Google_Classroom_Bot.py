@@ -75,3 +75,35 @@ class ClassAutomation():
         self.driver = webdriver.Firefox(profile)
         self.driver.get("https://accounts.google.com/")
         sleep(2)
+        try:
+            self.driver.find_element_by_name("identifier").send_keys(username)
+            sleep(1)
+        except:
+            self.driver.find_element_by_name("Email").send_keys(username)
+            sleep(1)
+        try:
+            self.driver.find_element_by_id("identifierNext").click()
+            sleep(4)
+        except:
+            self.driver.find_element_by_id("next").click()
+            sleep(4)
+
+        try:
+            self.driver.find_element_by_name("password").send_keys(password)
+            sleep(1)
+        except:
+            self.driver.find_element_by_name("Passwd").send_keys(password)
+            sleep(1)
+
+        try:
+            self.driver.find_element_by_id("passwordNext").click()
+            sleep(4)
+
+        except:
+            self.driver.find_element_by_id("trustDevice").click()
+            self.driver.find_element_by_id("submit").click()
+            sleep(4)
+
+        self.driver.get("https://classroom.google.com/")
+        sleep(6)
+ClassAutomation()
