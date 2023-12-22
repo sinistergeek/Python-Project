@@ -30,4 +30,26 @@ def downloadall():
                 download(text1.get())
                 pro1.destroy()
                 label1=Label(root,text='completed!').grid(row=0,column=1)
-                
+        if i == 1:
+            if text2.get()!='paste link 2 here...':
+                pro2.start()
+                download(text2.get())
+                pro2.destroy()
+                lable2 = Label(root,text='completed!').grid(row=1,column=1)
+        if i == 2:
+            if text3.get() != 'paste link 3 here..':
+                pro3.start()
+                download(text3.get())
+                pro3.destroy()
+                lable3 = Label(root,text='completed!').grid(row=2,column=1)
+
+
+        if i==3:
+            if text4.get() != 'paste link 4 here...':
+                pro4.start()
+                download(text4.get())
+                pro4.destroy()
+                label4 = Label(root,text='completed!').grid(row=3,column=1)
+
+
+
