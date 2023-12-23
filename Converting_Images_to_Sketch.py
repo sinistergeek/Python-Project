@@ -39,4 +39,24 @@ def convert(now):
     cv2.imwrite(f"{path}\\{img}(inverted).png",inverted)
     blurred = cv2.GaussianBlur(inverted,(21,21),0)
     cv2.imwrite(f"{path}\\{img}(blured).png",blurred)
+    inverted_blurred = 255 - blurred
+    pencil_sketch = cv2.divide(gray,inverted_blurred,scale=256.0)
+    cv2.imwrite(f"{path}\\{img}(final).png",pencil_sketch)
+    print()
+    print(f'You can find the image here: {here}\\{img}(final).png')
 
+def start():
+    print('Enter the number according to your pereference: ')
+    print('1 - Capture image from webcam.')
+    print('2 - Input the image path.')
+    print('3 - Exit')
+
+    while(1):
+        print()
+        user = int(input('Enter the number:'))
+        print()
+        if user == 1:
+            openCam()
+        elif user == 2:
+            img = input('Enter the input path for the image:')
+            convert(img)
