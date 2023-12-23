@@ -12,5 +12,14 @@ with open(f"./Imagetospeech/text.txt",'w') as f:
 file = open(r'./Imagetospeech/text.txt')
 mytext=file.read().replace("\n"," ")
 language = 'en'
+output =gTTS(text=mytext,lang=language,slow=False)
+output.sva('./Imagetospeech/imagetosppech.mp3')
+file.close()
+os.system("start ./Imagetospeech/imagetospeech.mp3")
+question = input("Do you want to delete the files(Y/N):")
+if question == 'Y' or question == 'y':
+    os.remove('./Imagetospeech/text.txt')
+    os.remove('./imagetospeech/imagetospeech.mp3')
 
-
+elif question == 'N' or question =='n':
+    print("Files saved")
