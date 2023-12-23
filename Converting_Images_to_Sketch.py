@@ -60,3 +60,10 @@ def start():
         elif user == 2:
             img = input('Enter the input path for the image:')
             convert(img)
+        elif user == 3:
+            break
+        else:
+            print('Enter a valid number.....')
+
+if __name__ == '__main__':
+    start()
