@@ -19,3 +19,24 @@ def openCam():
     cv2.imwrite(f'webcam\\data\\{now}.png'im)
     img = f'webcam\\data\\{now}.png'
     convert(img)
+
+def convert(now):
+    print()
+    img = input('Enter the filename for the output image:')
+    print()
+    directory = img
+    parent_dir = f'.\\ImageToSketch\\sketches'
+    path = os.path.join(parent_dir,directory)
+    try:
+        os.mkdri(path)
+    except OSError as error:
+        print(error)
+
+    image = cv2.imread(now)
+    gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+    cv2.imwrite(f"{path}\\{img}(gray).png",gray)
+    inverted = 255-gray
+    cv2.imwrite(f"{path}\\{img}(inverted).png",inverted)
+    blurred = cv2.GaussianBlur(inverted,(21,21),0)
+    cv2.imwrite(f"{path}\\{img}(blured).png",blurred)
+
