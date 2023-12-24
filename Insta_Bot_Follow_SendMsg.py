@@ -39,4 +39,10 @@ for user in users:
         message.click()
         time.sleep(4)
         browser.find_element_by_class_name('mt3GC').click()
-
+        time.sleep(5)
+        mbox = browser.find_element_by_tag_name('textarea')
+        mbox.send_keys(input("Write Msg you Want to Send"))
+        mbox.send_keys(Keys.RETURN)
+        time.sleep(5)
+    except:
+        pass
