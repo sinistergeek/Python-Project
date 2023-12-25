@@ -54,3 +54,7 @@ class InstaBot:
         close_btn.click()
         return names
 
+usr_name = input("Enter Username :")
+password = input("Enter Password :")
+my_bot = InstaBot(usr_name,password)
+my_bot.get_unfollowers()
