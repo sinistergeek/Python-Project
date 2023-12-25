@@ -27,4 +27,14 @@ class InstaBot:
             sleep(2)
             self.driver.find_element_by_xpath("//button[contains(text(),'Not Now')]").click()
             sleep(1)
+    def get_unfollowers(self):
+        self.driver.find_element_by_xpath("//a[contains(@href,'/{}')]".format(self.username)).click()
+        sleep(2)
+        self.driver.find_element_by_xpath("//a[contains(@href,'/following')]").click()
+        following = self._get_names()
+        sleep(2)
+        followers =self._get_names()
+        notfollowingback = [user for user in following if user not in followers]
+        table.add_column(column_names[0],notfollowingback)
+        print(table)
 
