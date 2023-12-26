@@ -30,3 +30,21 @@ print(allimages)
 imglink = []
 for img in allimages:
     imglink.append(img["src"])
+
+print(imglink)
+
+for index,img_link in enumerate(imglink):
+    if img_link:
+        print(img_link)
+        if not rq.get(img_link):
+            pass
+        else:
+            img_data = rq.get(img_link).content
+            print(img_link)
+            with open("insta/"+str(index+1)+".jpg",'wb+') as f:
+                f.write(img_data)
+
+    else:
+        f.close()
+        print("Images Downloaded")
+        break
