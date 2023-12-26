@@ -14,3 +14,7 @@ followees = [followee.username for followee in profile.get_followees()]
 print(followers)
 profile = instaloader.Profile.from_username(bot.context,'wwe')
 posts = profile.get_posts()
+
+for index,post in enumerate(posts,1):
+    bot.download_post(post,target=f"{profile.usernmae}_{index}")
+
