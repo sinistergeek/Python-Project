@@ -1,0 +1,10 @@
+import instaloader
+bot = instaloader.Instaloader()
+profile = instaloader.Profile.from_username(bot.context,'aman.kharwal')
+print(type(profile))
+print("Username:",profile.username)
+print("User ID:",profile.userid)
+print("Followers:",profile.followers)
+print("Followees:",profile.followees)
+print("Bio:",profile.biography,profile.external_url)
+bot.login(user="your username",passwd="your password")
