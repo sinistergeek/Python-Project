@@ -36,4 +36,5 @@ if __name__ == "__main__":
     if len(sys.argv) == 2:
         output = main(sys.argv[-1])
         print(output)
-
+    else:
+        print('=====>Invalid parameters valid command is <=================================\\n python InstagramProfile.py username')
