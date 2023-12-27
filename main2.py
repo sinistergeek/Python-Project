@@ -24,3 +24,16 @@ def main(username):
         posts = re.findall(r'\d+[,]*',data[2])[0]
         name = re.findall(r'"description":"([^"]+)"',page.text)[0]
         instagram_profile={'success':True,'profile':{'name':name,'profileurl':url,'username':username,'followers':followers,'following':following,'posts':posts,'aboutinfo':aboutinfo}}
+
+
+    else:
+        instagram_profile = {'success':False,'profile':{}}
+        return instagram_profile
+if __name__ == "__main__":
+    if len(sys.argv) == 2:
+        output = main(sys.argv[-1])
+        pp_download(sys.argv[-1])
+        pprint.pprint(output)
+
+    else:
+        print('Invalid paramaters Valid Command \n\t Usage: python main.py username')
