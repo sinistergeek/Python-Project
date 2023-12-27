@@ -25,3 +25,15 @@ def main(username):
                                'posts':posts,
                                'aboutinfo':aboutinfo}
                            }
+
+    else:
+        instagram_profile = {'success':False,'profile':{}}
+        return instagram_profile
+
+
+if __name__ == "__main__":
+    "driver code"
+    if len(sys.argv) == 2:
+        output = main(sys.argv[-1])
+        print(output)
+
