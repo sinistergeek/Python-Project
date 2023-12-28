@@ -34,3 +34,19 @@ def pp_download(username):
                 pp_final = re.sub('profile_pic_url_hd":"','',pp_link)
                 file_size_request = requests.get(pp_final,steam=True)
                 file_size = int(file_size_request.headers['Content-Length'])
+                block_size = 1024
+                t=tqdm(total=file_size,unit='B',unit_scale=True,desc=username,ascii=True)
+                with open(username+'.jpg','wb') as f:
+                    for data in file_size_request.iter_content(block_size):
+                        t.update(len(data))
+                        f.write(data)
+
+                t.close()
+                im = Image.open(username + ".jpg")
+                im.show()
+                print("Profile picture downloaded successfully")
+
+    except Exception:
+        print('error')
+
+
