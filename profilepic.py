@@ -13,3 +13,24 @@ def pp_download(username):
 
     if check_url3:
         final_url = url + '/?__a=1'
+
+    if check_url4:
+        final_url = url + '?__a=1'
+
+    if check_url1:
+        alpha = check_url1.group()
+        final_url = re.sub('\\?hl=[a-z-]{2.5}','?__a=1',alpha)
+
+    try:
+        if check_url3 or check_url4 or check_url2 or check_url1:
+            req = requests.get(final_url)
+            get_status = requests.get(final_url).status_code
+            get_content = req.content.decode('utf-8')
+
+            if get_status == 200:
+                print("\nDownloading the image...")
+                find_pp = re.search(r'profile_pic_url_hd\":\"([^\'\'])',get_content)
+                pp_link = find_pp.group()
+                pp_final = re.sub('profile_pic_url_hd":"','',pp_link)
+                file_size_request = requests.get(pp_final,steam=True)
+                file_size = int(file_size_request.headers['Content-Length'])
