@@ -45,3 +45,16 @@ def scrapte_results():
     query_label.insert(1.0,p_records)
     query_label.config(state=tk.DISABLED)
 
+window = tk.Tk()
+window.title('IPL Statistics')
+window.geometry('800x850')
+
+ttk.Label(window,text="IPL Statistics",background='blue',foreground="white",font=("Helvetica",20)).grid(row=0,column=1)
+
+ttk.Label(window,text="Select category and year :",font=('Helvetica',15)).grid(column=0,row=5,padx=10,pady=25)
+category =ttk.Combobox(window,width=27,state='readonly')
+year = ttk.Combobox(window,width=27,state='readonly')
+submit_btn = ttk.Button(window,text="Search",command=scrape_results)
+
+
+
