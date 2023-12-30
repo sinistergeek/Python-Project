@@ -56,5 +56,15 @@ category =ttk.Combobox(window,width=27,state='readonly')
 year = ttk.Combobox(window,width=27,state='readonly')
 submit_btn = ttk.Button(window,text="Search",command=scrape_results)
 
-
-
+category['values'] = ('Most Runs','Most Fours','Most Sixes','Most Fifties','Most Centuries','Highest Score','Most Wickets','Most Maidens','Most Dot Balls','Best Bowling Average','Best Bowling Economy','Best Bowling Strike Rate')
+year['values'] = ('All time','2021','2020','2019','2017','2016','2015','2014','2013','2012','2011','2009','2008')
+category.grid(column=1,row=5,padx=10)
+category.current(0)
+year.grid(column=2,row=5,padx=10)
+year.current(0)
+submit_btn.grid(row=5,column=3,pady=5,padx=15,ipadx=5)
+frame = ttk.Frame(window)
+frame.place(relax=0.5,rely=0.12,relwidth=0.98,relheight=0.90,anchor="n")
+query_label = tk.Text(frame,height="52",width="500")
+query_label.grid(row=7,columnspan=2)
+window.mainloop()
