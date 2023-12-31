@@ -40,4 +40,22 @@ def canny(img):
     return canny
 
 
+def display_lines(img,lines):
+    line_image = np.zeros_like(img)
+    if lines is not None:
+        for line in lines:
+            for x1,y1,x2,y2 in line:
+                cv2.line(line_image,(x1,y1),(x2,y2),(255,0,0),10)
+
+    return line_image
+
+def region_of_interest(canny):
+    height = canny.shape[0]
+    width = canny.shape[1]
+    mask = np.zeros_like(canny)
+    triangle = np.array([[(200,height),(550,250),(1100,height),]],np.int32)
+    cv2.fillPoly(mask,triangle,255)
+    masked_image = cv2.bitwise_and(canny,mask)
+    return masked_image
+
 
