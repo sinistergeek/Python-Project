@@ -119,4 +119,20 @@ def scrap_skills(driver,links):
         actions.move_to_element(button).click().perform()
         skills = driver.find_elements_by_xpath("//*[starts-with(@class,'pv-skill-category-entity____name-text')]")
         skill_set_list = []
+        for skill in skills:
+            skill_set_list.append(skill.text)
+        skill_set.append(" -- ".join(skill_set_list))
+    return driver, skill_set
+
+
+def save_to_csv(names,headlines,links,skills):
+    if skills is None:
+        skills = [None]*len(names)
+
+    df = pd.DataFrame()
+    for i in range(len(names)):
+        df = df.append({"Name":names[i],"Headline":headlines[i],"Link":links[i],"Skills":skills[i]},ignore_index=True)
+
+        df.to_csv("scrap.csv",index=False,columns=["Name","Headline","link","Skills"])
+
 
