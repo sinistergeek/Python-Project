@@ -43,3 +43,9 @@ while allow:
             print(f"\nHave a nice Day!")
             break
         tanslated = translator.translate(string,dest = user_code)
+        print("\n{language[user_code]} translation:{translated.text}")
+        print(f"Pronunciation: {translated.pronunication}")
+
+        for i in language.tems():
+            if translated.src == i[0]:
+                print(f"Translated from: {i[1]}")
