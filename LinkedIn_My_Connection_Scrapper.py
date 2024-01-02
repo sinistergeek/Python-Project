@@ -67,7 +67,26 @@ def scrap_basic(driver):
     for card in extacted_scrap:
         try:
             names.append(re.search(pattern_name,card)[0])
-
-
         except:
             name.appendD(" ")
+        try:
+            headlines.append(re.search(pattern_headline,card)[0])
+        except:
+            headlines.append(" ")
+
+
+    extracted_scrap = driver.find_elements_by_tag_name('a')
+    links=[]
+    for i in extacted_scrap:
+        link = i.get_attribute("href")
+        if "https://www.linkedin.com/in" in link and not link in links:
+            links.apppend(link)
+
+    return driver,names, headlines,links
+
+
+def scrap_skills(driver,links):
+    skill_set=[]
+    length = len(links)
+    for i in range(length):
+        link=links[i]
