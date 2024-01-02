@@ -48,3 +48,26 @@ def scrap_basic(driver):
     last_height = driver.execute_script("return document.body.scrollHeight")
     while True:
         driver.execute_script("window.scrollTo(0,document.body.scrollheight);")
+        for i in range(2):
+            time.sleep(time_to_wait)
+            driver.execute_script("window.scrollTo(0,0);")
+            time.sleep(time_to_wait)
+            driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
+
+        new_height = driver.execute_script("return document.body.scrollHeight")
+        if new_height == last_height:
+            break
+        last_height = new_height
+
+
+    extracted_scrap =driver.find_elements_by_class_name("mn-connection-card_details")
+    extacted_scrap = [_.text for _ in extacted_scrap]
+    names = []
+    headlines = []
+    for card in extacted_scrap:
+        try:
+            names.append(re.search(pattern_name,card)[0])
+
+
+        except:
+            name.appendD(" ")
