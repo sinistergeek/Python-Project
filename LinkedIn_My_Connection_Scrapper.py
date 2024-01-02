@@ -136,3 +136,27 @@ def save_to_csv(names,headlines,links,skills):
         df.to_csv("scrap.csv",index=False,columns=["Name","Headline","link","Skills"])
 
 
+if __name__ == "__main__":
+    (options,args) = parser.parse_args()
+    email = options.email
+    password = options.password
+    skills = options.skills
+    driver = login(email,password)
+    print("Successfull Login!")
+    print("Commencing 'My-Connections' list scrap....")
+    driver,names,headlines,links = scrap_basic(driver)
+    print("Finished basic scrap,scrapped{}".format(len(names)))
+
+    if skills:
+        print("Commencing 'Skills'  scrap...")
+        driver,skill_set = scrap_skills(driver,links)
+        print("Finished Skills scrap.")
+        print("Saving to CSV file....")
+        save_to_csv(names,headlines,links,skill_set)
+
+    else:
+        save_to_csv(names,headlines,links,None)
+
+
+    print("Scrapping session has ended.")
+    driver.quit()
