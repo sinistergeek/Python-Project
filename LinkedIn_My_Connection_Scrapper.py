@@ -90,3 +90,18 @@ def scrap_skills(driver,links):
     length = len(links)
     for i in range(length):
         link=links[i]
+        driver.get(link)
+        time_to_wait = 3
+        last_height = driver.execute_script("return document.body.scrollHeight")
+        while true:
+            driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
+            for i in range(2):
+                time.sleep(time_to_wait)
+                driver.execute_script("window.scrollTo(0,document.body.scrollHeight/4);")
+                driver.execute_script("window.scrollTo(0,document.body.scrollHeight/3);")
+                driver.execute_script("window.scrollTo(0,document.body.scrollHeight/2);")
+                driver.execute_script("window.scrollTo(0,document.body.scrollheight*3/4);")
+                time.sleep(time_to_wait)
+
+
+
