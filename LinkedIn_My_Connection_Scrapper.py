@@ -36,4 +36,15 @@ def login(email,password):
     session_password = driver.find_element_by_name("session_password")
     session_password.send_keys(password)
     submit = driver.find_element_by_class_name("sigin-in-form__submit-button")
-
+    submit.clic()
+    if driver.title != "LinkedIn":
+        print("Provided E-mail/Password is worng!")
+        driver.quit()
+        sys.exit()
+    return driver
+def scrap_basic(driver):
+    driver.get("https://www.linkedin.com/mynetwork/invite-connect/connections/")
+    time_to_wait = 3
+    last_height = driver.execute_script("return document.body.scrollHeight")
+    while True:
+        driver.execute_script("window.scrollTo(0,document.body.scrollheight);")
