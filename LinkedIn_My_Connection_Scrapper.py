@@ -23,3 +23,17 @@ operation Modes:
     (Time Consuming mode)
     This will do the same job of basic mode but along with visiting each profile and extacting the skills of each.
 """
+
+parser = OptionParser()
+parser.add_option("-e","--email",dest="email",help="Enter login email")
+parser.add_option("-p","--password",dest="password",help="Enter loging password")
+parser.add_option("-s","--skills",action="store_true",dest="skills",help="Flag to scrap each profile, and look at its skill set")
+def login(email,password):
+    driver = webdriver.Chrome("chromedriver.exe")
+    driver.get("https://www.linkedin.com")
+    session_key = driver.find_element_by_name("session_key")
+    session_key.send_keys(email)
+    session_password = driver.find_element_by_name("session_password")
+    session_password.send_keys(password)
+    submit = driver.find_element_by_class_name("sigin-in-form__submit-button")
+
