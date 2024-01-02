@@ -100,8 +100,23 @@ def scrap_skills(driver,links):
                 driver.execute_script("window.scrollTo(0,document.body.scrollHeight/4);")
                 driver.execute_script("window.scrollTo(0,document.body.scrollHeight/3);")
                 driver.execute_script("window.scrollTo(0,document.body.scrollHeight/2);")
-                driver.execute_script("window.scrollTo(0,document.body.scrollheight*3/4);")
+                driver.execute_script("window.scrollTo(0,document.body.scrollHeight*3/4);")
                 time.sleep(time_to_wait)
+                driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
+            new_height = driver.execute_script("return document.body.scrollHeight")
+            if new_height == last_height:
+                break
+            last_height = new_height
+        buttons = driver.find_elements_by_tag_name('button')
+        length = len(buttons)
+        for button_num in range(length):
+            i = buttons[button_num].get_attribute("data-control-name")
+            if i == "skill_details":
+                button = buttons[button_num]
+                break
 
-
+        actions = Actionchains(driver)
+        actions.move_to_element(button).click().perform()
+        skills = driver.find_elements_by_xpath("//*[starts-with(@class,'pv-skill-category-entity____name-text')]")
+        skill_set_list = []
 
