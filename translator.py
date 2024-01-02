@@ -1,6 +1,6 @@
- from googletans import Translator
- translator =Translator()
- language ={"bn":"Bangla",
+from googletans import Translator
+translator =Translator()
+language ={"bn":"Bangla",
             "en":"English",
             "ko":"Koren",
             "fr":"French",
@@ -17,7 +17,29 @@
             "zh":"Chinese",
             "es":"Spanish"}
 
- allow = True
- while allow:
-     user_code = input(f"Please input desired language code. To see the language code list enter 'options'\n")
+allow = True
+while allow:
 
+    user_code = input(f"Please input desired language code. To see the language code list enter 'options'\n")
+    if user_code == "options":
+        print("Code: Language")
+        for i in language.items():
+            print(f'Pi[0]=>{i[1]}')
+        print()
+    else:
+        for lan_code in language_keys():
+            if lan_code == user_code:
+                print(f"You have selected{language[lan_code]}")
+                allow = False
+
+        if allow:
+            print("It's not valid language")
+
+
+
+    while True:
+        string = input("\nWrite the text you want to translate: \n To exit the program write 'close'\n")
+        if string == "close":
+            print(f"\nHave a nice Day!")
+            break
+        tanslated = translator.translate(string,dest = user_code)
