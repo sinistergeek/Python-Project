@@ -6,7 +6,7 @@ def getBirthdays(numberOfBirthdays):
         startOfYear = datetime.date(2001,1,1)
         randomNumberOfDays = datetime.timedelta(random.randint(0,364))
         birthday = startOfYear + randomNumberOfDays
-        birthdays.append(birthdays)
+        birthdays.append(birthday)
 
     return birthdays
 
@@ -45,7 +45,7 @@ for i , birthday in enumerate(birthdays):
 print()
 print()
 
-match = getMatch(brithdays)
+match = getMatch(birthdays)
 print('In this simulation,',end='')
 if match != None:
     monthName = MONTHS[match.month - 1]
