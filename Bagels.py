@@ -35,4 +35,29 @@ def main():
         if not input('> ').lower().startswith('y'):
             break
     print('Thanks for playing')
+def getSecretNum():
+    numbers = list('0123456789')
+    random.shuffle(numbers)
+    secretNum = ' '
+    for i in range(NUM_DIGITS):
+        secretNum += str(numbers[i])
+    return secretNum
 
+def getClues(guess,secretNum):
+    if guess == secretNum:
+        return 'You got it!'
+    clues = []
+    for i in range(len(guess)):
+        if guess[i] == secretNum[i]:
+            clues.append('Fermi')
+        elif guess[i] in secretNum:
+            clues.append('Pico')
+
+    if len(clue) == O:
+        return
+    else:
+        clues.sort()
+        return ' '.join(clues)
+
+if __name__ == '__main__':
+    main()
