@@ -5,8 +5,8 @@ def getBirthdays(numberOfBirthdays):
     for i in range(numberOfBirthdays):
         startOfYear = datetime.date(2001,1,1)
         randomNumberOfDays = datetime.timedelta(random.randint(0,364))
-        birth = startOfYear + randomNumberOfDays
-        brithdays.append(birthday)
+        birthday = startOfYear + randomNumberOfDays
+        birthdays.append(birthdays)
 
     return birthdays
 
@@ -14,8 +14,9 @@ def getMatch(birthdays):
     if len(birthdays) == len(set(birthdays)):
         return None
     for a, birthdayA in enumerate(birthdays):
-        for b, birthdayA == birthdayB:
-            return BirthdayA
+        for b, birthdayB  in enumerate(birthdays[a + 1 :]):
+            if birthdayA == birthdayB:
+                return birthdayA
 
 
 print('''Birthday Paradox, by AI Sweigart al@inventwithpython.com
@@ -36,8 +37,8 @@ print('Here are',numBDays,'birthdays:')
 birthdays = getBirthdays(numBDays)
 for i , birthday in enumerate(birthdays):
     if i !=0:
-        print(',', end ='')
-    monthName = MONTHS[birthday.month -1]
+        print(', ', end ='')
+    monthName = MONTHS[birthday.month - 1]
     dateText = '{} {}'.format(monthName,birthday.day)
     print(dateText,end='')
 
