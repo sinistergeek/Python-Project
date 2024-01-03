@@ -27,9 +27,9 @@ def main():
             numGuesses += 1
             if guess == secretNum:
                 break
-            if numGuesses > MAX_GueSSES:
+            if numGuesses > MAX_GUESSES:
                 print('you ran out of guesses.')
-                print('The answer was {}.'.format(secret(secretNum)))
+                print('The answer was {}.'.format(secretNum))
 
         print('Do you want to play again? (yes or no)')
         if not input('> ').lower().startswith('y'):
@@ -53,7 +53,7 @@ def getClues(guess,secretNum):
         elif guess[i] in secretNum:
             clues.append('Pico')
 
-    if len(clue) == O:
+    if len(clues) == 0:
         return
     else:
         clues.sort()
