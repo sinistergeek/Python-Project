@@ -16,4 +16,23 @@ def main():
         print('I have thought up a number.')
         print('You have {} guess to get it..'.format(MAX_GUESSES))
         numGuesses = 1
+        while numGuesses <= MAX_GUESSES:
+            guess = ''
+            while len(guess)!= NUM_DIGITS or not guess.isdecimal():
+                print('Guess #{}:'.format(numGuesses))
+                guess = input('>')
+
+            clues = getClues(guess,secretNum)
+            print(clues)
+            numGuesses += 1
+            if guess == secretNum:
+                break
+            if numGuesses > MAX_GueSSES:
+                print('you ran out of guesses.')
+                print('The answer was {}.'.format(secret(secretNum)))
+
+        print('Do you want to play again? (yes or no)')
+        if not input('> ').lower().startswith('y'):
+            break
+    print('Thanks for playing')
 
