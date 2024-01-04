@@ -104,3 +104,48 @@ def getDuck():
             deck.append((rank,suit))
     random.shuffle(deck)
     return deck
+
+def displayHands(playerHand,dealerHand,showDealerHand):
+    print()
+    if showDealerHand:
+        print('DEALER:',getHandValue(dealerHand))
+        displayCards(dealerHand)
+    else:
+        print('DEALER: ???')
+        displayCards([BACKSIDE]+dealerHand[1:])
+    print('PLAYER:',getHandValue(playerHand))
+    displayCards(playerHand)
+
+def getHandValue(cards):
+    value = 0
+    numberOfAces = 0
+    for card in cards:
+        rank = card[0]
+        if rank == 'A':
+            numberOfAces += 1
+        elif rank in ('K','Q','J'):
+            value += 10
+        else:
+            value += int(rank)
+
+    value += numberOfAces
+    for i in range(numberOfAces):
+        if value + 10 <= 21:
+            value += 10
+    return value
+
+def displayCards(cards):
+
+    rows = ['','','','','']
+    for i, card in enumerate(cards):
+        rows[0] += ' ___ '
+        if card == BACKSIDE:
+            row[1] += '|## | '
+            row[2] += '|###| '
+            row[3] += '|_##| '
+        else:
+            rank, suit = card
+            row[1] += '|{} | '.format(rank.ljust(2))
+            row[2] += '| {} |'.format(suit)
+            row[3] += '|_{}| '.format(rank.rjust(2,'_'))
+
