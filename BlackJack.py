@@ -64,4 +64,43 @@ def main():
                 if getHandValue(dealerHand) > 21:
                     break
                 input('Press Enter to continue.....')
+                print('\n\n')
+        displayHands(playerHand,dealerHand,True)
+        playerValue = getHandValue(playerHand)
+        dealerValue = getHandValue(dealerHand)
+        if dealerValue > 21:
+            print('Dealer busts! You win ${}!'.format(bet))
+            money += bet
+        elif (playerValue > 21) or (playerValue < dealerValue):
+            print('You losts!')
+            money -= bet
+        elif playerValue > dealerValue:
+            print('You won ${}!'.format(bet))
+            money += bet
+        elif playerValue == dealerValue:
+            print('It\'s a tie,the bet is returned to you.')
+        input('Press Enter to continue....')
+        print('\n\n')
 
+def getBet(maxBet):
+    while True:
+        print('How much do you bet? (1-{}, or QUIT)'.format(maxBet))
+        bet = input('> ').upper().strip()
+        if bet == 'QUIT':
+            print('Thanks for playing!')
+            sys.exit()
+        if not bet.isdecimal():
+            continue
+        bet = int(bet)
+        if 1 <= bet <= maxBet:
+            return bet
+
+def getDuck():
+    deck = []
+    for suit in (HEARTS,DIAMONDS,SPADES,CLUBS):
+        for rank in range(2,11):
+            deck.append((str(rank),suit))
+        for rank in ('J','Q','K','A'):
+            deck.append((rank,suit))
+    random.shuffle(deck)
+    return deck
