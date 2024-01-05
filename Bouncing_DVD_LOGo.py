@@ -92,4 +92,16 @@ def main():
     bexts,goto(5,0)
     bext.fg('white')
     print('Corner bounces:',cornerBounces,end='')
+    for logo in logos:
+        bext.goto(logo[X],logo[Y])
+        bext.fg(logo[COLOR])
+        print('sinister',end='')
+    bext.goto(0,0)
 
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        print()
+        print('Bouncing DVD logo,by sinister')
+        sys.exit()
