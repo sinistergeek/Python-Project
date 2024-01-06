@@ -26,7 +26,7 @@ while True:
 while True:
     maxKey = len(SYMBOLS) - 1
     print('Please enter the key (0 to {}) to use.'.format(maxKey))
-    response = input('> ').uppper()
+    response = input('> ').upper()
     if not response.isdecimal():
         continue
 
@@ -36,6 +36,7 @@ while True:
 
 
 print('Enter the message to {}.'.format(mode))
+message = input('> ')
 message = message.upper()
 translated = ''
 for symbol in message:
@@ -50,7 +51,15 @@ for symbol in message:
         elif num < 0:
             num = num + len(SYMBOLS)
 
-
+        translated = translated + SYMBOLS[num]
     else:
-        tanslated = translated + symbol
-print(traslated)
+        translated = translated + symbol
+print(translated)
+
+try:
+    pyperclip.copy(translated)
+    print('Full {}ed text copied to clipboard.'.format(mode))
+
+except:
+    pass
+
