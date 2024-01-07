@@ -12,7 +12,7 @@ while True:
     continue
 while True:
     print('Enter the month for the calendar,1-12')
-    response = intput('> ')
+    response = input('> ')
     if not response.isdecimal():
         print('Please enter a numeric month, like 3 for March.')
         continue
@@ -26,18 +26,18 @@ while True:
 def getCalendarFor(year,month):
     calText = ''
     calText += (' ' * 34) + MONTHS[month - 1] + ' ' + str(year) + '\n'
-    callText += '...Sunday....Monday....Tuesday....Wednesday......Thrusday.......Friday.....Saturday...\n'
+    calText += '...Sunday....Monday....Tuesday....Wednesday......Thrusday.......Friday.....Saturday...\n'
     weekSeparator  = ('+-----------'* 7) + '+\n'
     blankRow = ('|           ' * 7) + '\n'
     currentDate = datetime.date(year,month,1)
     while currentDate.weekday() != 6:
         currentDate -= datetime.timedelta(days=1)
     while True:
-        callText += weekSeparator
+        calText += weekSeparator
         dayNumberRow = ''
         for i in range(7):
             dayNumberLabel = str(currentDate.day).rjust(2)
-            dayNumberDate += '|' + dayNumberLabel + (' '*8)
+            dayNumberRow += '|' + dayNumberLabel + (' '*8)
             currentDate += datetime.timedelta(days=1)
         dayNumberRow += '|\n'
         calText += dayNumberRow
@@ -49,9 +49,9 @@ def getCalendarFor(year,month):
     return calText
 
 calText = getCalendarFor(year,month)
-print(callText)
+print(calText)
 calendarFilename = 'calendar_{}_{}.txt'.format(year,month)
 with open(calendarFilename, 'w') as fileObj:
-    fileObj.write(callText)
+    fileObj.write(calText)
 
 print('Saved to '+ calendarFilename)
