@@ -26,3 +26,32 @@ while True:
 def getCalendarFor(year,month):
     calText = ''
     calText += (' ' * 34) + MONTHS[month - 1] + ' ' + str(year) + '\n'
+    callText += '...Sunday....Monday....Tuesday....Wednesday......Thrusday.......Friday.....Saturday...\n'
+    weekSeparator  = ('+-----------'* 7) + '+\n'
+    blankRow = ('|           ' * 7) + '\n'
+    currentDate = datetime.date(year,month,1)
+    while currentDate.weekday() != 6:
+        currentDate -= datetime.timedelta(days=1)
+    while True:
+        callText += weekSeparator
+        dayNumberRow = ''
+        for i in range(7):
+            dayNumberLabel = str(currentDate.day).rjust(2)
+            dayNumberDate += '|' + dayNumberLabel + (' '*8)
+            currentDate += datetime.timedelta(days=1)
+        dayNumberRow += '|\n'
+        calText += dayNumberRow
+        for i in range(3):
+            calText += blankRow
+        if currentDate.month != month:
+            break
+    calText += weekSeparator
+    return calText
+
+calText = getCalendarFor(year,month)
+print(callText)
+calendarFilename = 'calendar_{}_{}.txt'.format(year,month)
+with open(calendarFilename, 'w') as fileObj:
+    fileObj.write(callText)
+
+print('Saved to '+ calendarFilename)
