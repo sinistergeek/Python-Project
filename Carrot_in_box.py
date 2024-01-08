@@ -71,3 +71,43 @@ while True:
     else:
         break
 firstBox = 'RED'
+secondBox = 'GOLD'
+if response.startswith('Y'):
+    carrotInFirstBox = not carrotInFirstBox
+    firstBox,secondBox = secondBox,firstBox
+print('''
+    -------------- --------------
+    |           |   |           |
+    |{}         |   |{}         |
+    |BOX        |   |BOX        |
+    |           |   |           |
+    |           |   |           |
+    -------------- --------------
+      '''.format(firstBox,secondBox))
+print()
+if carrortInFirstBox:
+    print('''
+    ------------- -----------
+    |           | |         |
+    |{}         | |{}       |
+    |BOX        | |BOX      |
+    |           | |         |
+    ------------- ------------
+    '''.format(firstBox,secondBox))
+
+else:
+    print('''
+    ----- -----
+    |   | |   |
+    |{} | |{} |
+    |BOX| |BOX|
+    ----- -----
+    '''.format(firstBox,secondBox))
+
+print(playerNames)
+if carrortInFirstBox:
+    print(p1Name + 'is the winner!')
+else:
+    print(p2Name + 'is the winner!')
+
+print('Thanks for playing!')
