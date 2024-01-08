@@ -28,3 +28,26 @@ print()
 print(p1Nmae + 'here is the inside of your box')
 if random.randint(1,2) == 1:
     carrotInFirstBox = True
+
+else:
+    carrotInFirstBox = False
+
+if carrotInFirstBox:
+    print('''
+    ---------- -----------
+    |        | |         |
+    | RED BOX| |GOLD BOX |
+    |        | |         |
+    ---------- -----------
+    (carrot!)''')
+
+else:
+    print('''
+    --------- --------
+    |       | |      |
+    |RED BOX| |GOLD  |
+    |       | |BOX   |
+    --------  --------
+    (no carrot)''')
+    print(playerNames)
+
