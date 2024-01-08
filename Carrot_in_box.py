@@ -50,4 +50,24 @@ else:
     --------  --------
     (no carrot)''')
     print(playerNames)
+input('Press Enter to continue....')
+print('\n'*100)
+print(p1Name + ', tell' + p2Name + 'to open their eyes.')
+input('Press Enter to continue')
 
+print()
+print(p1Name + ', say one of the following to' + p2Name + '.')
+print(' 1) There is a carrot in  my box.')
+print(' 2) There is not a carrort in my box.')
+print()
+input('Then press Enter to continue')
+
+print()
+print(p2Name + ', do you want to swap boxes with '+ p1Name + '?YES/NO')
+while True:
+    response = input('> ').upper()
+    if not (response.startswith('Y') or response.startswith('N')):
+        print(p2Name + ', Please enter "YES" or "NO".')
+    else:
+        break
+firstBox = 'RED'
