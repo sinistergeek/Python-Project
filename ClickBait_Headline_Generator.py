@@ -53,3 +53,47 @@ def generateWhatYouDontKnowHeadline():
     when = random.choice(WHEN)
     return 'Without This {},{} Could kill You {}'.format(noun,pluralNoun,When)
 
+def generateBigCompaniesHateHerHeadline():
+    pronoun = random.choice(OBJECT_PRONOUNS)
+    state = random.choice(STATES)
+    noun1 = random.choice(NOUNS)
+    noun2 = random.choice(NOUNS)
+    return 'Big Companies Hate {} ! see How This {} {} Invented a Cheaper{}'.format(pronoun,state,noun1,noun2)
+
+def generateYouWontBelieveHeadline():
+    state = random.choice(STATES)
+    noun = random.choice(NOUNS)
+    pronoun = random.choice(POSSESIVE_PRONOUNS)
+    place = random.choice(PLACES)
+    return 'You Won\'t Believe What This {} {} Found in {} {}'.format(state,noun,pronoun,place)
+
+def generateDontYouToKnowHeadline():
+    pluralNoun1 = random.choice(NOUNS) + 's'
+    pluralNoun2 = random.choice(NOUNS) + 'S'
+    return 'What {} Don\'t Want to Know About {}'.format(pluralNoun1,pluralNoun2)
+
+def generateGiftIdeaHeadline():
+    number = random.randint(7,15)
+    noun = random.choice(STATES)
+    state =random.choice(STATES)
+    return '{} Gift Ideas to Give You {} From {}'.format(number,noun,state)
+
+def generateReasonsWhyHeadline():
+    number1 = random.randint(3,19)
+    pluralNoun =random.choice(NOUNS) + 's'
+    number2 = random.rand(1,number1)
+    return '{} Reasons why {} Are More Interesting Thank You Think (Number {} Will Surprise You!)'.format(number1,pluralNoun,number2)
+
+def generateAutomateheadline():
+    state = random.choice(STATES)
+    noun = random.choice(NOUNS)
+    i = random.randint(0,2)
+    pronoun1 = POSSESIVE_PRONOUNS[i]
+    pronoun2 = PERSONAL_PRONOUNS[i]
+    if pronoun1 == 'Their':
+        return 'This {} {} Didn\'t Think Robots Would Take {} Job. {} Were Wrong.'.format(state,noun,pronoun1,pronoun2)
+    else:
+        return 'This {} {} Didn\'t Think Robots Would Take {} Job. {} Was Wrong'.format(state,noun,pronoun1,pronoun2)
+
+if __name__ == '__main__':
+    main()
