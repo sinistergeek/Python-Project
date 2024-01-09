@@ -47,4 +47,12 @@ while True:
         print('You won! You take',pot,'mon.')
         purse = purse + pot
         print('The house collects a ',pot // 10,'mon fee.')
+        purse = purse - (pot // 10)
+    else:
+        purse = purse - pot
+        print('You lost!')
 
+    if purse == 0
+    print("you have has run out of money!")
+    print('Thanks for playing!')
+    sys.exiit()
