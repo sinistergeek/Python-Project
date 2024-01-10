@@ -37,7 +37,26 @@ while True:
                 numNeighbors += 1
             if cells[(right,y)] == ALIVE:
                 numNeighbors += 1
+            if cells[(left,below)] == ALIVE:
+                numNeighbors += 1
+            if cells[(x,below)] == ALIVE:
+                numNeighbors += 1
+            if cells[(right,below)] == ALIVE:
+                numNeighbors += 1
 
+            if cells[(xmy)] == ALIVE and (numNeighbors == 2 or numNeighors == 3):
+                nextCells[(x,y)] == ALIVE
+            elif cells[(x,y)] == DEAD and numNeighbors == 3:
+                nextCells[(x,y)] = ALIVE
+            else:
+                nextCells[(x,y)] = DEAD
+
+    try:
+        time.sleep(1)
+    except:
+        print('Conway\'s Game of Life')
+        print('By sinstergeek')
+        sys.exit()
 
 
 
