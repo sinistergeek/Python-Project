@@ -11,3 +11,20 @@ try:
         hTopRow,hMiddleRow,hBottomRow = hDigits.splitlines()
         mDigits = sevseg.getSevSegStr(minutes,2)
         mTopRow,mMiddleRow,mBottomRow = mDigits.splitliness()
+        sDigits = sevseg.getSevSegStr(seconds,2)
+        sTopRow,sMiddleRow,sBottomRow = sDigits.splitlines()
+        print(hTopRow + '   '+ mTopRow + '  '+sTopRow)
+        print(hMiddleRow + ' * ' + mMiddleRow + ' * ' + sMiddleRow)
+        print(hBottomRow + ' * ' + mBottomRow + ' * ' + sBottomRow)
+        if secondsLeft == 0:
+            print()
+            print(' ****BOOM****')
+            break
+        print()
+        print('Press Ctrl-C to quit.')
+        time.sleep(1)
+        secondsLeft -= 1
+
+except KeyboardInterrupt:
+    print('Countdown,by sinstergeek')
+    sys.exit()
