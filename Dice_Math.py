@@ -122,3 +122,16 @@ while time.time() < startTime + QUIZ_DURATION:
     for cy in range(CANVAS_HEIGHT):
         for cx in range(CANVAS_WIDTH):
             print(canvas.get((cx,cy),' '),end='')
+        print()
+    response = input('Enter the sum:').strip()
+    if response.isdecimal() and int(response) == sumAnswer:
+        correctAnswers += 1
+    else:
+        print('Incorrect, the answer is',sumAnswer)
+        time.sleep(2)
+        incorrectAnswers += 1
+
+score = (correctAnswers * REWARD) - (incorrectAnswers * PENALTY)
+print('Correct: ', correctAnswers)
+print('Incorrect:',incorrectAnswers)
+print('Score:',score)
