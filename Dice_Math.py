@@ -92,4 +92,33 @@ while time.time() < startTime + QUIZ_DURATION:
         while True:
             left = random.randint(0,CANVAS_WIDTH - 1 - DICE_WIDTH)
             top = random.randint(0,CANVAS_HEIGHT - 1 - DICE_HEIGHT)
+            topLeftX = left
+            topLeftY = top
+            topRightX = left + DICE_WIDTH
+            topRightY = top
+            bottomLeftX = left
+            bottomLeftY = top + DICE_HEIGHT
+            bottomRightX = left + DICE_wIDTH
+            bottomRightY = top + DICE_HEIGHT
+            overlaps = False
+            for prevDieLeft, preDieTop in topLeftDiceCorners:
+                prevDieRight = prevDieLeft + DICE_WIDTH
+                prevDieBottom =prevDieTop + DICE_HEIGHT
+                for cornerX, cornerY in ((topLeftX,topLeftY),(topRightX,topRightY),(bottomLeftX,bottomLeftY),(bottomRightX,bottomRightY)):
+                    if (prevDieLeft <= cornerX < prevDieRight and prevDieTop <= cornerY < prevDieBottom):
+                        overlaps = True
+            if not overlaps:
+                topLeftDiceCorners.append((left,top))
+                break
+    canvas = {}
+    for i, (dieLeft, dieTop) in enumerate(topLeftDiceCorners):
+        dieFace = diceFaces[i]
+        for dx in range(DICE_WIDTH):
+            for dy in range(DICE_HEIGHT):
+                canvasX = dieLeft + dx
+                canvasY = dieTop + dy
+                canvas[(canvasX,canvasY)] = dieFace[y][dx]
 
+    for cy in range(CANVAS_HEIGHT):
+        for cx in range(CANVAS_WIDTH):
+            print(canvas.get((cx,cy),' '),end='')
