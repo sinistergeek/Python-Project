@@ -1,4 +1,5 @@
 import random, shutil, sys, time
+from colorama import Fore,Back,Style
 MIN_STREAM_LENGTH = 6
 MAX_STREAM_LENGTH = 14
 PAUSE = 0.1
@@ -16,9 +17,12 @@ try:
             if columns[i] == 0:
                 if random.random() <= DENSITY:
                     columns[i] = random.randint(MIN_STREAM_LENGTH,MAX_STREAM_LENGTH)
+                    
             if columns[i] > 0:
                 print(random.choice(STREAM_CHARS),end='')
+                
                 columns[i] -= 1
+
             else:
                 print(' ',end='')
         print()
