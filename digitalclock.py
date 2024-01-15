@@ -16,4 +16,14 @@ try:
         mTopRow,mMiddleRow,mBottomRow = mDigits.splitlines()
         sDigits =sevseg.getSevSegStr(seconds,2)
         sTopRow,sMiddleRow,sBottomRow = sDigits.splitlines()
-
+        print(hTopRow + '       ' + mTopRow + '     '+sTopRow)
+        print(hMiddleRow + '    *    ' + mMiddleRow + '     *     ' + sMiddleRow)
+        print(hBottomRow + '    *    ' + mBottomRow + '     *     ' + sBottomRow)
+        print('Press Ctrl-C to quit.')
+        while True:
+            time.sleep(0.01)
+            if time.localtime().tm_sec != currentTime.tm_sec:
+                break
+except KeyboardInterrupt:
+    print('Digital clock, by sinister geek')
+    sys.exit()
