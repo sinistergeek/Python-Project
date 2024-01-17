@@ -139,5 +139,19 @@ class Duckling:
             return ' ^^ '
 
     def getNextBodyPart(self):
+        if self.partToDisplayNext == HEAD:
+            self.partToDisplayNext = BODY
+            return self.getHeadStr()
+        elif self.partToDisplayNext == BODY:
+            self.partToDisplayNext = FEET
+            return self.getBodyStr()
+        elif self.partToDisplayNext == FEET:
+            self.partToDisplayNext = None
+            return self.getFeelStr()
 
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit()
 
