@@ -50,7 +50,7 @@ class Duckling:
         self.body = random.choice([CHUBBY,VERY_CHUBBY])
         self.mouth = random.choice([OPEN,CLOSED])
         self.wing = random.choice([OUT,UP,DOWN])
-        if self.body = CHUBBY:
+        if self.body == CHUBBY:
             self.eyes = BEADY
 
         else:
@@ -68,7 +68,7 @@ class Duckling:
             if self.eyes == BEADY and self.body == CHUBBY:
                 headStr += '"'
 
-            elif self.eyes == BEADY and self.body == VERFY_CHUBBY:
+            elif self.eyes == BEADY and self.body == VERY_CHUBBY:
                 headStr += '" '
             elif self.eyes == WIDE:
                 headStr +="''"
@@ -147,7 +147,7 @@ class Duckling:
             return self.getBodyStr()
         elif self.partToDisplayNext == FEET:
             self.partToDisplayNext = None
-            return self.getFeelStr()
+            return self.getFeetStr()
 
 if __name__ == '__main__':
     try:
