@@ -55,3 +55,89 @@ class Duckling:
 
         else:
             self.eyes = random.choice([BEADY,WIDE,HAPPY,ALOOF])
+        self.partToDisplayNext = HEAD
+
+    def getHeadStr(self):
+        headStr = ''
+        if self.direction == LEFT:
+            if self.mouth == OPEN:
+                headStr += '>'
+            elif self.mouth == CLOSED:
+                headStr += '='
+
+            if self.eyes == BEADY and self.body == CHUBBY:
+                headStr += '"'
+
+            elif self.eyes == BEADY and self.body == VERFY_CHUBBY:
+                headStr += '" '
+            elif self.eyes == WIDE:
+                headStr +="''"
+            elif self.eyes == HAPPY:
+                headStr += '^^'
+            elif self.eyes == ALOOF:
+                headStr += '``'
+
+            headStr += ') '
+        if self.direction == RIGHT:
+            headStr += ' ('
+            if self.eyes == BEADY and self.body == CHUBBY:
+                headStr += '"'
+            elif self.eyes == BEADY and self.body == VERY_CHUBBY:
+                headStr += ' "'
+            elif self.eyes == WIDE:
+                headStr += "''"
+            elif self.eyes == HAPPY:
+                headStr += '^^'
+            elif self.eyes == ALOOF:
+                headStr += '``'
+
+            if self.mouth == OPEN:
+                headStr += '<'
+            elif self.mouth == CLOSED:
+                headStr += '='
+
+        if self.body == CHUBBY:
+            headStr += ' '
+        return headStr
+
+    def getBodyStr(self):
+        bodyStr = '('
+        if self.direction == LEFT:
+            if self.body == CHUBBY:
+                bodyStr += ' '
+            elif self.body == VERY_CHUBBY:
+                bodyStr += '  '
+
+            if self.wing == OUT:
+                bodyStr += '>'
+            elif self.wing == UP:
+                bodyStr += '^'
+            elif self.wing == DOWN:
+                bodyStr += 'v'
+        if self.direction == RIGHT:
+            if self.wing == OUT:
+                bodyStr += '<'
+            elif self.wing == UP:
+                bodyStr += '^'
+            elif self.wing == DOWN:
+                bodyStr += 'v'
+
+            if self.body == CHUBBY:
+                bodyStr += ' '
+            elif self.body == VERY_CHUBBY:
+                bodyStr += '  '
+        bodyStr += ')'
+        if self.body == CHUBBY:
+            bodyStr += ' '
+        return bodyStr
+
+
+    def getFeetStr(self):
+        if self.body == CHUBBY:
+            return ' ^^ '
+        elif self.body == VERY_CHUBBY:
+            return ' ^^ '
+
+    def getNextBodyPart(self):
+
+
