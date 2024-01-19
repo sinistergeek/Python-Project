@@ -30,3 +30,53 @@ def getCanvasString(canvasData,cx,cy):
                 canvasStr += UP_DOWN_CHAR
             elif cell in (set(['A','D']),set(['A']),set(['D'])):
                 canvasStr += LEFT_RIGHT_CHAR
+            elif cell == set(['S','D']):
+                canvasStr += DOWN_RIGHT_CHAR
+            elif cell == set(['A','S']):
+                canvasStr += DOWN_LEFT_CHAR
+
+            elif cell == set(['W','D']):
+                canvasStr += UP_RIGHT_CHAR
+            elif cell == set(['W','A']):
+                canvasStr +=  UP_LEFT_CHAR
+            elif cell == set(['W','S','D']):
+                canvasStr += UP_DOWN_RIGHT_CHAR
+            elif cell == set(['W','S','A']):
+                canvasStr += UP_DOWN_LEFT_CHAR
+            elif cell == set(['A','S','D']):
+                canvasStr += DOWN_LEFT_RIGHT_CHAR
+            elif cell == set(['W','A','D']):
+                canvasStr += UP_LEFT_RIGHT_CHAR
+            elif cell == set(['W','A','S','D']):
+                canvasStr += CROSS_CHAR
+            elif cell == None:
+                canvasStr += ' '
+        canvasStr += '\n'
+    return canvasStr
+
+moves = []
+while True:
+    print(getCanvasString(canvas,cursorX,cursorY))
+    print('WASD keys to move, H for help, C to clear,' + 'F to save, or QUIT.')
+    response = input('> ').upper()
+    if response == 'QUIT':
+        print('Thanks for playing!')
+        sys.exit()
+    elif response == 'H':
+        print('Enter W, A, S, and D characters to move the cursor and')
+        print('draw a line behind it as it moves. For example, ddd')
+        print('draws a line going right and sssdddwwwaaa draws a box.')
+        print()
+        print('You can save your drawing to a text file by entering F.')
+        input('Press Enter to return to the program.')
+        continue
+    elif response == 'C':
+        canvas = {}
+        moves.append('C')
+
+    elif response == 'F':
+        try:
+            print('Enter filename to save to:')
+            filename = input('> ')
+            if not filename.endswidth('.txt'):
+                filename += '.txt'
