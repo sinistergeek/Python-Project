@@ -80,3 +80,42 @@ while True:
             filename = input('> ')
             if not filename.endswidth('.txt'):
                 filename += '.txt'
+            with open(filename,'w',encoding='utf-8') as file:
+                file.write(''.join(moves) + '\n')
+                file.write(getCanvasString(canvas,None,None))
+        except:
+            print('ERROR: Could not save file.')
+    for command in response:
+        if command not in ('W','A','S','D'):
+            continue
+        move.append(command)
+        if canvas == {}:
+            if command in ('W','S'):
+                canvas[(cursorX,cursorY)] = set(['W','S'])
+            elif command in ('A','D'):
+                canvas[(cursorX,cursorY)] = set(['A','D'])
+        if command == 'W' and cursorY > 0:
+            canvas[(cursorX,cursorY)].add(command)
+            cursorY = cursorY - 1
+        elif command == 'S' and cursorY < CANVAs_HEIGHT - 1:
+            canvas[(cursorX, cursorY)].add(command)
+            cursorY = cursorY + 1
+        elif command == 'A' and cursorX > 0:
+            canvas[(cursorX, cursorY)].add(command)
+            cursorX = cursorX - 1
+        elif command == 'D' and cursorX < CANVAS_WIDTH -1 :
+            canvas[(cursorX,cursorY)].add(command)
+            cursorX = cursorX + 1
+
+        else:
+            continue
+        if(cursorX, cursorY) not in canvas:
+            canvas[(cursorX,cursorY)] = set()
+        if command == 'W':
+            canvas[(cursorX,cursorY)].add('S')
+        elif command == 'S':
+            canvas[(cursorX,cursorY)].add('W')
+        elif command == 'A':
+            canvas[(cursorX,cursorY)].add('D')
+        elif command == 'D':
+            canvas[(cursorX,cursorY)].add('A')
