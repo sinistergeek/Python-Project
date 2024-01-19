@@ -88,7 +88,7 @@ while True:
     for command in response:
         if command not in ('W','A','S','D'):
             continue
-        move.append(command)
+        moves.append(command)
         if canvas == {}:
             if command in ('W','S'):
                 canvas[(cursorX,cursorY)] = set(['W','S'])
@@ -97,7 +97,7 @@ while True:
         if command == 'W' and cursorY > 0:
             canvas[(cursorX,cursorY)].add(command)
             cursorY = cursorY - 1
-        elif command == 'S' and cursorY < CANVAs_HEIGHT - 1:
+        elif command == 'S' and cursorY < CANVAS_HEIGHT - 1:
             canvas[(cursorX, cursorY)].add(command)
             cursorY = cursorY + 1
         elif command == 'A' and cursorX > 0:
