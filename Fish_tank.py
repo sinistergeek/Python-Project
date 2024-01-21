@@ -143,4 +143,53 @@ def drawAquarium():
     bext.fg('white')
     bext.goto(0,0)
     print('Fish tank, by sinister geek Ctrl-C quit.',end='')
+    bext.fg('white')
+    for bubble in BUBBLES:
+        bext.goto(bubble['x'],bubble['y'])
+        print(random.choice(('o','0')),end='')
 
+    for fish in FISHES:
+        bext.goto(fish['x'],fish['y'])
+        if fish['goingRight']:
+            fishText = fish['right'][STEP % len(fish['right'])]
+        else:
+            fishText = fish['left'][STEP % len(fish['left'])]
+        for i, fishPart in enumerate(fishText):
+            bext.fg(fish['colors'][i])
+            print(fishPart,end='')
+    bext.fg('green')
+    for kelp in KELPS:
+        for i, kelpSegment in enumerate(kelp['segments']):
+            if kelpSegment == '(':
+                bext.goto(kelp['x'],BOTTOM_EDGE - i)
+            elif kelpSegment == ')':
+                bext.goto(kelp['x'] + 1, BOTTOM_EDGE - i)
+            print(kelpSegment, end='')
+
+    bext.fg('yellow')
+    bext.goto(0,HEIGHT - 1)
+    print(chr(9617) * (WIDTH - 1),end='')
+    sys.stdout.flush()
+
+def clearAquarium():
+    global FISHES, BUBBLErS, BUBBLES, KELP
+
+    for bubble in BUBBLES:
+        bext.goto(bubble['x'],bubble['y'])
+        print(' ',end='')
+
+    for fish in FISHES:
+        bext.goto(fish['x'],fish['y'])
+        print(' ' * len(fish['left'][0]),end='')
+
+    for kelp in KELPS:
+        for i, kelpSegment in enumerate(kelp['segments']):
+            bext.goto(kelp['x'],HEIGHT - 2 - i)
+            print('     ',end='')
+
+    sys.studout.flush()
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit()
