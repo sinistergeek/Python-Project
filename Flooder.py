@@ -32,4 +32,35 @@ def main():
     bext.bg('black')
     bext.fg('white')
     bext.clear()
-    
+    print('Do you want to play in colorblind mode? Y/N')
+    response = input('> ')
+    if response.upper().startswith('Y'):
+        displayMode = SHAPE_MODE
+    else:
+        displayMode = COLOR_MODE
+    gameBoard = getNewBoard()
+    movesLeft = MOVEs_PER_GAME
+    while True:
+        displayBoard(gameBoard, displayMode)
+        print('Moves left:',movesLeft)
+        playerMove = askForPlayerMove(displayMode)
+        changeTile(playerMove, gameBoard,0,0)
+        movesLeft -= 1
+        if hasWond(gameBoard):
+            displayBoard(gameBoard, displayMode)
+            print('You have won!')
+            break
+        elif movesLeft == 0:
+            displayBoard(gameBoard,displayMode)
+            print('You have run out of moves!')
+            break
+
+def getNewBoard():
+    board = {}
+    for x in range(BOARD_WIDTH):
+        for y in range(BOARD_HEIGHT):
+            board[(x,y)] = random.choice(TILE_TYPES)
+    for i in range(BOARD_WIDTH * BOARD_HEIGHT):
+        x = random.randint(0, BOARD_WIDTH - 2)
+        y = random.randint(0,BOARD_HEIGHT - 1)
+    return board
