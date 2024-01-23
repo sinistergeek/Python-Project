@@ -40,4 +40,40 @@ def main():
                 else:
                     nextForest[(x,y)] = forest[(x,y)]
 
+            forest = nextForest
+            time.sleep(PAUSE_LENGTH)
+
+def createNewForest():
+    forest = {'width':WIDTH,'height':HEIGHT}
+    for x in range(WIDTH):
+        for y in range(HEIGHT):
+            if (random.random() * 100) <= INITIAL_TREE_DENSITY:
+                forest[(x,y)] = TREE
+            else:
+                forest[(x,y)] = EMPTY
+    return forest
+
+def displayFOrest(forest):
+    bext.goto(0,0)
+    for y in range(forest['height']):
+        for x in range(forest['width']):
+            if forest[(x,y)] == TREE:
+                bext.fg('green')
+                print(TREE,end='')
+            elif forest[(x,y)] == FIRE:
+                bext.fg('red')
+                print(FIRE,end='')
+            elif forest[(x,y)] == EMPTY:
+                print(EMPTY,end='')
+        print()
+    bext.fg('reset')
+    print('Grow chance : {}%'.format(GROW_CHANCE * 100),end='')
+    print('Lightning chance: {}%'.format(FIRE_CHANCE * 100),end='')
+    print('Press Ctrl-C to quit.')
+
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit()
 
