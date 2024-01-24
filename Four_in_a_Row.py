@@ -29,3 +29,35 @@ def main():
             playerTurn = PLAYER_O
         elif playerTurn == PLAYER_O:
             playerTurn = PLAYER_X
+
+def getNewBoard():
+    board = {}
+    for columnIndex in range(BOARD_WIDTH):
+        for rowIndex in range(BOARD_HEIGHT):
+            board[(columnIndex,rowIndex)] = EMPTY_SPACE
+    return board
+
+def displayBoard(board):
+    titleChars = []
+    for rowIndex in range(BOARD_HEIGHT):
+        for columnIndex in range(BOARD_WIDTH):
+            tilesChars.append(board[(columnIndex,rowIndex)])
+    print("""
+    1234567
+    +------+
+    |{}{}{}{}{}{}{}{}|
+    """.format(*tileChars))
+
+def askForPlayerMove(playerTile,board):
+
+    while True:
+        print('Player {}, enter a column or QUIT:'.format(playerTile))
+        response = input('> ').upper().strip()
+        if response == 'QUIT':
+            print('Thanks for playing')
+            sys.exit()
+        if response not in COLUMN_LABELS:
+            print('Enter a number from 1 to {}'.format(BOARD_WIDTH))
+            continue
+        columnIndex =int(response)
+        if board[(columnIndex,0)] != EMPTY_SPACE:
