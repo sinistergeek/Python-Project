@@ -101,3 +101,12 @@ def isWinner(playerTile,board):
             tile4 = board[(columnIndex +3,rowIndex + 3)]
             if tile1 == tile2 == tile3 == tile4 == playerTile:
                 return True
+            tile1 =board[(columnIndex +3,rowIndex)]
+            tile2 = board[(columnIndex +2,rowIndex + 1)]
+            tile3 = board[(columnIndex +1,rowIndex + 2)]
+            tile4 = board[(columnIndex,rowIndex +3)]
+            if tile1 == tile2 == tile3 == tile4 == playerTile:
+                return True
+    return False
+if __name__ == '__main__':
+    main()
