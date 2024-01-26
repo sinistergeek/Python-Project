@@ -37,3 +37,40 @@ def getWords():
         randomWord = getOneWordExcept(words)
         if numMatchingLetters(secretPassword,randomWord) == 3:
             words.append(randomWord)
+
+    for i in range(500):
+        if len(words) == 12:
+            break
+        randomWord = getOneWordExcept(words)
+        if numMatchingLetters(secretPassword,randomWord) != 0:
+            words.append(randomWord)
+
+    while len(words) < 12:
+        randomWord = getOneWordExcept(words)
+        words.append(randomWord)
+
+    assert len(words) == 12
+    return words
+
+
+def getOneWordExcept(blocklist=None):
+    if blocklist == None:
+        blocklist = []
+    while True:
+        randomWord = random.choice(WORDS)
+        if randomWord not in blocklist:
+            return randomWord
+
+def numMatchingLetters(word1,word2):
+    matches = 0
+    for i in range(len(word1)):
+        if word1[i] == word2[i]:
+            matches += 1
+    return matches
+
+def getComputerMemoryString(words):
+    linesWithWords = random.sample(range(16 * 2),len(words))
+    memoryAddress = 16 * random.randint(0,4000)
+    computerMemory = []
+    nextWord = 0
+    for lineNum in range(16):
