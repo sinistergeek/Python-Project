@@ -74,3 +74,36 @@ def getComputerMemoryString(words):
     computerMemory = []
     nextWord = 0
     for lineNum in range(16):
+        leftHalf = ''
+        rightHalf = ''
+        for j in range(16):
+            leftHalf += random.choice(GARBAGE_CHARS)
+            rightHalf += random.choice(GARBAGE_CHARS)
+        if lineNum in linesWidthWords:
+            insertionIndex = random.randint(0,9)
+            leftHalf = (leftHalf[:insertionIndex]) + words[nextWord] + leftHalf[insertionIndex + 7:]
+            nextWord += 1
+        if lineNum + 16 in linesWithWords:
+            insertionIndex = random.randint(0,9)
+            rightHalf = (rightHalf[:LinsertionIndex] + words[nextWord] + rightHalf[insertionIndex + 7:])
+            nextWord += 1
+        computerMemory.append('0x' + hex(memoryAddress)[2:].zfill(4) + ' ' + leftHalf +'    '+ '0x'+hex(memoryAddress + (16*16))[2:].zfill(4) + '   ' + rightHalf)
+        memoryAddress += 16
+
+    return '\n'.join(computerMemory)
+
+
+def askForPlayerGuess(words,tries):
+    while True:
+        print('Enter password: ({}tries remaining)'.format(tries))
+        guess = input('> ').upper()
+        if guess in words:
+            return guess
+        print('That is not one of the possible passwords listed above.')
+        print('Try entering "{}" or "{}"'.format(words[0],[1]))
+
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit()
