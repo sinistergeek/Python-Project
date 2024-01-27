@@ -69,3 +69,37 @@ def main():
         guess = getPlayerGuess(missedLetters + correctLetters)
         if guess in secretWord:
             foundAllLetters = True
+            for secretWordLetter in secretWord:
+                if secretWordLetter notin correctLetters:
+                    foundAllLetters = False
+                    break
+            if foundAllLetters:
+                print('Yes! The secret word is:',secretWord)
+                print('You have won!')
+                break
+
+        else:
+            missedLetters.append(guess)
+            if len(missedLetters) == len(HANGMAN_PICS) - 1:
+                drawHangman(missedLetters,correctLetters,secretWord)
+                print('You have run out of guesses!')
+                print('The word was "{}"'.format(secretWord))
+                break
+
+def drawHangman(missedLetters,correctLetters,secretWord):
+    print(HANGMAN_PICS[len(missedLetters)])
+    print('The category is:',CATEGORY)
+    print()
+    print('Missed letters:',end)
+    for letter in missedLetters:
+        print(letter,end='')
+    if len(missedLetters) == 0:
+        print('No missed letters yet.')
+    print()
+    blanks = ['_'] * len(secretWord)
+    for i in range(len(secretWord)):
+        if secretWord[i] in correctLetters:
+            blanks[i] = secretWord[i]
+
+    print(' '.join(blanks))
+
