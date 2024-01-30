@@ -81,4 +81,57 @@ def runHourglassSimulation(allSand):
                 noWallRight = right not in HOURGLASS
                 notOnRightEdge = sand[X] < SCREEN_WIDTH - 1
                 canFallRight = (noSandBelowRight and noWallBeloRight and noWallRight and notOnRightEdge)
+                fallingDirection = None
+                if canFallLeft and not canFallRight:
+                    fallingDirection = -1
+                elif not canFallLeft and canFallRight:
+                    fallingDirection = 1
+                elif canFallLeft and canFallRight:
+                    fallingDirection = rando                fallingDirection = None
+                    if canFallLeft and not canFallRight:
+                        fallingDirection = -1
+                    elif not canFallLeft and canFallRight:
+                        fallingDirection = 1
+                    elif canFallLeft and canFallRight:
+                        fallingDirection = random.choice((-1,1))
+                    if random.random() * 100 <= WIDE_FALL_CHANCE:
+                        belowTwoLeft = (sand[X] -2,sand[Y] + 1)
+                        noSandBelowTwoLeft = belowTwoLeft not in allSand
+                        noWallSecondTwoLeft = belowTwoLeft not in HOURGLASS
+                        notOnSecondToLeftEdge = sand[X] > 1
+                        canFallTwoLeft = (canFallLeft and noSandBelowTwoLeft and noWallBelowTwoLeft and notOnSecondToLeftEdge)
+                        belowTwoRight = (sand[X] + 2,sand[Y] + 1)
+                        noSandBelowTwoRight = belowTwoRight not in allSand
+                        noWallBelowTwoRight = belowTwoRight not in HOURGLASS
+                        notOnSecondToRightEdge = sand[X] < SCREEN_WIDTH - 2
+                        canFallTwoRight = (canFallRight and noSandBelowTwoRight and noWallBelowTwoRight and notOnSecondToRightEdge)
+                        if canFallTwoLeft and not canFallTwoRight:
+                            fallingDirection = -2
+                        elif not canFallTwoLeft and canFallTwoRight:
+                            fallingDirection = 2
+                        elif canFallTwoLeft and canFallTwoRight:
+                            fallingDirection = random.choice((-2,2))
+                    if fallingDirection == None:
+                        continue
+                    bext.goto(sand[X],sand[Y])
+                    print('',end='')
+                    bext.goto(sand[X] + fallingDirection,sand[Y] + 1)
+                    print(SAND,end='')
 
+                    allSand[i] = (sand[X] + fallingDirection,sand[Y] + 1)
+                    sandMovedOnThisStep = True
+
+        sys.stdout.flush()
+        time.sleep(PAUSE_LENGTH)
+        if not sandMoveOnThisStep:
+            time.sleep(2)
+            for sand in allSand:
+                bext.goto(sand[X],sand[Y])
+                print(' ',end='')
+            break
+
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit()
