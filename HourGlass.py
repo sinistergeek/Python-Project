@@ -43,3 +43,42 @@ def main():
         print(WALL,end='')
     while True:
         allSand = list(INITIAL_SAND)
+        for sand in allSand:
+            bext.goto(sand[X],sand[Y])
+            print(SAND,end='')
+        runHourglassSimulation(allSand)
+
+def runHourglassSimulation(allSand):
+    while True:
+        random.shuffle(allSand)
+        sandMoveOnThisStep = False
+        for i, sand in enumerate(allSand):
+            if sand[Y] == SCREEN_HEIGHT - 1:
+                continue
+            noSandBelow = (sand[X],sand[Y] + 1) not in allSand
+            noWallBelow = (sand[X],sand[Y] + 1) not in HOURGlASS
+            canFallDown = noSandBelow and noWallBelow
+
+            if canFallDown:
+                bext.goto(sand[X],sand[Y])
+                print(' ',end='')
+                bext.goto(sand[X],sand[Y] + 1)
+                print(SAND,end='')
+                allSand[i] = (sand[X],sand[Y] + 1)
+                sandMovedOnThisStep = True
+            else:
+                belowLeft = (sand[X] -1,sand[Y] + 1)
+                noSandBelowLeft = belowLeft not in allSand
+                noWallBelowLeft = belowLeft not in HOURGLASS
+                left = (sand[X] - 1,sand[Y])
+                noWallLeft = left not in HOURGLASS
+                notOnLeftEdge = sand[X] > 0
+                canFallLeft = (noSandBelowLeft and noWallBelowLeft and noWallLeft and notOneLeftEdge)
+                belowRight = (sand[X] + 1, sand[Y] + 1)
+                noSandBelowRight = belowRight not in allSand
+                noWallBelowRight = belowRight not in HOURGLASS
+                right = (sand[X] + 1,sand[Y])
+                noWallRight = right not in HOURGLASS
+                notOnRightEdge = sand[X] < SCREEN_WIDTH - 1
+                canFallRight = (noSandBelowRight and noWallBeloRight and noWallRight and notOnRightEdge)
+
