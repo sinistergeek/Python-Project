@@ -120,5 +120,33 @@ def askForPlayerMove(board,robots,playerPosition):
                     'A': (playerX - 1, playerY + 0),
                     'S': (playerX ,playerY)}[move]
 
-
-
+def moveRobots(board,robotPositions,playerPosition):
+    playerx,playery = playerPosition
+    nextRobotPositions = []
+    while len(robotPositions) > 0:
+        robotx, roboty = robotPositions[0]
+        if robotx < playerx:
+            movex = 1
+        elif robotx > playerx:
+            movex = -1
+        elif robotx == playerx:
+            movex = 0
+        if roboty < playery:
+            movey = 1
+        elif roboty > playery:
+            movey = -1
+        elif roboty == playery:
+            movey = 0
+        if board[(robotx + movex,roboty + movey)] == WALL:
+            if board[(robotx + movex,roboty)] == EMPTY_SPACE:
+                movey = 0
+            elif board[(robotx,roboty + movey)] == EMPTY_SPACE:
+                movex = 0
+            else:
+                movex = 0
+                movey = 0
+        newRobotx = robotx + movex
+        newRoboty = roboty + movey
+        if (board[(robotx,roboty)] == DEAD_ROBOT or board[(newRobotx,newRoboty)] == DEAD_ROBOT):
+            del robotPosition[0]
+            continue
