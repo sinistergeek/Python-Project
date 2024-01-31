@@ -37,7 +37,7 @@ def getNewBoard():
     board = {'teleports' : NUM_TELEPORTS}
     for x  in range(WIDTH):
         for y in range(HEIGHT):
-            board[(x,y)] = EMPTY-SPACE
+            board[(x,y)] = EMPTY_SPACE
     for x in range(WIDTH):
         board[(x,0)] = WALL
         board[(x,HEIGHT - 1)] = WALL
@@ -85,7 +85,7 @@ def displayBoard(board,robots,playerPosition):
             elif (x,y) in robots:
                 print(ROBOT,end='')
             else:
-                print(EMPty-SPACE,end='')
+                print(EMPTY_SPACE,end='')
         print()
 def askForPlayerMove(board,robots,playerPosition):
     playerX,playerY = playerPosition
@@ -101,7 +101,7 @@ def askForPlayerMove(board,robots,playerPosition):
     while True:
         print('(T)eleports remaining: {}'.format(board["teleports"]))
         print('         ({})({})({})'.format(q,w,e))
-        print('         ({})(S)({})').format(a,d)
+        print('         ({})(S)({})'.format(a,d))
         print('Enter move or QUIT: ({}) ({}) ({})'.format(z,x,c))
         move = input('> ').upper()
         if move == 'QUIT':
@@ -113,6 +113,7 @@ def askForPlayerMove(board,robots,playerPosition):
         elif move != '' and move in allMoves:
             return {'Q': (playerX - 1, playerY - 1),
                     'W': (playerX + 0, playerY - 1),
+                    'E': (playerX + 1, playerY - 1),
                     'D': (playerX + 1, playerY + 0),
                     'C': (playerX + 1, playerY + 1),
                     'X': (playerX + 0, playerY + 1),
@@ -148,7 +149,7 @@ def moveRobots(board,robotPositions,playerPosition):
         newRobotx = robotx + movex
         newRoboty = roboty + movey
         if (board[(robotx,roboty)] == DEAD_ROBOT or board[(newRobotx,newRoboty)] == DEAD_ROBOT):
-            del robotPosition[0]
+            del robotPositions[0]
             continue
 
         if (newRobotx, newRoboty) in nextRobotPositions:
