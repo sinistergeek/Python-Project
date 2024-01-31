@@ -72,3 +72,53 @@ def addRobots(board):
         x,y = getRandomEmptySpace(board,robots)
         robots.append((x,y))
     return robots
+
+def displayBoard(board,robots,playerPosition):
+    for y in range(HEIGHT):
+        for x in range(WIDTH):
+            if board[(x,y)] == WALL:
+                print(WALL,end='')
+            elif board[(x,y)] == DEAD_ROBOT:
+                print(DEAD_ROBOT,end='')
+            elif (x,y) == playerPosition:
+                print(PLAYER,end='')
+            elif (x,y) in robots:
+                print(ROBOT,end='')
+            else:
+                print(EMPty-SPACE,end='')
+        print()
+def askForPlayerMove(board,robots,playerPosition):
+    playerX,playerY = playerPosition
+    q = 'Q' if isEmpty(playerX - 1,playerY - 1,board,robots) else ' '
+    w = 'W' if isEmpty(playerX + 0,playerY - 1,board,robots) else ' '
+    e = 'E' if isEmpty(playerX + 1,playerY - 1,board,robots) else ' '
+    d = 'D' if isEmpty(playerX + 1,playerY + 0,board,robots) else ' '
+    c = 'C' if isEmpty(playerX + 1,playerY + 1,board,robots) else ' '
+    x = 'X' if isEmpty(playerX + 0,playerY + 1,board,robots) else ' '
+    z = 'Z' if isEmpty(playerX - 1,playerY + 1,board,robots) else ' '
+    a = 'A' if isEmpty(playerX - 1,playerY + 0,board,robots) else ' '
+    allMoves = (q + w + e + d + c + x + a + z + 'S')
+    while True:
+        print('(T)eleports remaining: {}'.format(board["teleports"]))
+        print('         ({})({})({})'.format(q,w,e))
+        print('         ({})(S)({})').format(a,d)
+        print('Enter move or QUIT: ({}) ({}) ({})'.format(z,x,c))
+        move = input('> ').upper()
+        if move == 'QUIT':
+            print('Thanks for playing!')
+            sys.exit()
+        elif move == 'T' and board['teleports'] > 0:
+            board['teleports'] -= 1
+            return getRandomEmptySpace(board,robots)
+        elif move != '' and move in allMoves:
+            return {'Q': (playerX - 1, playerY - 1),
+                    'W': (playerX + 0, playerY - 1),
+                    'D': (playerX + 1, playerY + 0),
+                    'C': (playerX + 1, playerY + 1),
+                    'X': (playerX + 0, playerY + 1),
+                    'Z': (playerX - 1, playerY + 1),
+                    'A': (playerX - 1, playerY + 0),
+                    'S': (playerX ,playerY)}[move]
+
+
+
