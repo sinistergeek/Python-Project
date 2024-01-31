@@ -150,3 +150,14 @@ def moveRobots(board,robotPositions,playerPosition):
         if (board[(robotx,roboty)] == DEAD_ROBOT or board[(newRobotx,newRoboty)] == DEAD_ROBOT):
             del robotPosition[0]
             continue
+
+        if (newRobotx, newRoboty) in nextRobotPositions:
+            board[(newRobotx,newRoboty)] = DEAD_ROBOT
+            nextRobotPositions.remove((newRobotx,newRoboty))
+        else:
+            nextRobotPositions.append((newRobotx,newRoboty))
+        del robotPositions[0]
+    return nextRobotPositions
+
+if __name__ == '__main__':
+    main()
