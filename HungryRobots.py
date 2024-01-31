@@ -31,3 +31,44 @@ def main():
                 displayBoard(board,robots,playerPosition)
                 print('You have been caught by a robot!')
                 sys.exit()
+
+
+def getNewBoard():
+    board = {'teleports' : NUM_TELEPORTS}
+    for x  in range(WIDTH):
+        for y in range(HEIGHT):
+            board[(x,y)] = EMPTY-SPACE
+    for x in range(WIDTH):
+        board[(x,0)] = WALL
+        board[(x,HEIGHT - 1)] = WALL
+    for y in range(HEIGHT):
+        board[(0,y)] = WALL
+        board[(WIDTH - 1, y)] = WALL
+
+    for i in range(NUM_WALLS):
+        x,y = getRandomEmptySpace(board,[])
+        board[(x,y)] = WALL
+
+    for i in range(NUM_DEAD_ROBOTS):
+        x,y = getRandomEmptySpace(board,[])
+        board[(x,y)] =DEAD_ROBOT
+    return board
+
+def getRandomEmptySpace(board,robots):
+    while True:
+        randomX = random.randint(1,WIDTH - 2)
+        randomY = random.randint(1, HEIGHT - 2)
+        if isEmpty(randomX,randomY,board,robots):
+            break
+    return(randomX,randomY)
+
+def isEmpty(x,y,board,robots):
+    return board[(x,y)] == EMPTY_SPACE and (x,y) not in robots
+
+
+def addRobots(board):
+    robots = []
+    for i in range(NUM_ROBOTS):
+        x,y = getRandomEmptySpace(board,robots)
+        robots.append((x,y))
+    return robots
