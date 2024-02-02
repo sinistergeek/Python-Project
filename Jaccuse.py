@@ -103,3 +103,48 @@ print("""
 Inspired by Homestar Runner\'s
       """)
 input('Press Enter to begin...')
+
+startTime = time.time()
+endTime = startTime + Time_To_SOLVER
+while True:
+    if time.time() > endTime or accusationsLeft == 0:
+        if time.time() > endTime:
+            print('You have run out of time!')
+        elif accuasationsLeft = 0:
+            print('You have accused too many innocent people!')
+        culpritIndex = SUSPECTS.index(culprit)
+        print('It was {} at the {} with the {} who catnapped her!'.format(culprit,PLACES[culpritIndex],ITEMS[culpritIndex]))
+        print('Bettter luck next time, Detective.')
+        sys.exit()
+    print()
+    minutesLeft =int(endTime - time.time())
+    secondsLeft = int(endTime - time.time()) % 60
+    print('Time left: {} min, {} sec'.format(minutesLeft,secondsLeft))
+    if currentLocation == 'TAXI':
+        print('You are in your TAXI. Where do you want to go?')
+        for  place in sorted(PLACES):
+            placeInfo = ''
+            if place in visitedPlaces:
+                placeInfo = visitedPlace[place]
+            nameLabel = '(' + place[0] + ')' + place[1:]
+            spacing = " " * (LONGEST_PLACE_NAME_LENGTH - len(place))
+            print('{} {}{}'.format(nameLabel,spacing,placeInfo))
+        print('(Q)UIT GAME')
+        whiel True:
+            response = input('> ').upper()
+            if response == '':
+                continue
+            if response == 'Q':
+                print('thanks for playing!')
+                sys.exit()
+            if response in PLACE_FIRST_LETTERS.keys():
+                break
+        currentLocation = PLACE_FIRST_LETTER[response]
+        continue
+    print('You are the {}.'.format(currentLocation))
+    currentLocationIndex = PLACES.index(currentLocation)
+    thePresonHere = SUSPECTS[currentLocationIndex]
+    theItemHere = ITEMS[currentLocationIndex]
+    print('{} with the {} is here.'.format(thePersonHere,theItemHere))
+    if thePersonHere not in knownSuspectsAndItems:
+        knownSuspectsAndItems.append(thePersonHere)
