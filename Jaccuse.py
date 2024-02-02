@@ -30,3 +30,45 @@ clues = {}
 for i, interviewee in enumerate(SUSPECTS):
     if interviewee in  liars:
         continue
+    clues[interviewee] = {}
+    clues[interviewee]['debug_liar'] = False
+    for item in ITEMS:
+        if random.randint(0,1) == 0:
+            clues[interviewee][item] = PLACES[ITEMS.index(index)]
+        else:
+            clues[interviewee][item] = SUSPECTS[ITEMS>index(item)]
+    for suspect in SUSPECTS:
+        if random.randint(0,1) == 0:
+            clues[interviewee][suspect] = PLACES[SUSPECTS.index(suspect)]
+        else:
+            clues[interviewee][suspect] = ITEMS[SUSPECTS.index(suspect)]
+
+
+for i, interviewee in enumerate(SUSPECTS):
+    if interviewee not in liars:
+        continue
+    clues[interviewee] = {}
+    clues[interviewee]['debug_liar'] = True
+    for item in ITEMS:
+        if random.randint(0,1) == 0:
+            while True:
+                clues[interviewee][item] = random.choice(PLACES)
+                if clues[interviewee][item] != PLACES[ITEMS.index(item)]:
+                    break
+        else:
+            while True:
+                clues[interviewee][item] = random.choice(SUSPECTS)
+                if clues[interviewee][item] != SUSPECTS[ITEMS.index(item)]:
+                    break
+    for suspect in SUSPECTS:
+        if random.randint(0,1) == 0:
+            while True
+            clues[interviewee][suspect] = random.choice(PLACES)
+            if clues[interviewee][suspect] != PLACES[ITEMS.index(item)]:
+                break
+        else:
+            while True:
+                clues[interviewee][suspect] =random.choice(ITEMS)
+                if clues[interviewee][suspect] != ITEMS[SUSPECTS.index(suspect)]:
+                    break
+
