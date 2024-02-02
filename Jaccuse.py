@@ -71,4 +71,35 @@ for i, interviewee in enumerate(SUSPECTS):
                 clues[interviewee][suspect] =random.choice(ITEMS)
                 if clues[interviewee][suspect] != ITEMS[SUSPECTS.index(suspect)]:
                     break
-
+zophieClues = {}
+for interviewee in random.sample(SUSPECTS,random.randint(3,4)):
+    kindOfClue = random.randint(1,3)
+    if kindOfClue == 1:
+        if interviewee not in liars:
+            zophieClues[interviewee] = culprit
+        elif interviewee in liars:
+            while True:
+                zophieClues[interviewee] = random.choice(SUSPECTS)
+                if zophieClues[interviewee] != culprit:
+                    break
+    elif kindOfClue == 2:
+        if interviewee not in liars:
+            zophieClues[interviewee] = PLACES[SUSPECTS.index(culprit)]
+        elif interviewee in liars:
+            while True:
+                zophieClues[interviewee] = random.choice(PLACES)
+                if zophieClues[interviewee] != PLACES[SUSPECTS.index(culprit)]:
+                    break
+    elif kindOfClue == 3:
+        if interviewee not in liars:
+            zophieClues[interviewee] = ITEMS[SUSPECTS.index(culprit)]
+        elif interviewee in liars:
+            while True:
+                zophieClues[interviewee] = random.choice(ITEMS)
+                if zophieClues[interviewee] != ITEMS[SUSPECTS.index(culprit)]:
+                    break
+print("""
+      Jacuse !(a mystery game)
+Inspired by Homestar Runner\'s
+      """)
+input('Press Enter to begin...')
