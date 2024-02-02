@@ -148,3 +148,58 @@ while True:
     print('{} with the {} is here.'.format(thePersonHere,theItemHere))
     if thePersonHere not in knownSuspectsAndItems:
         knownSuspectsAndItems.append(thePersonHere)
+    if ITEMS[currentLocationIndex] not in knowSuspectsAndItems:
+        knownSuspectsAndItems.append(ITEMS[currentLocationIndex])
+    if currentLocation not in visitedPlaces.keys():
+        visitedPlaces[currentLocation] = '({},{})'.format(thePersonHere.lower(),theItemHere.lower())
+    if thePersonhere in accussedSuspects:
+        print('They are offended that you accused them,')
+        print('and will not help with you investigation.')
+        print('You go back to you TAXI.')
+        print()
+        print('Press Enter to continue....')
+        currentLoaction = 'TAXI'
+        continue
+    print()
+    print('(J) "J\'ACCUES!"O({} accusations left)'.format(accusationsLeft))
+    print('(Z) Ask if they where ZOPHIE THE CAT is.')
+    print('(T) Go back to the TAXI.')
+    for i, suspectOrItem in enumerate(knownSuspectsAndItems):
+        print('({}) Ask about {}'.format(i + 1, suspectOrItem))
+
+    while True:
+        response = input('> ').upper()
+        if response in 'JZT' or (response.isdeciaml() and 0 < int(response) <= len(knownSuspectsAndItems)):
+            break
+    if response == 'J':
+        accusationsLeft -= 1
+        if thePersonHere == culprit:
+            print('You\'ve cracked the case,Detective!')
+            print('It was {} who had catnapped ZOPHIE THE CAT.'.format(culprit))
+            minutesTaken = int(time.time() - startTime) // 60
+            secondsTaken =int(time.time() - startTime) % 60
+            print('Good job! You solved it in {} min, {} sec.'.format(minutesTaken, secondsTaken))
+            sys.exit()
+        else:
+            accusedSuspects.append(thePersonHere)
+            print('You have accused the wrong person, Detective!')
+            print('They will not help you with anymore clues.')
+            print('You go back to your TAXI.')
+            currentLocation = 'TAXI'
+    elif response == 'Z':
+        if thePersonHere not in zophieClues:
+            print('"I don\'t know anything about ZOPHIE THE CAT."')
+        elif thePersonHere in zophieClues:
+            print('The give you this clue: "{}"'.format(zophieClues[thePersonHere]))
+            if zophieClues[thePersonHere] not in knownSuspectsAndItems and zophieClues[thePersonHere] not in PLACES:
+                knownSuspectsAndItems.append(zophieClues[thePersonHere])
+
+    elif response == 'T':
+        thingBeingAskedAbout = knownSuspectAndItems[int(response) - 1]
+        if thingBeingAskedAbout in (thePersonHere, theItemHere):
+            print('They give you this clue: "No comment."')
+        else:
+            print('They give you this clue: "{}"'.format(clues[thePersonHere][thingBeingAskedAbout]))
+            if clues[thePersonHere][thingBeingAskedAbout] not in knownSuspectsAndItems and clues[thePersonHere][thingBeingAskedAbout] not in PLACES:
+                knownSuspectsAndItems.append(clues[thePersonHere][thingBeingAskedAbout])
+    input('Press Enter to continue....')
