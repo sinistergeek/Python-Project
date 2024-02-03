@@ -21,3 +21,43 @@ while True:
     if response.isdecimal() and int(response) > 1:
         numPlayers = int(response)
         break
+    print('Please enter a number larger than 1.')
+playerNames = []
+playerScores = {}
+for i in range(numPlayers):
+    while True:
+        print('What is player #' + str(i + 1) + '\'s name?') 
+        response = input('> ')
+        if response != '' and response not in playerNames:
+            playerNames.append(response)
+            playerScores[response] = 0
+            break
+        print('Please enter a name.')
+print()
+turn = 0
+endGameWith = None
+while True:
+    print()
+    print('SCORES: ',end='')
+    for i, name in enumerate(playerNames):
+        print(name + ' = ' + str(playerScores[name]),end='')
+        if i != len(playerNames) -1:
+            print(',',end='')
+    print('\n')
+    starts = 0
+    skulls = 0
+    cup = ([GOLD] * 6) + ([SILVER] * 4) + ([BRONZE] * 3)
+    hand = []
+    print('It is' + playerNames[turn] + '\'s turn.')
+
+    while True:
+        print()
+        if (3 - len(hand)) > len(cup):
+            print('There aren\'t enough dice left in the cup to' + 'continue' + playerNames[turn] + '\'s turn.')
+            break
+
+        random.shuffle(cup)
+        while len(hand) < 3:
+            hand.append(cup.pop())
+        rollResults = []
+
