@@ -60,4 +60,53 @@ while True:
         while len(hand) < 3:
             hand.append(cup.pop())
         rollResults = []
+        for dice in hand:
+            roll = random.randint(1,6)
+            if dice == GOLD:
+                if 1 <= roll <= 3:
+                    rollResults.append(STAR_FACE)
+                    stars += 1
+                elif 4 <= roll <= 5:
+                    rollResults.append(QUESTION_FACE)
+                else:
+                    rollResults.append(SKULL_FACE)
+                    skulls += 1
+            if dice == SILVER:
+                if 1 <= roll <= 2:
+                    rollResults.append(START_FACE)
+                    stars += 1
+                elif 3 <= roll <= 4:
+                    rollResults.append(QUESTION_FACE)
+                else:
+                    rollResults.append(SKULL_FACE)
+                    skills += 1
+            if dice == BRONZE:
+                if roll == 1:
+                    rollResults.append(START_FACE)
+                    stars += 1
+                elif 2 <= roll <= 4:
+                    rollResults.append(QUESTION_FACE)
+                else:
+                    rollResults.append(SKULL_FACE)
+                    skulls += 1
+        for lineNum in range(FACE_HEIGHT):
+            for diceNum in range(3):
+                print(rollResults[diceNum][lineNum] + ' ',end='')
+            print()
 
+        for diceType in hand:
+            print(diceType.center(FACE_WIDTH) + ' ',end='')
+        print()
+
+        print('Stars collected:',stars, ' Skulls collected:',skulls)
+        if skulls >= 3:
+            print('3 or more skulls means you\'ve lost your stars!')
+            input('Press Enter to continue....')
+            break
+
+        print(playerNames[turn] +', do you want to roll again? Y/N')
+        while True:
+            response = input('> ').upper()
+            if response != '' and response[0] in ('Y','N'):
+                break
+            print('Please enter Yes or No.')
