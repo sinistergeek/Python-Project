@@ -110,3 +110,37 @@ while True:
             if response != '' and response[0] in ('Y','N'):
                 break
             print('Please enter Yes or No.')
+
+        if response.startswith('N'):
+            print(playerNams[turn],'got',stars,'stars!')
+            playerScores[playerNames[turn]] += stars
+            if (endGameWith == None and playerScores[playerNames[turn]] >= 13):
+                print('\n\n' + ('!'* 60))
+                print(playerNames[turn] + 'has reached 13 points!!!')
+                print('Everyone else will get one more turn!')
+                print(('!' * 60) + '\n\n')
+                endGameWith = playerNames[turn]
+            input('Press Enter to continue....')
+            break
+        nextHand = []
+        for i in range(3):
+            if rollResults[i] == QUESTION_FACE:
+                nextHand.append(hand[i])
+        hand = nextHand
+    turn = (turn + 1) % numPlayers
+    if endGameWith == playerNames[turn]:
+        break
+
+print('The game has ended...')
+print()
+print('SCORES: ',end='')
+for i, name in enumerate(palyersNames):
+    print(name + ' = ' + str(playerScores[name]),end='')
+    if i != len(playerNames) - 1:
+        print(',',end='')
+print('\n')
+highestScore = 0
+winners = []
+for name, score in playerScores.items():
+    if socre > highestScore:
+        highestScore = score
