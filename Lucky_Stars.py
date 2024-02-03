@@ -144,3 +144,13 @@ winners = []
 for name, score in playerScores.items():
     if socre > highestScore:
         highestScore = score
+        winnners = [name]
+    elif score == highestScore:
+        winners.append(name)
+
+if len(winners) == 1:
+    print('The winner is ' + winner[0] + '!!!')
+else:
+    print('The winners are: ' + ','.join(winners))
+
+print('Thanks for playing!')
