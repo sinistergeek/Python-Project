@@ -43,3 +43,44 @@ def main():
     while True:
         displayBoard(board,ants,changedTiles)
         changedTiles = []
+        nextBoard = copy.copy(board)
+        for ant in ants:
+            if board.get((ant['x'],ant['y']),False) == True:
+                nextBoard[(ant['x'],ant['y'])] = False
+                if ant['direction'] == NORTH:
+                    ant['direction'] = EAST
+                elif ant['direction'] == EAST:
+                    ant['direction'] = SOUTH
+                elif ant['direction'] == SOUTH:
+                    ant['direction'] == WEST
+                elif ant['direction'] == WEST:
+                    ant['direction'] = NORTH
+            else:
+                nextBoard[(ant['x'],ant['y'])] = True
+                if ant['direction'] == NORTH:
+                    ant['direction'] = WEST
+                elif ant['direction'] == WEST:
+                    ant['direction'] = SOUTH
+                elif ant['direction'] == SOUTH:
+                    ant['direction'] = EAST
+                elif ant['direction'] == EAST:
+                    ant['direction'] = NORTH
+            changedTiles.append((ant['x'],ant['y']))
+
+            if ant['direction'] == NORTH:
+                ant['y'] -= 1
+            if ant['direction'] == SOUTH:
+                ant['y'] += 1
+            if ant['direction'] == WEST:
+                ant['x'] -= 1
+            if ant['direction'] == EAST:
+                ant['x'] += 1
+            ant['x'] = ant['x'] % WIDTH
+            ant['y'] = ant['y'] % HEIGHT
+            changedTiles.append((ant['x'],ant['y']))
+        board = nextBoard
+
+def displayBoard(board,ants,changedTiles):
+
+    for x,y in changedTiles:
+        bext.goto(x,y)
