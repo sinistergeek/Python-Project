@@ -79,4 +79,43 @@ def makeMove(board,playerTurn,pit):
         seedsToSow -= 1
     if (pit == playerTurn =='1') or (pit == playerTurn == '2'):
         return playerTurn
+    
+    if playerTurn == '1' and pit in PLAYER_1_PITS and board[pit] == 1:
+        oppositePit = OPPOSITE_PIT[pit]
+        board['1'] += board[oppositePit] 
+        board[oppositePit] = 0
+    elif playerTurn == '2' and pit in PLAYER_2_PITS and board[pit] == 1:
+        oppositePit = OPPOSITE_PIT[pit]
+        board['2'] += board[oppositePit]
+        board[oppositePit] = 0
+    if playerTurn == '1':
+        return '2'
+    elif playerTurn == '2':
+        return '1'
 
+def checkForWinner(board):
+    player1Total = board['A'] + board['B'] + board['C']
+    player1Total += board['D'] + board['E'] + board['F']
+    player2Total = board['G'] + board['H'] + board['I']
+    player2Total += board['J'] + board['K'] + board['L']
+
+    if player1Total == 0:
+        board['2'] += player2Total
+        for pit in PLAYER_2_PITS:
+            board[pit] = 0
+    elif player2Total == 0:
+        board['1'] += player1Total
+        for pit in PLAYER_1_PITS:
+            board[pit] = 0
+    else:
+        return 'no winner'
+
+    if board['1'] > board['2']:
+        return '1'
+    elif board['2'] > board['1']:
+        return '2'
+    else:
+        return 'tie'
+
+if __name__ == '__main__':
+    main()
