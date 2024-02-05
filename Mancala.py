@@ -49,4 +49,34 @@ def displayBoard(board):
         A{} | B{} |C{} | D{}| E{} | F{}
         +---------+---------+--------+-----+---------+
         """.format(*seedAmounts))
+def askForPlayerMove(playerTurn,board):
+    while True:
+        if playerTurn == '1':
+            print('Player 1, choose move: A-F (or QUIT)')
+        elif playerTurn == '2':
+            print('Player 2, choose move: G-L (or QUIT)')
+        response = input('> ').upper().strip()
+
+        if response == 'QUIT':
+            print('Thanks for playing!')
+            sys.exit()
+        if (playerTurn == '1' and response not in PLAYER_1_PITS) or (playerTurn == '2' and response not in PLAYER_2_PITS):
+            print('Please pick a letter on your side of the board.')
+            continue
+        if board.get(response) == 0:
+            print('Please pick a non-empty pit.')
+            continue
+        return response
+def makeMove(board,playerTurn,pit):
+    seedsToSow = board[pit]
+    board[pit] = 0
+
+    while seedsToSow > 0:
+        pit = NEXT_PIT[pit]
+        if(playerTurn == '1' and pit == '2') or (playerTurn == '2' and pit == '1'):
+            continue
+        board[pit] += 1
+        seedsToSow -= 1
+    if (pit == playerTurn =='1') or (pit == playerTurn == '2'):
+        return playerTurn
 
