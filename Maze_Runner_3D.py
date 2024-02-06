@@ -22,3 +22,25 @@ def wallStrToWallDict(wallStr):
                 width = x
             wallDict[(x,y)] = character
     wallDict['height'] = height + 1
+    wallDict['width'] = width + 1
+    return wallDict
+
+EXIT_DICT = {(0,0):'E',(1,0):'X',(2,0): 'I',(3,0):'T','height':1,'width':4
+        }
+ALL_OPEN = wallStrToWallDict(r'''
+.........
+........
+'''.strip())
+
+CLOSED = {}
+CLOSED['A'] = wallStrToWallDict(r'''
+........
+                                ....'''.strip())
+CLOSED['B'] = wallStrToWallDict(r'''
+.......\
+...\....
+                                '''.strip())
+CLOSED['C'] = wallStrToWallDict(r'''
+........
+......
+                                '''.strip())
