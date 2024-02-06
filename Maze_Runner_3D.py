@@ -143,3 +143,53 @@ for line in lines:
         assert character in (WALL,EMPTY,START,EXIT),'Invalid character at column {}, line{}'.format(x+1,y+1)
         if character in (WALL,EMPTY):
             maze[(x,y)] = character
+        elif character == START:
+            px,py = x,y
+            maze[(x,y)] = EMPTY
+        elif character == EXIT:
+            exitx,exity = x,y
+            maze[(x,y)] = EMPTY
+
+    y += 1
+HEIGHT = y
+
+assert px != None and py != None, 'No start point in file.'
+assert exitx != None and exity != None, 'No exit point in file.'
+pDir = NORTH
+
+while True:
+    displayWallDict(makeWallDict(maze,px,py,pDir,exitx,exity))
+    while True:
+        print('Location ({},{}) Direction: {}'.format(px,py,pDir))
+        print('         (W)')
+        print('Enter direction: (A) (D) or QUIT.')
+        move = input('> ').upper()
+
+        if move == 'QUIT':
+            print('Thanks for playing!')
+            sys.exit()
+
+        if (move not in ['F','L','R','W','A','D'] and not move.startswith('T')):
+            print('Please enter one of the F,L or R (or W,A,D).')
+            continue
+
+        if move == 'F' or move == 'W':
+            if pDir == NORTH and maze[(px,py - 1)] == EMPTY:
+                py -= 1
+                break
+            if pDir == SOUTH and maze[(px,py + 1)] == EMPTY:
+                py += 1
+                break
+            if pDir == EAST and maze[(px + 1,py)] == EMPTY:
+                px += 1
+                break
+            if pDir = WEST and maze[(px - 1,py)] == EMPTY:
+                px -= 1
+                break
+        elif move == 'L' or move == 'A':
+            pDir = {NORTH:WEST,WEST:SOUTH,SOUTH:EAST,EAST:NORTH}[pDir]
+            break
+        elif move == 'R' or move == 'D':
+            pDir = {NORTH: EAST, EAST:SOUTH,SOUTH:WEST,WEST:NORTH}[pDir]
+            break
+
