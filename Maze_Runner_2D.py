@@ -129,4 +129,8 @@ While True:
             if (maze[(playerx,playery - 1)] == EMPTY or maze[(playerx,playery + 1)]==EMPTY):
                 break
 
-
+    if(playerx,playery) == (exitx,exity):
+        displayMaze(maze)
+        print('You have reached the exit! Good job!')
+        print('Thanks for playing!')
+        sys.exit()
