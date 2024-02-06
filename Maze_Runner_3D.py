@@ -98,3 +98,48 @@ def makeWallDict(maze,playerx,playery,playerDirection,exitx,exity):
     wallDict = copy.copy(ALL_OPEN)
     PASTE_CLOSED_TO = {'A':(6,4),'B':(4,3),'C':(3,1),'D':(10,3),'E':(0,0),'F':(12,0)}
 
+    for sec in 'ABCDEF':
+        if section[sec] == WALL:
+            wallDict = pasteWallDict(CLOSED[sec],wallDict,PASTE_CLOSED_TO[sec][0],PASTE_CLOSED_TO[sec][1])
+
+        if section['C'] == EXIT:
+            wallDict = pasteWallDict(EXIT_DICT,wallDict,7,9)
+        if section['E'] == EXIT:
+            wallDict = pasteWallDict(EXIT_DICT,wallDict,0,11)
+        if section['F'] == EXIT:
+            wallDict = pasteWallDict(EXIT_DICT,wallDict,13,11)
+        return wall Dict
+
+print('Maze Runner 3D')
+
+whilte True:
+    print('Enter the filename of the maze(or LIST or QUIT):')
+    filename = input('> ')
+    if filename.upper() == 'LIST':
+        print('Maze files found in',os.getcwd())
+        for fileInCurrentFolder in os.listdir():
+            if(fileInCurrentFolder.startswith('maze') and fileInCurrentFolder.endswith('.txt')):
+                print(' ',fileInCurrentFolder)
+        continue
+    if filename.upper() == 'QUIT':
+        sys.exit()
+
+    if os.path.exists(filename):
+        break
+    print('There is no file named',filename)
+
+
+mazeFile = open(filename)
+maze = {}
+lines = mazeFile.readlines()
+px = None
+py = None
+exitx = None
+exity = None
+y = 0
+for line in lines:
+    WIDTH = len(line.rstrip())
+    for x, character in enumerate(line.rstrip()):
+        assert character in (WALL,EMPTY,START,EXIT),'Invalid character at column {}, line{}'.format(x+1,y+1)
+        if character in (WALL,EMPTY):
+            maze[(x,y)] = character
