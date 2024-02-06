@@ -76,3 +76,57 @@ While True:
         if move == 'QUIT':
             print('Thanks for playing!')
             sys.exit()
+
+        if move not in ['W','A','S','D']:
+            print('Invalid direction. Enter one of W,A,S, or D')
+            continue
+
+        if move == 'W' and maze[(playerx,playery - 1)] == EMPTY:
+            break
+        if move == 'S' and maze[(playerx,playery + 1)] == EMPTY:
+            break
+        elif move == 'A' and maze[(playerx - 1, playery)] == EMPTY:
+            break
+        elif move == 'D' and maze[(playerx + 1, playery)] == EMPTY:
+            break
+        print('You cannot move in that direction')
+
+    if move == 'W':
+        while True:
+            player -= 1
+            if (playerx,playery - 1) == (exitx,exity):
+                break
+            if maze[(playerx,playery - 1)] == WALL:
+                break
+            if (maze[(playerx + 1, playery)]== EMPTY):
+                break
+    elif move == 'S':
+        while True:
+            playery += 1
+            if (playerx,playery) == (exitx,exity):
+                break
+            if maze[(playerx,playery + 1)] == WALL:
+                break
+            if (maze[(playerx - 1, playery)]) == EMPTY or maze[(playerx + 1, playery)] == EMPTY):
+                break
+    elif move == 'A':
+        while True:
+            if (playerx,playery) == (exitx,exity):
+                break
+            if maze[(playerx - 1,playery)] == WALL:
+                break
+            if (maze[(playerx,playery - 1)] == EMPTY
+                or maze[(playerx,playery + 1)] == EMPTY):
+                break
+
+    elif move == 'D':
+        while True:
+            playerx += 1
+            if (playerx,playery) == (exitx,exity):
+                break
+            if maze[playerx + 1,playery] == WALL:
+                break
+            if (maze[(playerx,playery - 1)] == EMPTY or maze[(playerx,playery + 1)]==EMPTY):
+                break
+
+
