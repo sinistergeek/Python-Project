@@ -192,4 +192,14 @@ while True:
         elif move == 'R' or move == 'D':
             pDir = {NORTH: EAST, EAST:SOUTH,SOUTH:WEST,WEST:NORTH}[pDir]
             break
-
+        elif move.startswith('T'):
+            px,py = move.split()[1].split(',')
+            px = int(px)
+            py = int(py)
+            break
+        else:
+            print('You cannot move in that direction.')
+    if (px,py) == (exitx,exity):
+        print('You have reached the exit! Good Job!')
+        print('Thanks for playing!')
+        sys.exit()
