@@ -69,4 +69,32 @@ def displayWalldict(wallDict):
         print(BLOCK)
     print(BLOCK * (wallDict['width'] + 2))
 
+def pasteWallDict(srcWallDict,dstWallDict,left,top):
+    dstWallDict = copy.copy(dstWallDict)
+    for x in range(srcWallDict['width']):
+        for y in range(srcWallDict['height']):
+            dstWallDict[(x + left,y + top)] = srcWallDict[(x,y)]
+    return dstWallDict
+
+def makeWallDict(maze,playerx,playery,playerDirection,exitx,exity):
+    if playerDirection == NORTH:
+        offsets = (('A',0,-2),('B',-1,-1),('C',0,-1),('D',1,-1),('E',-1,0),('F',1,0))
+
+    if playerDirection == SOUTH:
+        offsets = (('A',0,2),('B',1,1),('C',0,-1),('D',1,-1),('E',-1,0),('F',1,0))
+    
+    if playerDirection == EAST:
+        offsets = (('A',2,0),('B',1,-1),('C',1,0),('D',1,1),('E',0,-1),('F',0,1))
+    
+    if playerDirection == WEST:
+        offsets = (('A',-2,0),('B',-1,1),('C',-1,0),('D',-1,-1,),('E',0,1),('F',0,-1))
+
+    section = {}
+    for sec,xOff, yOff in offsets:
+        section[sec] = maze.get((playerx + xOff,playery + yOff),WALL)
+        if(playerx + xOff,playery + yOff) == (exitx,exity):
+            section[sec] = EXIT
+
+    wallDict = copy.copy(ALL_OPEN)
+    PASTE_CLOSED_TO = {'A':(6,4),'B':(4,3),'C':(3,1),'D':(10,3),'E':(0,0),'F':(12,0)}
 
