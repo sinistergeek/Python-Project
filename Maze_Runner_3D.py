@@ -44,3 +44,29 @@ CLOSED['C'] = wallStrToWallDict(r'''
 ........
 ......
                                 '''.strip())
+CLOSED['D'] = wallStrToWallDict(r'''
+./.
+....'''.strip())
+
+CLOSED['E'] = wallStrToDict(r'''
+....
+...'''.strip())
+
+CLOSED['F'] - wallStrToWallDict(r'''
+../..
+.....
+'''.strip())
+
+def displayWalldict(wallDict):
+    print(BLOCK * (wallDict['width'] + 2))
+    for y in range(wallDict['height']):
+        print(BLOCK,end=' ')
+        for x in range(wallDict['width']):
+            wall = wallDict[(x,y)]
+            if wall == '.':
+                wall = ' '
+            print(wall,end='')
+        print(BLOCK)
+    print(BLOCK * (wallDict['width'] + 2))
+
+
