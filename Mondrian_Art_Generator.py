@@ -65,5 +65,40 @@ while True:
             elif orientation == 'horizontal':
                 for changex in (-1,1):
                     x = startx
+                    while 0 < x < width - 1:
+                        x += changex
+                        if(canvas[(x,starty -1)] == BLACK and canvas[(x,starty + 1)] == BLACK):
+                            break
+                        elif((canvas[(x,starty -1)] == WHITE and canvas[(x,starty + 1)] == BLACK) or (canvas[(x,starty - 1)] == BLACK and canvas[(x,starty + 1)] =WHITE)):
+                            canDeleteSegment = False
+                            break
+                        else:
+                            pointsToDelete.append((startx,starty))
+
+            if not canDeleteSegment:
+                continue
+            break
+        for x,y in pointsToDelete:
+            canvas[(x,y)] = WHITE
+    for x in range(width):
+        canvas[(x,0)] = BLACK
+        canvas[(x,height - 1)] = BLACK
+    for y in range(height):
+        canvas[(0,y)] = BLACK
+        canvas[(width -1,y)]
+
+    for i in range(numberOfRectanglesToPaint):
+        while True:
+            startx = random.randint(1,width - 2)
+            starty = random.randint(1,height - 2)
+            if canvas[(startx,starty)] != WHITE:
+                continue
+            else:
+                break
+
+        colorToPaint = random.choice([RED,YELLOW,BLUE,BLACK])
+        pointsToPaint = set([(startx,starty)])
+        while len(pointsToPaint) > 0:
+            x,y = pointsToPaint.pop()
 
 
