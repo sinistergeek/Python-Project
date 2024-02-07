@@ -30,4 +30,40 @@ while True:
         for y in range(height):
             canvas[(x,y)] = BLACK
         x += random.randint(MIN_X_INCREASE,MAX_X_INCREASE)
+    y = random.randint(MIN_Y_INCREASE,MAX_Y_INCREASE)
+    while y < height - MIN_Y_INCREASE:
+        numberOfSegmentsToDelete += 1
+        for x in range(width):
+            canvas[(x,y)] = BLACK
+        y += random.randint(MIN_Y_INCREASE,MAX_Y_INCREASE)
+    numberOfRectanglesToPoint = numberOfSegmentsToDelete - 3
+    numberOfSegmentsToDelete = int(numberOfSegmentsToDelete * 1.5)
+    for i in range(numberOfSegmentsToDelete):
+        while True:
+            startx = random.randint(1,width - 2)
+            starty = random.randint(1,height -2)
+            if canvas[(startx,starty)] == WHITE:
+                continue
+            elif (canvas[(startx,starty - 1)] == WHITE and canvas[(startx,starty + 1)] == WHITE):
+                orientation = 'horizontal'
+            else:
+                continue
+            pointsToDelete = [(startx,starty)]
+            canDeleteSegment = True
+            if orientation == 'vertical':
+                for changey in (-1,1):
+                    y = starty
+                    while 0 < y < height -1:
+                        y += changey
+                        if (canvas[(startx - 1,y)] == BLACK and canvas[(startx + 1,y)] == BLACK):
+                            break
+                        elif((canvas[(startx -1, y)] ==WHITE and canvas[(startx + 1,y)] = BALCK) or (canvas[(startx - 1,y)] == BLACK and canvas[(startx + 1, y)] == WHITE)):
+                            canDeleteSegment = False
+                            break
+                        else:
+                            pointsToDelete.append((startx,y))
+            elif orientation == 'horizontal':
+                for changex in (-1,1):
+                    x = startx
+
 
