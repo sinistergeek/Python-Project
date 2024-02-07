@@ -100,5 +100,23 @@ while True:
         pointsToPaint = set([(startx,starty)])
         while len(pointsToPaint) > 0:
             x,y = pointsToPaint.pop()
+            canvas[(x,y)] = colorToPaint
+            if canvas[(x - 1, y)] ==WHITE:
+                pointsToPaint.add((x - 1,y))
+            if canvas[(x + 1, y)] == WHITE:
+                pointsToPaint.add((x + 1,y))
+            if canvas[(x,y-1)] == WHITE:
+                pointsToPaint.add((x,y - 1))
+            if canvas[(x,y + 1)] == WHITE:
+                pointsToPaint.add((x,y + 1))
 
+    for y in range(height):
+        for x in range(width):
+            bext.bg(canvas[(x,y)])
+            print(' ',end='')
+        print()
 
+    try:
+        input('Press Enter for another work of art, or Ctrl - C to quit.')
+    except KeyboardInterrupt:
+        sys.exit()
