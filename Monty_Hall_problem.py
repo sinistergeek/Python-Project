@@ -81,4 +81,53 @@ while True:
             doorPick = 3
         elif doorPick == 1 and showGoatDoor == 3:
             doorPick = 2
+        elif doorPick == 2 and showGoatDoor == 1:
+            doorPick = 3
+        elif doorPick == 2 and showGoatDoor == 3:
+            doorPick = 1
+        elif doorPick == 3 and showGoatDoor == 1:
+            doorPick = 2
+        elif doorPick == 3 and showGoatDoor == 2:
+            doorPick = 1
 
+    if doorThatHasCar == 1:
+        print(FIRST_CAR_OTHERS_GOAT)
+    elif doorThatHasCar == 2:
+        print(SECOND_CAR_OTHERS_GOAT)
+    elif doorThatHascar == 3:
+        print(THIRD_CAR_OTHERS_GOAT)
+    print('Door {} has the car!'.format(doorThatHasCar))
+
+    if doorPick == doorThatHasCar:
+        print('You won!')
+        if swap == 'Y':
+            swapWins += 1
+        elif swap == 'N':
+            stayWins += 1
+    else:
+        print('Sorry, you lost.')
+        if swap == 'Y':
+            swapLosses += 1
+        elif swap == 'N':
+            stayLosses += 1
+
+    totalSwaps = swapWins + swapLosses
+    if totalSwaps != 0:
+        swapSuccess = round(swapWins / totalSwaps * 100,1)
+    else:
+        swapSuccess = 0.0
+
+    totalStays = stayWins + stayLosses
+    if(stayWins + stayLosses) != 0:
+        staySuccess = round(stayWins / totalStays * 100,1)
+    else:
+        staySuccess = 0.0
+    print()
+    print('Swapping:    ',end='')
+    print('{} wins, {} losses,'.format(swapWins,swapLosses),end='')
+    print('success rate {}%'.format(swapSuccess))
+    print('Not swapping: ',end='')
+    print('{} wins,{} losses'.format(stayWins,stayLosses),end='')
+    print('success rate {}%'.format(staySuccess))
+    print()
+    input('Press Enter to repeat the experiment...')
