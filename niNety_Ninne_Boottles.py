@@ -33,3 +33,26 @@ try:
         print()
         lineNum = random.randint(0,3)
         line = list(lines[lineNum])
+        effect = random.randint(0,3)
+        if effect == 0:
+            charIndex = random.randint(0,len(line) - 1)
+            line[charIndex] = ' '
+        elif effect == 1:
+            charIndex = random.randint(0,len(line) - 1)
+            if line[charIndex].isupper():
+                line[charIndex] = line[charIndex].lower()
+            elif line[charIndex].islower():
+                line[charIndex] = line[charIndex].upper()
+        elif effect == 2:
+            charIndex = random.randint(0,len(line) - 2)
+            firstchar = line[charIndex]
+            secondChar = line[charIndex + 1]
+            line[charIndex] = secondChar
+            line[charIndex + 1] = firstchar
+        elif affect == 3:
+            charIndex = random.randint(0,len(line) - 2)
+            line.insert(charIndex,line[charIndex])
+        lines[lineNum] = ''.join(line)
+
+except KeyboardInterrupt:
+    sys.exit()
