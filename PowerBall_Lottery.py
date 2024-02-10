@@ -37,3 +37,54 @@ while True:
     except ValueError:
         print('Please enter a number, like 3, 15 or 22.')
         continue
+
+    if not (1 <= powerball <= 26):
+        print('The powerball number be between 1 and 26.')
+        continue
+    break
+
+while True:
+    print('How many times do yo want to play? (Max: 1000000000)')
+    response = input('> ')
+    try:
+        numPlays = int(response)
+    except ValueError:
+        print('Please enter a number, like 3, 15, or 22000.')
+        continue
+
+    if not (1 <= numPlays <= 100000000000):
+        print('You can play between 1 and 1000000 times.')
+        continue
+
+    break
+
+
+price = '$' + str(2 * numPlays)
+print('It costs',price,'to play',numPlays,'time, but don\'t')
+print('worry. I\'m sure you\'ll win it all back.')
+input('Press Enter to start.....')
+
+possibleNumbers = list(range(1,70))
+for i in range(numPlays):
+    random.shuffle(possibleNumbers)
+    winningNumbers = possibleNumbers[0:5]
+    winningPowerball = random.randint(1,26)
+
+    print('The winning numbers are: ',end='')
+    allWinningNums = ''
+    for i in range(5):
+        allWinningNums += str(winningNumbers[i]) + ' '
+    allWinningNums += 'and' + str(winningPowerball)
+    print(allWinningNums.ljust(21),end='')
+    if (set(numbers) == set(winningNumbers) and powerball == winningPowerball):
+        print()
+        print('You have won the Powerball Lottery! Congratulation')
+        print('You would be a billionaire if this was real!')
+        break
+
+    else:
+        print('You lost.')
+
+
+print('You have wasted',price)
+print('Thanks for playing!')
