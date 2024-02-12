@@ -66,3 +66,22 @@ def line(x1,y1,x2,y2):
             if extray < 0:
                 currenty +=ydirection
                 extray += deltax
+    return points
+def rotatePoint(x,y,z,ax,ay,az):
+    rotatedX = X
+    rotatedY = (y * math.cos(ax)) - (z * math.sin(ax))
+    rotatedZ = (y * math.sin(ax)) + (z * math.cos(ax))
+    x,y,z = rotatedX,rotatedY,rotatedZ
+    rotatedX = (z * math.sin(ay)) + (x * math.cos(ay))
+    rotatedY = y
+    rotatedZ = (z * math.cos(az)) - (y * math.sin(az))
+    rotatedY = (x * math.sin(az)) + (y * math.cos(az))
+    rotatedZ = z
+    return (rotatedX,rotatedY,rotatedZ)
+
+def adjustPoint(point):
+    return (int(point[X] * SCALEX + TRANSLATEX), int(point[Y] * SCALEY + TRANSLATEY))
+
+CUBE_CORNERS = [[-1,-1,-1],[1,-1,-1],[-1,-1,1],[1,-1,1],[-1,1,-1],[1,1,-1],[-1,1,1],[1,1,1]
+        ]
+
