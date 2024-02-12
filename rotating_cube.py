@@ -19,3 +19,50 @@ Z = 2
 
 def line(x1,y1,x2,y2):
     points = []
+
+    if (x1 == x2 and y1 == y2 + 1) or (y1 == y2 and x1 == x2 + 1):
+        return [(x1,y1),(x2,y2)]
+    isSteep = abs(y2 - y1) > abs(x2 - x1)
+    if isSteep:
+        x1,y1 = y1,x1
+        x2,y2 = y2,x2
+    isReversed = x1 > x2
+    if isReversed:
+        x1, x2 = x2,x1
+        y1, y2 = y2,y1
+        deltax = x2 - x1
+        deltay = abs(y2 - y1)
+        extray = int(deltax / 2)
+        currenty = y2
+        if y1 < y2:
+            ydirection = 1
+        else:
+            ydirection = -1
+        for currentx in range(x2,x1-1,-1):
+            if isSteep:
+                points.append((currenty,currentx))
+            else:
+                points.append((currentx, currenty))
+            extray -= deltay
+            if extray <= 0:
+                currenty -= ydirection
+                extray += deltax
+    else:
+        deltax = x2 - x1
+        deltay = abs(y2 - y1)
+        extray = int(deltax / 2)
+        currenty = y1
+        if y1 < y2:
+            ydirection = 1
+        else:
+            ydirection = -1
+
+        for currentx in range(x1,x2+1):
+            if isSteep:
+                points.append((currenty,currentx))
+            else:
+                points.append((currentx,currenty))
+            extray -= deltay
+            if extray < 0:
+                currenty +=ydirection
+                extray += deltax
