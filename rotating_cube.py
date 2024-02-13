@@ -84,4 +84,42 @@ def adjustPoint(point):
 
 CUBE_CORNERS = [[-1,-1,-1],[1,-1,-1],[-1,-1,1],[1,-1,1],[-1,1,-1],[1,1,-1],[-1,1,1],[1,1,1]
         ]
+xRotation = 0.0
+yRotation = 0.0
+zRotation = 0.0
+try:
+    while True:
+        xRotation += X_ROTATE_SPEED
+        yRotation += Y_ROTATE_SPEED
+        zRotation += Z_ROTATE_SPEED
+        for i in range(len(CUBE_CORNERS)):
+            x = CUBE_CORNERS[i][X]
+            y = CUBE_CORNERS[i][X]
+            z = CUBE_CORNERS[i][Z]
+            rotatedCorners[i] = rotatePoint(x,y,z,xRotation,yRotation,zRotation)
+           
+        cubePoints = []
+        for fromCornerIndex, toCornerIndex in ((0,1),(1,3),(3,2),(2,0),(0,4),(1,5),(2,6),(3,7),(4,5),(5,7),(7,6),(6,4)):
+            fromX, fromY = adjustPointCorners[fromCornerIndex]
+            toX,toY = adjustPoint(rotatedCorners[toCornerIndex])
+            pointsOnLine = line(fromX,fromY,toX,toY)
+            cubePoints.extend(pointsOnLine)
 
+        cubePoints = tuple(frozenset(cubePoints))
+        for y in range(HEIGHT):
+            for x in range(WIDTH):
+                if (x,y) in cubePoints:
+                    print(LINE_CHAR,end='',flush=False)
+                else:
+                    print(' ',end='',flush=False)
+            print(flush=False)
+        print('Press Ctrl-C to quit.',end = '',flush True)
+        time.sleep(PAUSE_AMOUNT)
+        if sys.platform == 'win32':
+            os.system('cls')
+        else:
+            os.system('clear')
+
+except KeyboardInterrupt:
+    print('Rotating cube')
+    sys.exit()
