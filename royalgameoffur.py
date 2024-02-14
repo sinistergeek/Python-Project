@@ -60,3 +60,49 @@ def main():
                 print('-',end='')
             flipTally += result
         print(' ',end='')
+
+        if flipTally == 0:
+            input('You lose a turn. Press Enter to continue...')
+            turn = opponent
+            continue
+        validMoves = getValidMoves(gameBoard,turn,flipTally)
+        if validMoves == []:
+            print('There are no possible moves, so you lose a turn.')
+            input('Press Enter to continue...')
+            turn = opponent
+            continue
+        while True:
+            print('Select move', flipTally,'spaces: ',end='')
+            print(' '.join(validMoves) + 'quit')
+            move = int('> ').lower()
+            if move == 'quit':
+                print('Thanks for playing!')
+                sys.exit()
+            if move in validMoves:
+                break
+            print('That is not a valid more.')
+        if move == 'home':
+            gameBoard[home] -= 1
+            nextTrackSpaceIndex = flipTally
+        else:
+            gameBoard[move] = EMPTY
+            nextTrackSpaceIndex = track.index(move) + flipTally
+
+        movingOntoGoal = nextTrackSpaceIndex == len(track) - 1
+        if movingOntoGoal:
+            gameBoard[goal] += 1
+            if gameBoard[goal] == 7:
+                displayBoard(gameBoard)
+                print(turn, 'has won the game!')
+                print('Thanks for playing!')
+                sys.exit()
+        else:
+            nextBoardSpace = track[nextTrackSpaceIndex]
+            if gameBoard[nextBoardSpace] == opponent:
+                gameBoard[opponentHome] += 1
+            gameBoard[nextBoardSpace] = turn
+        if nextBoardSpace in FLOWER_SPACES:
+            print(turn,'landed on a flower space and goes again.')
+            input('Press Enter to continue....')
+        else:
+            turn = opponent
