@@ -106,3 +106,37 @@ def main():
             input('Press Enter to continue....')
         else:
             turn = opponent
+
+def getNewBoard():
+    board = {X_HOME: 7, X_GOAL: 0,O_HOME: 7,O_GOAL:0}
+    for spaceLabel in ALL_SPACES:
+        board[spaceLabel] = EMPTY
+    return board
+
+def displayBoard(board):
+    print('\n' * 60)
+
+    xHomeTokens = ('X' * board[X_HOME]).ljust(7,'.')
+    xGoalTokens = ('X' * board[X_GOAL]).ljust(7,'.')
+    oHomeTokens = ('O' * board[O_HOME]).ljust(7,'.')
+    oGoalTokens = ('O' * board[O_GOAL]).ljust(7,'.')
+    spaces = []
+    spaces.append(xHomeTokens)
+    spaces.append(xGoalTokens)
+    for spaceLabel in ALL_SPACES:
+        spaces.append(board[spaceLabel])
+    spaces.append(oHomeTokens)
+    spaces.append(oGoalTokens)
+    print(BOARD_TEMPLATE.format(*spaces))
+
+def getValidMoves(board,player,flipTally):
+    validMoves = []
+    if player == X_PLAYER:
+        opponent = O_PLAYER
+        track = X_TRACK
+        home = X_HOME
+    elif player == O_PLAyEr:
+        opponent = X_PLAYER
+        track = O_TRACK
+        home = O_HOME
+
