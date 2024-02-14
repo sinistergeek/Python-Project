@@ -139,4 +139,25 @@ def getValidMoves(board,player,flipTally):
         opponent = X_PLAYER
         track = O_TRACK
         home = O_HOME
+    if board[home] > 0 and board[track[flipTally]] == EMPTY:
+        validMoves.append('home')
 
+    for trackSpaceIndex,space in enumerate(track):
+        if space == 'H' or space == 'G' or board[space] != player:
+            continue
+        nextTrackSpaceIndex = trackSpaceIndex + flipTally
+        if nextTrackSpaceIndex >= len(track):
+            continue
+        else:
+            nextBoardSpaceKey = track[nextTrackSpaceIndex]
+            if nextBoardSpaceKey == 'G':
+                validMoves.append(space)
+                continue
+        if board[nextBoardSpaceKey] in (EMPTY,opponent):
+            if nextBoardSpaceKey == '1' and board['1'] == opponent:
+                continue
+            validMoves.append(space)
+    return validMoves
+
+if __name__ == '__main__':
+    main()
