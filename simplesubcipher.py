@@ -79,4 +79,11 @@ def translateMessage(message,key,mode):
             translated += symbol
     return translated
 
+def generatedRandomKey():
+    key = list(LETTERS)
+    random.shuffle(key)
+    return ''.join(key)
 
+
+if __name__ == '__main__':
+    main()
