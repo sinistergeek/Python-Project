@@ -38,4 +38,45 @@ def main():
         translated = encryptMessage(myMessage,myKey)
     elif myMode == 'decrypt':
         translated = decryptMessage(myMessage,myKey)
+    print('The %sed message is:' % (myMode))
+    print(translated)
+    try:
+        pyperclip.copy(translated)
+        print('Full %sed text copied to clipboard.'%(myMode))
+    except:
+        pass
+
+def checkKey(key):
+    keyList = list(key)
+    lettersList = list(LETTERS)
+    keyList.sort()
+    lettersList.sort()
+    if keyList != lettersList:
+        print('There is an error in the key or symbol set.')
+        return False
+    return True
+
+def encryptMessage(message,key):
+    return translateMessage(message,key,'encrypt')
+
+def decryptMessage(message,key):
+    return translateMessage(message,key,'decrypt')
+def translateMessage(message,key,mode):
+    translated = ''
+    charsA = LETTERS
+    charsB = key
+    if mode == 'decrypt':
+        charsA,charsB = charsB,charsA
+
+    for symbol in message:
+        if symbol.upper() in charsA:
+            symIndex = charsA.find(symbol.upper())
+            if symbol.isupper():
+                translated += charsB[symIndex].upper()
+            else:
+                translated += charsB[symIndex].lower()
+        else:
+            translated += symbol
+    return translated
+
 
