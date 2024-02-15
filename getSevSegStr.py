@@ -62,3 +62,6 @@ def getSevSegStr(number, minWidth=0):
             rows[1] += ' '
             rows[2] += ' '
     return '\n'.join(rows)
+
+if __name__ == '__main__':
+    print('')
