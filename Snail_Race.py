@@ -49,3 +49,9 @@ while True:
             sys.exit()
     time.sleep(0.5)
     print('\n' * 40)
+    print('START' + (' ' * (FINISH_LINE - len('START')) + 'FINISH'))
+    print('|' + (' ' * (FINISH_LINE - 1) + '|'))
+    for snailName in snailNames:
+        spaces = snailProgress[snailName]
+        print((' ' * spaces) + snailName[:MAX_NAME_LENGTH])
+        print(('.'*snailProgress[snailName]) + '@v')
