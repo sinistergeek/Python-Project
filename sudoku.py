@@ -74,4 +74,29 @@ class SudokuGrid:
                 columnNumbers.append(number)
             if not self._isCompleteSetOfNumbers(columnNumbers):
                 return False
+        for boxx in (0,3,6):
+            for boxy in (0,3,6):
+                boxNumbers = []
+                for x in range(BOX_LENGTH):
+                    for y in range(BOX_LENGTH):
+                        number = self.grid[(boxx + x,boxy + y)]
+                        boxNumbers.append(number)
+                if not self._isCompleteSetOfNumbers(boxNumbers):
+                    return False
+        return True
+print('Sudoku Puzzle')
+input('Press Enter to begin...')
+with open('sudokupuzzles.txt') as puzzleFile:
+    puzzles = puzzleFile.readlines()
 
+for i, puzzle in enumerate(puzzles):
+    puzzles[i] = puzzle.strip()
+
+grid = SudokuGrid(random.choice(puzzles))
+
+while True:
+    grid.display()
+    if grid.isSolved():
+        print('Congratulations! You solved the puzzle')
+        print('Thanks for playing!')
+        sys.exit()
