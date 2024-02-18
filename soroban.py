@@ -59,4 +59,28 @@ def main():
         if abacusNumber > 999999999:
             abacusNumber = 999999999
 
-
+def displayAbacus(number):
+    numberList = list(str(number).zfill(NUMBER_OF_DIGITS))
+    hasBead = []
+    for i in range(NUMBER_OF_DIGITS):
+        hasBead.append(numberList[i] in '01234')
+    for i in range(NUMBER_OF_DIGITS):
+        hasBead.append(numberList[i] in '56789')
+    for i in range(NUMBER_OF_DIGITS):
+        hasBead.append(numberList[i] in '12346789')
+    for i in range(NUMBER_OF_DIGITS):
+        hasBead.append(numberList[i] in '2346789')
+    for i in range(NUMBER_OF_DIGITS):
+        hasBead.append(numberList[i] in '034589')
+    for i in range(NUMBER_OF_DIGITS):
+        hasBead.append(numberList[i] in '014569')
+    for i in range(NUMBER_OF_DIGITS):
+        hasBead.append(numberList[i] in '012567')
+    for i in range(NUMBER_OF_DIGITS):
+        hasBead.append(numberList[i] in '01235678')
+    abacusChar = []
+    for i, beadPresent in enumerate(hasBead):
+        if beadPresent:
+            abacusChar.append('O')
+        else:
+            abacusChar.append('|')
