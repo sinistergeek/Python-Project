@@ -21,3 +21,18 @@ def main():
 
 def englishToSpongecase(message):
     spongetext=''
+    useUpper = False
+    for character in message:
+        if not character.isalpha():
+            spongetext += character
+            continue
+        if useUpper:
+            spongetext += character.upper()
+        else:
+            spongetext += character.lower()
+        if random.randint(1,100) <= 90:
+            useUpper = not useUpper
+    return spongetext
+
+if __name__ == '__main__':
+    main()
