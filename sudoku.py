@@ -34,4 +34,44 @@ class SudokuGrid:
         self.grid[(x,y)] = number
         self.moves.append(copy.copy(self.grid))
         return True
+
+    def undo(self):
+        if self.moves == []:
+            return
+        self.moves.pop()
+        if self.moves == []:
+            self.resetGrid()
+        else:
+            self.grid = copy.copy(self.moves[-1])
     
+    def display(self):
+        print(' ABC DEF GHI')
+        for y in range(GRID_LENGTH):
+            for x in range(GRID_LENGTH):
+                if x == 0:
+                    print(str(y + 1) + ' ',end='')
+                print(self.grid[(x,y)] + ' ',end='')
+                if x == 2 or x == 5:
+                    print('| ',end='')
+            print()
+            if y == 2 or y == 5:
+                print('=======+-----+---')
+    def _isCompleteSetOfNumbers(self,numbers):
+        return sorted(numbers) == list('123456789')
+
+    def isSolved(self):
+        for row in range(GRID_LENGTH):
+            rowNumbers = []
+            for x in range(GRID_LENGTH):
+                number = self.grid[(x,row)]
+                rowNumbers.append(number)
+            if not self._isCompleteSetOfNumbers(rowNumbers):
+                return False
+        for column in range(GRID_LENGTH):
+            columnNumbers = []
+            for y in range(GRID_LENGTH):
+                number =self.grid[(column,y)]
+                columnNumbers.append(number)
+            if not self._isCompleteSetOfNumbers(columnNumbers):
+                return False
+
