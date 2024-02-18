@@ -100,3 +100,50 @@ while True:
         print('Congratulations! You solved the puzzle')
         print('Thanks for playing!')
         sys.exit()
+
+    while True:
+        print()
+        print('Enter a move, or RESET, NEW, UNDO, ORIGINAL, or QUIT:')
+        print('(For example, a move looks like "B4 9".)')
+        action = input('> ').upper().strip()
+        if len(action) > 0 and action[0] in ('R','N','U','O','Q'):
+            break
+        if len(action.split()) == 2:
+            space,number =action.split()
+            if len(space) != 2:
+                continue
+            column, row = space
+            if column not in list('ABCDEFGHI'):
+                print('There is no column',column)
+                continue
+            if not row.isdecimal() or not (1 <= int(row) <=9):
+                print('There is no row',row)
+                continue
+            if not (1 <= int(number) <= 9):
+                print('Select a number from 1 to 9, not ',number)
+                continue
+            break
+    print()
+    if action.startswith('R'):
+        grid.resetGrid()
+        continue
+    if action.startswith('N'):
+        grid = SudokuGrid(random.choice(puzzles))
+        continue
+    if action.startswith('U'):
+        grid.undo()
+        continue
+    if action.startswith('O'):
+        originalGrid = SudokuGrid(grid.originalSetup)
+        print('The original grid looked like this:')
+        originalGrid.display()
+        input('Press Enter to continue.....')
+
+    if action.startwith('Q'):
+        print('Thanks for playing!')
+        sys.exit()
+
+    if grid.makeMove(column,row,number) == False:
+        print('You cannot overwrite the original grid\'s numbers.')
+        print('Enter ORIGINAL to view the original gird.')
+        input('Press Enter to continue....')
