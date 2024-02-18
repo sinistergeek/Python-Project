@@ -84,3 +84,26 @@ def displayAbacus(number):
             abacusChar.append('O')
         else:
             abacusChar.append('|')
+    chars = abacusChar + numberList
+    print("""
+    {} {} {} {} {} {} {} {} {} {}
+    {} {} {} {} {} {} {} {} {} {}
+    {} {} {} {} {} {} {} {} {} {}
+    {} {} {} {} {} {} {} {} {} {}
+    {} {} {} {} {} {} {} {} {} {}
+    {} {} {} {} {} {} {} {} {} {}
+    {} {} {} {} {} {} {} {} {} {}
+    {} {} {} {} {} {} {} {} {} {}
+    {} {} {} {} {} {} {} {} {} {}
+    {} {} {} {} {} {} {} {} {} {}
+
+    """.format(*chars))
+
+
+def displayControls():
+    print('+q w e r t y u i o p ')
+    print('-a s d f g h j k l ;')
+    print('(Enter a number, "quit", or a stream of up/down letters.)')
+
+if __name__ == '__main__':
+    main()
