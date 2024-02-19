@@ -42,3 +42,25 @@ def getBoardStr(board):
 def isValidSpace(board,space):
     return space in ALL_SPACES and board[space] == BLANK
 
+def isWinner(board,player):
+    b,p = board,player
+    return ((b['1'] == b['2'] == b['3'] == p) or
+            (b['4'] == b['5'] == b['6'] == p) or
+            (b['7'] == b['8'] == b['9'] == p) or
+            (b['1'] == b['4'] == b['7'] == p) or
+            (b['2'] == b['5'] == b['8'] == p) or
+            (b['3'] == b['6'] == b['9'] == p) or
+            (b['3'] == b['5'] == b['7'] == p) or
+            (b['1'] == b['5'] == b['9'] == p))
+
+def isBoardFull(board):
+    for space in ALL_SPACES:
+        if board[space] == BLANK:
+            return False
+    return True
+
+def updateBoard(board, space, mark):
+    board[space] = mark
+
+if __name__ == '__main__':
+    main()
