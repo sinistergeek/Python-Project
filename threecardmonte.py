@@ -72,4 +72,10 @@ while True:
         elif guess == 'RIGHT':
             guessIndex = 2
         break
-
+displayCards(cards)
+if cards[guessIndex] == ('Q',HEARTS):
+    print('You won!')
+    print('Thanks for playing!')
+else:
+    print('You lost!')
+    print('Thanks for playing')
