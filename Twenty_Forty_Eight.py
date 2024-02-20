@@ -40,3 +40,35 @@ def drawBoard(board):
             tile = board[(x,y)]
             labelForThisTile = str(tile).center(5)
             labels.append(labelForThisTile)
+    print("""
+    +----+-----+----+---+
+    {}|{} {}|{}
+    {}|{} {}|{}
+    {}|{} {}|{}
+    {}|{} {}|{}
+    +----+-----+----+----+
+    """.format(*labels))
+
+
+def getScore(board):
+    score = 0 
+    for x in range(4):
+        for y in range(4):
+            if board[(x,y)] != BLANK:
+                score = score + board[(x,y)]
+    return score
+
+def combineTilesInColumn(column):
+    combinedTiles = []
+    for i in range(4):
+        if column[i] != BLANK:
+            combinedTiles.append(column[i])
+    while len(combinedTiles) < 4:
+        combinedTiles.append(BLANK)
+    for i in range(3):
+        if combinedTiles[i] == combinedTiles[i + 1]:
+            combinedTiles[i] *= 2
+            for aboveIndex in range(i + 1, 3):
+                combinedTiles[aboveIndex] = combinedTiles[aboveIndex + 1]
+            combinedTiles[3] = BLANK
+    return combinedTiles
