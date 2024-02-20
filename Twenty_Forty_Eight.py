@@ -14,3 +14,29 @@ def main():
         playerMove = askForPlayerMove()
         gameBoard = makeMove(gameBoard,PlayerMove)
         addTwoBoard(gameBoard)
+        if isFull(gameBoard):
+            drawBoard(gameBoard)
+            print('Game Over - Thanks for playing!')
+            sys.exit()
+
+def getNewBoard():
+
+    newBoard = {}
+    for x in range(4):
+        for y in range(4):
+            newBoard[(x,y)] = BLANK
+    startingTwosPlaced = 0
+    while startingTwosPlaced < 2:
+        randomSpace = (random.randint(0,3),random.randint(0,3))
+        if newBoard[randomSpace] == BLANK:
+            newBoard[randomSpace] = 2
+            startingTwosPlaced = startingTwosPlaced + 1
+    return newBoard
+
+def drawBoard(board):
+    labels = []
+    for y in range(4):
+        for x in range(4):
+            tile = board[(x,y)]
+            labelForThisTile = str(tile).center(5)
+            labels.append(labelForThisTile)
