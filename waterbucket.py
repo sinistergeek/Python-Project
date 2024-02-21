@@ -34,4 +34,36 @@ while True:
     2|{1}|2|{9} |2|{14}|
     1|{0}|1|{8} |1|{13}|
           '''.format(*waterDisplay))
+    for waterAmount in waterInBucket.values():
+        if waterAmount == GOAL:
+            print('Good job! You solved it in',steps,'steps!')
+            sys.exit()
+    print('You can:')
+    print('(F)ill the bucket')
+    print('(E)mpty the bucket')
+    print('(P)our one bucket into another')
+    print('(Q)uit')
+    while True:
+        move = input('> ').upper()
+        if move == 'QUIT' or move == 'Q':
+            print('Thanks for playing!')
+            sys.exit()
+        if move in ('F','E','P'):
+            break
+        print('Enter F,E,P, or Q')
+    while True:
+        print('Select a bucket 8,5,3 or QUiT:')
+        srcBucket = input('> ').upper()
+        if srcBucket == 'QUIT':
+            print('Thanks for playing!')
+            sys.exit()
+        if srcBucket in ('8','5','3'):
+            break
+    if move == 'F':
+        srcBucketSize = int(srcBucket)
+        waterInBuckett[srcBucket] = srcBucketSize
+        steps += 1
+    elif move == 'E':
+        waterInBucket[srcBucket] = 0
+        steps += 1
 
