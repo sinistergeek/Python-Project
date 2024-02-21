@@ -66,4 +66,18 @@ while True:
     elif move == 'E':
         waterInBucket[srcBucket] = 0
         steps += 1
-
+    elif move == 'P':
+        while True:
+            print('Select bucket to pour into: 8,5 or 3')
+            dstBucket = input('> ').upper()
+            if dstBucket in ('8','5','3'):
+                break
+        dstBucketSize = int(dstBucket)
+        emptySpaceInDstBucket = dstBucketSize - waterInBucket[dstBucket]
+        waterInSrcBucket = waterInBucket[srcBucket]
+        amountToPour = min(emptySpaceIndstBucket,waterInSrcBucket)
+        waterInBucket[srcBucket] -= amountToPour
+        waterInBucket[dstBucket] += amountToPour
+        steps += 1
+    elif move == 'C':
+        pass
